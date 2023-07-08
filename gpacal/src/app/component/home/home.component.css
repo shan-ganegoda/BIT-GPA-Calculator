@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'poppins';
+  src: url("src/assets/Font/Poppins-Thin.ttf") format('truetype');
+}
+.forms>mat-label{
+  color: red;
+  margin-right: 20px;
+}
+
+.forms>mat-form-field{
+  margin-top: 5px;
+  height: 50px;
+  width: 400px;
+}
+
+.inputs{
+  display:flex;
+  align-items: center;
+
+}
+
+.forms{
+  padding: 20px;
+}
+
+.year1{
+  margin-top: -25rem;
+}
+
+mat-card-header {
+  background: #1b4780;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+
+}
+
+mat-card-title{
+  color: white;
+  margin-left: 180px;
+}
+
+.logo{
+  transform: scale(0.1);
+  margin-left: -43rem;
+}
+.nav{
+  margin-left: 28rem;
+}
+
+.navlist{
+  list-style-type: none;
+  flex:10;
+  display: flex;
+  gap: 20px;
+  font-family: poppins;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navlist>li:hover{
+  color: red;
+  cursor:pointer;
+}
+
+.navbar ,.background{
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(136, 235, 255, 1) 100%);
+}
+
+.year3{
+  margin-top: -13rem;
+}
+
+.btns{
+  width: 400px;
+}
+
+
+
