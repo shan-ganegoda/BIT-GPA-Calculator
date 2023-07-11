@@ -2,36 +2,39 @@
   font-family: 'poppins';
   src: url("src/assets/Font/Poppins-Thin.ttf") format('truetype');
 }
-.forms>mat-label{
+.navbar-brand{
+  align-content: flex-start;
+}
+.forms > mat-label {
   color: red;
   margin-right: 20px;
 }
 
-.forms>mat-form-field{
+.forms > mat-form-field {
   margin-top: 5px;
   height: 50px;
   width: 400px;
 }
 
-.inputs{
-  display:flex;
+.inputs {
+  display: flex;
   align-items: center;
 
 }
 
-.forms{
+.forms {
   padding: 20px;
 }
 
-.year1{
+.year1 {
   margin-top: -18rem;
 }
 
-.year2{
+.year2 {
   margin-top: -18rem;
 }
 
-.year3{
+.year3 {
   margin-top: 0rem;
 }
 
@@ -42,201 +45,234 @@ mat-card-header {
 
 }
 
-mat-card-title{
+mat-card-title {
   color: white;
   margin-left: 180px;
 }
 
-.logo{
+.logo {
   transform: scale(0.1);
-  margin-left: -40vw;
-}
-.nav{
-  margin-left: 25vw;
+  /*margin-left: 0;*/
 }
 
-.navlist{
+.nav {
+  /*margin-left: 25vw;*/
+}
+
+.navlist {
   list-style-type: none;
-  flex:10;
+  flex: 10;
   display: flex;
   gap: 20px;
-  font-family: poppins;
+  font-family: poppins, sans-serif;
   font-size: 20px;
   font-weight: bold;
 }
 
-.navlist>li:hover{
+.navlist > li:hover {
   color: red;
-  cursor:pointer;
+  cursor: pointer;
 }
 
-.navbar ,.background{
+.navbar, .background {
   background: rgb(2, 0, 36);
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(136, 235, 255, 1) 100%);
+  width: 100%;
 }
-.btns{
+.navbar{
+  position: fixed;
+  z-index: 1;
+}
+.btns {
   width: 400px;
 }
 
-.active{
+.active {
   text-decoration: underline;
 }
 
-@media (min-width:2560px) {
+/*@media (max-width: 4048px) {*/
+
+/*  .year3 {*/
+/*    margin-top: -15vh;*/
+/*  }*/
+/*}*/
+
+@media screen and (max-width: 2560px) {
 
   .year3 {
-    margin-top: -13vh;
+  margin-top: -18.1rem;
   }
 }
 
-@media (max-width:2560px) {
+@media screen and (max-width: 1440px ) {
 
   .year3 {
-    margin-top: -13vh;
+    margin-top: -36vh;
   }
-}
 
-@media (max-width:1440px){
-
-  .year3{
-    margin-top: -13vh;
+  mat-card {
+    width: max-content;
     height: max-content;
+
   }
 
-  mat-card{
-    width: 60%;
-  }
-
-  .forms>mat-form-field{
+  .forms > mat-form-field {
     margin-top: 5px;
     height: 50px;
-    width: 50%;
+    width: 100%;
   }
 }
 
-@media (max-width:1024px){
+@media screen and (max-width: 1024px) {
 
-  .forms>mat-form-field{
+  .forms > mat-form-field {
     margin-top: 5px;
     height: 50px;
-    width: 200px;
+    width: 100%;
   }
 
-  .year1{
+  .year1 {
     margin-top: -24rem;
   }
-  .year3{
-    margin-top: -31.5vh;
+
+  .year3 {
+    margin-top: -21.5rem;
   }
 
-  .year2{
-    margin-top: -25rem;
+  .year2 {
+    margin-top: -25.25rem;
   }
 
-  mat-card{
-    width: 32vw;
+  mat-card {
+    width: max-content;
+    height: max-content;
+
   }
 
-  mat-card-title{
+  mat-card-title {
     color: white;
     margin-left: 115px;
   }
 
-  .logo{
+  .logo {
+    position: relative;
     transform: scale(0.1);
-    margin-left: -38vw;
+    /*margin-left: -38vw;*/
   }
-  .nav{
-    margin-left: 15vw;
+
+  .nav {
+    /*margin-left: 15vw;*/
   }
-  .btns{
+
+  .btns {
     width: 200px;
   }
 }
 
-@media (max-width:768px){
+@media screen and (max-width: 768px) {
 
-  .forms>mat-form-field{
+  .forms > mat-form-field {
     margin-top: 5px;
     height: 50px;
-    width: 100px;
+    width: 100%;
   }
 
-  .year1{
-    margin-top: -18rem;
-  }
-  .year3{
-    margin-top: -8.2vh;
+  .year1 {
+    /*margin-top: -18rem;*/
   }
 
-  .year2{
-    margin-top: -16.6rem;
+  .year3 {
+    /*margin-top: -7.5vh;*/
   }
 
-  mat-card{
-    width: 32vw;
+  .year2 {
+    /*margin-top: -16.6rem;*/
   }
 
-  mat-card-title{
+  mat-card {
+    width: fit-content;
+    height: max-content;
+
+  }
+
+  mat-card-title {
     color: white;
-    margin-left: 75px;
+    /*margin-left: 75px;*/
+    align-content: center;
   }
 
-  .logo{
+  .logo {
     transform: scale(0.1);
-    margin-left: -35vw;
+    align-self: center;
+    /*margin-left: -35vw;*/
   }
-  .nav{
+
+  .nav {
     margin-left: 5vw;
   }
-  .btns{
+
+  .btns {
     width: 200px;
   }
 }
 
-@media (max-width:425px){
+@media screen and (max-width: 425px) {
 
-  .forms>mat-form-field{
-    margin-top: 5px;
+  .forms > mat-form-field {
+    /*margin-top: 5px;*/
     height: 50px;
-    width: 300px;
+    width: 100%;
   }
 
-  .year1{
-    margin-top: -18rem;
-  }
-  .year3{
-    margin-top: -33vh;
+  .year1 {
+    /*margin-top: -18rem;*/
   }
 
-  .year2{
-    margin-top: -25rem;
+  .year3 {
+    margin-top: -30vh;
   }
 
-  mat-card{
-    width: 90vw;
+  .year2 {
+    /*margin-top: -25rem;*/
   }
 
-  mat-card-title{
+  mat-card {
+    width: max-content;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 12px;
+  }
+
+  mat-card-content {
+    width: max-content;
+    align-self: center;
+  }
+
+  mat-card-title {
     color: white;
     margin-left: 75px;
   }
 
-  .logo{
+  .logo {
     transform: scale(0.05);
-    margin-left: -25vw;
-  }
-  .nav{
-    margin-left: -10vw;
+    /*margin-left: -25vw;*/
   }
 
-  .navlist{
+  .nav {
+    /*margin-left: -10vw;*/
+  }
+
+  .navlist {
     font-size: 13px;
   }
-  .btns{
+
+  .btns {
     width: 200px;
   }
 }
 
 
 
+.spacer {
+  flex: 1 1 auto;
+}
