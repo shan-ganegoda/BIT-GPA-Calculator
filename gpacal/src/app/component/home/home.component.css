@@ -24,7 +24,15 @@
 }
 
 .year1{
-  margin-top: -25rem;
+  margin-top: -18rem;
+}
+
+.year2{
+  margin-top: -18rem;
+}
+
+.year3{
+  margin-top: 0rem;
 }
 
 mat-card-header {
@@ -41,10 +49,10 @@ mat-card-title{
 
 .logo{
   transform: scale(0.1);
-  margin-left: -43rem;
+  margin-left: -40vw;
 }
 .nav{
-  margin-left: 28rem;
+  margin-left: 25vw;
 }
 
 .navlist{
@@ -66,13 +74,168 @@ mat-card-title{
   background: rgb(2, 0, 36);
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(136, 235, 255, 1) 100%);
 }
-
-.year3{
-  margin-top: -13rem;
-}
-
 .btns{
   width: 400px;
+}
+
+.active{
+  text-decoration: underline;
+}
+
+@media (min-width:2560px) {
+
+  .year3 {
+    margin-top: -13vh;
+  }
+}
+
+@media (max-width:2560px) {
+
+  .year3 {
+    margin-top: -13vh;
+  }
+}
+
+@media (max-width:1440px){
+
+  .year3{
+    margin-top: -13vh;
+    height: max-content;
+  }
+
+  mat-card{
+    width: 60%;
+  }
+
+  .forms>mat-form-field{
+    margin-top: 5px;
+    height: 50px;
+    width: 50%;
+  }
+}
+
+@media (max-width:1024px){
+
+  .forms>mat-form-field{
+    margin-top: 5px;
+    height: 50px;
+    width: 200px;
+  }
+
+  .year1{
+    margin-top: -24rem;
+  }
+  .year3{
+    margin-top: -31.5vh;
+  }
+
+  .year2{
+    margin-top: -25rem;
+  }
+
+  mat-card{
+    width: 32vw;
+  }
+
+  mat-card-title{
+    color: white;
+    margin-left: 115px;
+  }
+
+  .logo{
+    transform: scale(0.1);
+    margin-left: -38vw;
+  }
+  .nav{
+    margin-left: 15vw;
+  }
+  .btns{
+    width: 200px;
+  }
+}
+
+@media (max-width:768px){
+
+  .forms>mat-form-field{
+    margin-top: 5px;
+    height: 50px;
+    width: 100px;
+  }
+
+  .year1{
+    margin-top: -18rem;
+  }
+  .year3{
+    margin-top: -8.2vh;
+  }
+
+  .year2{
+    margin-top: -16.6rem;
+  }
+
+  mat-card{
+    width: 32vw;
+  }
+
+  mat-card-title{
+    color: white;
+    margin-left: 75px;
+  }
+
+  .logo{
+    transform: scale(0.1);
+    margin-left: -35vw;
+  }
+  .nav{
+    margin-left: 5vw;
+  }
+  .btns{
+    width: 200px;
+  }
+}
+
+@media (max-width:425px){
+
+  .forms>mat-form-field{
+    margin-top: 5px;
+    height: 50px;
+    width: 300px;
+  }
+
+  .year1{
+    margin-top: -18rem;
+  }
+  .year3{
+    margin-top: -33vh;
+  }
+
+  .year2{
+    margin-top: -25rem;
+  }
+
+  mat-card{
+    width: 90vw;
+  }
+
+  mat-card-title{
+    color: white;
+    margin-left: 75px;
+  }
+
+  .logo{
+    transform: scale(0.05);
+    margin-left: -25vw;
+  }
+  .nav{
+    margin-left: -10vw;
+  }
+
+  .navlist{
+    font-size: 13px;
+  }
+  .btns{
+    width: 200px;
+  }
 }
 
 
