@@ -12,6 +12,8 @@
 </mat-grid-list>
 
    <mat-grid-list [cols]="breakpoint" rowHeight="100rem" class="background" (window:resize)="onResize($event)">
+
+
      <mat-grid-tile>
 
        <mat-card class="year1">
@@ -54,7 +56,7 @@
          <mat-label>Introduction to Mathematics</mat-label>
          <mat-form-field class="inputs" appearance="outline">
            <mat-select formControlName="im">
-             <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
+             <mat-option *ngFor="let en of ens" [value]=en>{{en}}</mat-option>
            </mat-select>
          </mat-form-field><br>
 
@@ -91,7 +93,7 @@
          <mat-label>Communication Skills I</mat-label>
          <mat-form-field class="inputs" appearance="outline">
            <mat-select formControlName="csk1">
-             <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
+             <mat-option *ngFor="let en of ens" [value]=en>{{en}}</mat-option>
            </mat-select>
          </mat-form-field><br>
 
@@ -148,7 +150,7 @@
          <mat-label>Communication Skills II</mat-label>
          <mat-form-field class="inputs" appearance="outline">
            <mat-select formControlName="csk2">
-             <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
+             <mat-option *ngFor="let en of ens" [value]=en>{{en}}</mat-option>
            </mat-select>
          </mat-form-field><br>
 
@@ -189,7 +191,7 @@
            </mat-select>
          </mat-form-field><br>
 
-         <button class="btns" mat-fab extended color="primary">
+         <button class="btns" mat-fab extended color="primary" (click)="calculatey2gpa()">
            <mat-icon>favorite</mat-icon>Calculate</button>
 
        </form>
@@ -298,8 +300,10 @@
          </mat-card>
 
      </mat-grid-tile>
+
    </mat-grid-list>
 
+<
 
 
 
