@@ -91,13 +91,6 @@ mat-card-title {
   text-decoration: underline;
 }
 
-/*@media (max-width: 4048px) {*/
-
-/*  .year3 {*/
-/*    margin-top: -15vh;*/
-/*  }*/
-/*}*/
-
 @media screen and (max-width: 2560px) {
 
   .year3 {
@@ -270,8 +263,6 @@ mat-card-title {
     width: 200px;
   }
 }
-
-
 
 .spacer {
   flex: 1 1 auto;

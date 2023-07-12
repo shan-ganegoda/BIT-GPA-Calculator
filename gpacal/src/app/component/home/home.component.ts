@@ -11,8 +11,8 @@ export class HomeComponent implements OnInit{
   is !: any; ip !: any; pc !: any; cs !: any;
   mc !: any; ds !: any; se !: any; web1 !: any;
 
-  dsa !: number; dms !: number; web2 !: number; ooad !: number;
-  asd !: number; uxd !: number; ead !: number; cn !: number; pm!: number;
+  dsa !: any; dms !: any; web2 !: any; ooad !: any;
+  asd !: any; uxd !: any; ead !: any; cn !: any; pm!: any;
 
   // is !: number; ip !: number; pc !: number; cs !: number;
   // is !: number; ip !: number; pc !: number; cs !: number;
@@ -134,6 +134,31 @@ export class HomeComponent implements OnInit{
     var yr1gpaRound = Math.round(yr1gpa * 100) / 100;
 
     console.log(yr1gpaRound);
+
+  }
+
+  calculatey2gpa(){
+
+    this.second = JSON.stringify(this.yeartwo.getRawValue());
+    this.second = JSON.parse(this.second);
+
+    this.dms = this.getValue(this.second.dms);
+    this.dsa = this.getValue(this.second.dsa);
+    this.ooad = this.getValue(this.second.ooad);
+    this.web2 = this.getValue(this.second.web2);
+
+    this.uxd = this.getValue(this.second.uxd);
+    this.ead = this.getValue(this.second.ead);
+    this.asd = this.getValue(this.second.asd);
+    this.cn = this.getValue(this.second.cn);
+    this.pm = this.getValue(this.second.pm);
+
+
+
+    var yr2gpa=(this.ooad*3 + this.dsa*3 + this.dms*3 + this.web2*4 + this.uxd*3 + this.ead*4 + this.pm*3 + this.asd*4 + this.cn*3)/30
+    var yr2gpaRound = Math.round(yr2gpa * 100) / 100;
+
+    console.log(yr2gpaRound);
 
   }
 
