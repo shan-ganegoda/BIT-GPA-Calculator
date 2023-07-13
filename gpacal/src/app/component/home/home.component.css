@@ -3,8 +3,16 @@
   src: url("src/assets/Font/Poppins-Thin.ttf") format('truetype');
 }
 .navbar-brand{
-  align-content: flex-start;
+  /*align-content: flex-start;*/
+  margin-left: -27rem;
 }
+
+.title{
+  font-family: poppins,sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+}
+
 .forms > mat-label {
   color: red;
   margin-right: 20px;

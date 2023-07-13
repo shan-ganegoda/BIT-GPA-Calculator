@@ -14,26 +14,30 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MessageComponent} from "./util/dialog/message/message.component";
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    MessageComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatExpansionModule,
-        MatInputModule,
-        MatSelectModule,
-        MatGridListModule,
-        MatIconModule,
-        MatButtonModule,
-        ReactiveFormsModule,
-        MatToolbarModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatSelectModule,
+    MatGridListModule,
+    MatIconModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatDialogModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
