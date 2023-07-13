@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {MatDialog} from "@angular/material/dialog";
+import {MessageComponent} from "../../util/dialog/message/message.component";
 
 @Component({
   selector: 'app-home',
@@ -14,8 +16,8 @@ export class HomeComponent implements OnInit{
   dsa !: any; dms !: any; web2 !: any; ooad !: any;
   asd !: any; uxd !: any; ead !: any; cn !: any; pm!: any;
 
-  // is !: number; ip !: number; pc !: number; cs !: number;
-  // is !: number; ip !: number; pc !: number; cs !: number;
+  fme !: any; pp !: any; sdp !: any; pis !: any; sana!: any;
+  etit !: any; mad !: any; nsa !: any; bt !: any; qa!:any;
 
 
   grades: string[] = ['A+', 'A', "A-",'B+', 'B', "B-",'C+', 'C', "C-",'D+', 'D', "E"];
@@ -35,7 +37,9 @@ export class HomeComponent implements OnInit{
 
   breakpoint : number = 3;
 
-  constructor(private fb:FormBuilder){
+  constructor(private fb:FormBuilder,
+              private dg:MatDialog
+              ){
      this.yearone = this.fb.group({
        "ip" : new FormControl(),
        "is" : new FormControl(),
@@ -133,7 +137,12 @@ export class HomeComponent implements OnInit{
     var yr1gpa=(this.is*4 + this.ip*4 + this.cs*4 + this.pc*3 + this.ds*4 + this.web1*4 + this.mc*3 + this.se*4)/30
     var yr1gpaRound = Math.round(yr1gpa * 100) / 100;
 
-    console.log(yr1gpaRound);
+    const stsmsg = this.dg.open(MessageComponent, {
+      width: '500px',
+      data: {heading: "Year 1 GPA Status", message: yr1gpaRound}
+    });
+
+    //console.log(yr1gpaRound);
 
   }
 
@@ -159,6 +168,32 @@ export class HomeComponent implements OnInit{
     var yr2gpaRound = Math.round(yr2gpa * 100) / 100;
 
     console.log(yr2gpaRound);
+
+  }
+
+  calculatey3gpa(){
+
+    this.third = JSON.stringify(this.yearthree.getRawValue());
+    this.third = JSON.parse(this.third);
+
+    this.fme = this.getValue(this.third.fme);
+    this.pp = this.getValue(this.third.pp);
+    this.sdp = this.getValue(this.third.sdp);
+    this.pis = this.getValue(this.third.pis);
+    this.sana = this.getValue(this.third.sana);
+
+    this.etit = this.getValue(this.third.etit);
+    this.mad = this.getValue(this.third.mad);
+    this.nsa = this.getValue(this.third.nsa);
+    this.bt = this.getValue(this.third.bt);
+    this.qa = this.getValue(this.third.qa);
+
+
+
+    var yr3gpa=(this.sdp*8 + this.pp*3 + this.pis*3 + this.sana*3 + this.qa*3 + this.mad*4 + this.nsa*3 + this.bt*3)/30
+    var yr3gpaRound = Math.round(yr3gpa * 100) / 100;
+
+    console.log(yr3gpaRound);
 
   }
 
