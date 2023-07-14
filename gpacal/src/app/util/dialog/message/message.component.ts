@@ -13,7 +13,7 @@ export class MessageComponent {
   constructor(public dialogRef: MatDialogRef<MessageComponent>, @Inject(MAT_DIALOG_DATA) public data: {heading:string,message:any}) {
 
     // this.lines = this.data.message.split('<br>').filter((line: string) => line !== '');
-    console.log(this.data.message);
+    console.log(this.data.message.gpa);
   }
 
   ngOnInit(): void { this.dialogRef.addPanelClass('custom-dialog'); }

@@ -1,10 +1,20 @@
 <mat-card>
   <mat-card-title>{{data.heading}}</mat-card-title>
   <mat-card-content>
-<!--    <ng-container *ngFor="let line of lines">-->
-<!--      <span>{{ line }}</span><br/>-->
-<!--    </ng-container>-->
-    <span>{{data.message}}</span>
+    <ng-container>
+      <span>Your Year 1 GPA : </span><span class="result">{{data.message.gpa}}</span>
+      <br>
+      <h3>Progression Condition</h3>
+      <br>
+      <span>A Minimum GPA of 1.50 ?: </span> <span class="result">{{data.message.condition1}}</span><br/>
+      <span>A minimum of 20 credits of C grade for GPA courses?: </span> <span class="result">{{data.message.condition2}}</span><br/>
+      <span>A “PASS” grade for all EN courses? : </span> <span class="result">{{data.message.condition3}}</span><br/>
+      <span>Has obtained a grade below D grade?: </span> <span class="result">{{data.message.condition4}}</span><br/>
+      <br>
+      <span>Year Progression : </span> <span class="result">{{data.message.prmsg}}</span><br/>
+
+    </ng-container>
+<!--    <span>{{data.message}}</span>-->
   </mat-card-content>
   <mat-dialog-actions>
     <button mat-raised-button [mat-dialog-close]="true"> OK</button>

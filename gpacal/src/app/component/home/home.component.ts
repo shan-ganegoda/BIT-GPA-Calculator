@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit{
     //first : this.yearone.getRawValue();
 
     switch (value){
-      case '' : return 0; break;
+      case null : return 0; break;
       case 'A+' : return 4.00; break;
       case 'A' : return 4.00; break;
       case 'A-' : return 3.70; break;
@@ -134,12 +134,126 @@ export class HomeComponent implements OnInit{
 
 
 
+//Calcutate GPA
     var yr1gpa=(this.is*4 + this.ip*4 + this.cs*4 + this.pc*3 + this.ds*4 + this.web1*4 + this.mc*3 + this.se*4)/30
-    var yr1gpaRound = Math.round(yr1gpa * 100) / 100;
+    var year1gpa = Math.round(yr1gpa * 100) / 100;
+
+    //Condition 1 : GPA Level Should Be Greater Than 1.5
+    var c1 = true;
+    var haveminimumgpa = "";
+    if(year1gpa >= 1.50){
+      haveminimumgpa = "Yes";
+      c1 = true;
+    }else{
+      haveminimumgpa = "No";
+      c1 = false;
+    }
+
+    console.log("Minimum GPA level-" +haveminimumgpa + "(" + year1gpa + ")");
+
+    //Condition 2: Minimum of 20 Credits Of C Grade of GPA Courses
+
+    var creditcount = 0;
+    var minimumcreditcount = "";
+
+    if(this.is>=2){
+      creditcount += 4;
+    }
+    if(this.pc>=2){
+      creditcount += 3;
+    }
+    if(this.cs>=2){
+      creditcount += 4;
+    }
+    if(this.ip>=2){
+      creditcount += 4;
+    }
+
+    if(this.mc>=2){
+      creditcount += 3;
+    }
+    if(this.se>=2){
+      creditcount += 4;
+    }
+    if(this.web1>=2){
+      creditcount += 4;
+    }
+    if(this.ds>=2){
+      creditcount += 4;
+    }
+
+
+   var c2 = true;
+    if(creditcount >= 20){
+      minimumcreditcount = "Yes";
+      c2=true;
+    }else{
+      minimumcreditcount = "No";
+      c2=false;
+    }
+
+    console.log("Credit Count - " + creditcount);
+
+    //Condition 3 - All En Subjects Should be passed
+
+    var allenspassed = "";
+
+    var c3 = true;
+    if(this.first.im === 'Pass' && this.first.csk1 === 'Pass' ){
+      allenspassed = "Yes";
+      c3 = true;
+    }else{
+      allenspassed = "NO";
+      c3 = false;
+    }
+
+    //Condition 4 - No Grades Below D
+    var c4 = true;
+
+    var conditionstatement = "";
+
+    if(this.first.is == 0 && this.first.mc == 0 && this.first.cs == 0 && this.first.ip == 0 && this.first.pc == 0 && this.first.web1 == 0 && this.first.ds == 0 && this.first.se == 0){
+      c4 = false;
+    }else{
+      c4 = true;
+    }
+
+    if(!c4){
+      conditionstatement = "Yes";
+    }else{
+      conditionstatement = "No";
+    }
+
+    var proceedtonextyear = "";
+    var clr = "";
+    if(c1 && c2 && c3 && c4){
+      proceedtonextyear = "Congratulations! You Can Proceed To Next Year";
+      clr = "RED";
+    }else{
+      proceedtonextyear = "Sorry You Can't Proceed To Next Year";
+      clr = "GREEN";
+    }
+
+    const msg = "Your Year 1 GPA : " + year1gpa +
+            "<br> " +
+            "<br>Progression Conditions" +
+            "<br> " +
+            "<br>A Minimum GPA of 1.50 : " + haveminimumgpa +
+            "<br>A minimum of 20 credits of C grade for GPA courses: " + minimumcreditcount  +
+            "<br>A “PASS” grade for all EN courses : " + allenspassed +
+            "<br>Has not obtained a grade below D grade: " + conditionstatement +
+            "<br> " +
+            "<br>Year Progression : " + proceedtonextyear;
+
+
+    const datum = {"gpa":year1gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
+
+
+
 
     const stsmsg = this.dg.open(MessageComponent, {
       width: '500px',
-      data: {heading: "Year 1 GPA Status", message: yr1gpaRound}
+      data: {heading: "Year 1 GPA Status", message: datum}
     });
 
     //console.log(yr1gpaRound);
@@ -165,9 +279,146 @@ export class HomeComponent implements OnInit{
 
 
     var yr2gpa=(this.ooad*3 + this.dsa*3 + this.dms*3 + this.web2*4 + this.uxd*3 + this.ead*4 + this.pm*3 + this.asd*4 + this.cn*3)/30
-    var yr2gpaRound = Math.round(yr2gpa * 100) / 100;
+    var year2gpa = Math.round(yr2gpa * 100) / 100;
 
-    console.log(yr2gpaRound);
+    //Condition 1 : GPA Level Should Be Greater Than 1.5
+    var haveminimumgpa = "";
+    if(year2gpa >= 1.50){
+      haveminimumgpa = "Yes";
+    }else{
+      haveminimumgpa = "No";
+    }
+
+    //Condition 2: Minimum of 20 Credits Of C Grade of GPA Courses
+
+    var creditcount = 0;
+    var minimumcreditcount = "";
+
+    if(this.dsa>2){
+      creditcount += 3;
+    }
+    if(this.dms>2){
+      creditcount += 3;
+    }
+    if(this.web2>2){
+      creditcount += 4;
+    }
+    if(this.ooad>2){
+      creditcount += 3;
+    }
+
+    if(this.asd>2){
+      creditcount += 3;
+    }
+    if(this.ead>2){
+      creditcount += 4;
+    }
+    if(this.cn>2){
+      creditcount += 3;
+    }
+    if(this.pm>2){
+      creditcount += 3;
+    }
+    if(this.uxd>2){
+      creditcount += 3;
+    }
+
+
+    if(creditcount >= 20){
+      minimumcreditcount = "Yes";
+    }else{
+      minimumcreditcount = "No";
+    }
+
+    //Condition 3 - All En Subjects Should be passed
+
+    var allenspassed = "";
+
+    if(this.second.csk2 === 'Pass'){
+      allenspassed = "Yes";
+    }else{
+      allenspassed = "NO";
+    }
+
+    //Condition 4 - No Grades Below D
+    var condition4 = true;
+
+    var conditionstatement = "";
+
+    if(this.second.dsa == 0){
+      condition4 = false;
+    }
+
+    if(this.second.dms == 0){
+      condition4 = false;
+    }
+
+    if(this.second.ooad == 0){
+      condition4 = false;
+    }
+
+    if(this.second.web2 == 0){
+      condition4 = false;
+    }
+
+    if(this.second.asd == 0){
+      condition4 = false;
+    }
+
+    if(this.second.cn == 0){
+      condition4 = false;
+    }
+
+    if(this.second.ead == 0){
+      condition4 = false;
+    }
+
+    if(this.second.pm == 0){
+      condition4 = false;
+    }
+
+    if(this.second.uxd == 0){
+      condition4 = false;
+    }
+
+    if(!condition4){
+      conditionstatement = "Yes";
+    }else{
+      conditionstatement = "No";
+    }
+
+    var proceedtonextyear = "";
+    var clr = "";
+    if(haveminimumgpa !== "Yes" || minimumcreditcount !== "Yes" || allenspassed !== "Yes"  || conditionstatement !== "Yes"){
+      proceedtonextyear = "Sorry You Can't Proceed To Next Year";
+      clr = "RED";
+    }else{
+      proceedtonextyear = "Congradulations! You Can Proceed To Next Year";
+      clr = "GREEN";
+    }
+
+    const msg = "Your Year 2 GPA : " + year2gpa +
+      "<br> " +
+      "<br>Progression Conditions" +
+      "<br> " +
+      "<br>A Minimum GPA of 1.50 : " + haveminimumgpa +
+      "<br>A minimum of 20 credits of C grade for GPA courses: " + minimumcreditcount  +
+      "<br>A “PASS” grade for all EN courses : " + allenspassed +
+      "<br>Has not obtained a grade below D grade: " + conditionstatement +
+      "<br> " +
+      "<br>Year Progression : " + proceedtonextyear;
+
+
+
+
+    const stsmsg = this.dg.open(MessageComponent, {
+      width: '500px',
+      data: {heading: "Year 2 GPA Status", message: msg}
+    });
+
+    //console.log(yr1gpaRound);
+
+    console.log(year2gpa);
 
   }
 

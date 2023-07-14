@@ -5,8 +5,9 @@
 .navbar-brand{
   /*align-content: flex-start;*/
   margin-left: -27rem;
+  height: 50px;
+  margin-top: -440px;
 }
-
 .title{
   font-family: poppins,sans-serif;
   font-size: 30px;
@@ -24,6 +25,14 @@
   width: 400px;
 }
 
+h3{
+  background: dodgerblue;
+  width: 95px;
+  padding: 0 0 0 10px;
+  border-radius: 25px;
+  color: white;
+}
+
 .inputs {
   display: flex;
   align-items: center;
@@ -36,14 +45,17 @@
 
 .year1 {
   margin-top: -18rem;
+  height: fit-content;
 }
 
 .year2 {
   margin-top: -18rem;
+  height: fit-content;
 }
 
 .year3 {
   margin-top: 0rem;
+  height: fit-content;
 }
 
 mat-card-header {
@@ -82,7 +94,7 @@ mat-card-title {
   cursor: pointer;
 }
 
-.navbar, .background {
+.navbar, .back {
   background: rgb(2, 0, 36);
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(136, 235, 255, 1) 100%);
   width: 100%;
@@ -90,13 +102,35 @@ mat-card-title {
 .navbar{
   position: fixed;
   z-index: 1;
+  text-align: center;
 }
 .btns {
   width: 400px;
+  background: #4169E1;
 }
 
 .active {
   text-decoration: underline;
+}
+
+.btnoverall{
+  width: 80vw;
+  position: relative;
+  margin-left: 10rem;
+  margin-bottom: 25px;
+  top: -20rem;
+  background: #4169E1;
+}
+
+.btnall{
+  margin-top: -20rem;
+
+}
+footer{
+  background: #000000;
+  color: white;
+  text-align: center;
+  height: 2rem;
 }
 
 @media screen and (max-width: 2560px) {
@@ -104,17 +138,26 @@ mat-card-title {
   .year3 {
   margin-top: -18.1rem;
   }
+
+  .title{
+    margin-left: 15rem;
+  }
+
+  .title{
+    position: relative;
+    left: -13vw;
+  }
 }
 
 @media screen and (max-width: 1440px ) {
 
   .year3 {
-    margin-top: -36vh;
+    margin-top: -26vh;
   }
 
   mat-card {
     width: max-content;
-    height: max-content;
+    height: fit-content;
 
   }
 
@@ -123,6 +166,7 @@ mat-card-title {
     height: 50px;
     width: 100%;
   }
+
 }
 
 @media screen and (max-width: 1024px) {
@@ -144,6 +188,8 @@ mat-card-title {
   .year2 {
     margin-top: -25.25rem;
   }
+
+
 
   mat-card {
     width: max-content;

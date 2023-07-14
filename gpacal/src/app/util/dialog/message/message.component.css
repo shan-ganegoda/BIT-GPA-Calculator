@@ -1,6 +1,6 @@
 mat-card {
   padding: 20px;
-  background: #b5d3b5;
+  background: #FFA07A;
 }
 
 mat-card-title {
@@ -14,4 +14,8 @@ mat-card-content {
 button {
   margin-left: 10px;
   padding: 5px 40px 5px 40px !important;
+}
+
+.result{
+  font-weight: bold;
 }
