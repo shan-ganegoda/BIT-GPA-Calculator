@@ -10,9 +10,9 @@
     <span class="spacer"></span>
     <div class="nav">
       <ul class="navlist">
-        <li class="active">Home</li>
-        <li>Contact us</li>
-        <li>About</li>
+        <li><a routerLink="">Home</a></li>
+        <li><a routerLink="contactus">Contact us</a></li>
+        <li><a routerLink="about">About</a></li>
       </ul>
     </div>
 
@@ -274,7 +274,7 @@
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="fme">
                   <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
+                  <mat-option *ngFor="let grade of ens" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
 
@@ -323,7 +323,7 @@
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="etit">
                   <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
+                  <mat-option *ngFor="let grade of ens" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
 

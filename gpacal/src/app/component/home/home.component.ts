@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit{
   grades: string[] = ['A+', 'A', "A-",'B+', 'B', "B-",'C+', 'C', "C-",'D+', 'D', "E"];
   ens: string[] = ['Pass', 'Fail'];
   gpas: number[] = [4.00, 4.00, 3.70,3.30, 3.00, 2.70,2.30, 2.00, 1.70,1.30, 1.00, 0.00];
-  subjects1 : string[] = ['Information Systems','Computer Systems','Personal Computing with Foss','Introduction to Programming'];
 
   logo: string = 'assets/logo.jpg';
 
@@ -234,22 +233,7 @@ export class HomeComponent implements OnInit{
       clr = "GREEN";
     }
 
-    const msg = "Your Year 1 GPA : " + year1gpa +
-            "<br> " +
-            "<br>Progression Conditions" +
-            "<br> " +
-            "<br>A Minimum GPA of 1.50 : " + haveminimumgpa +
-            "<br>A minimum of 20 credits of C grade for GPA courses: " + minimumcreditcount  +
-            "<br>A “PASS” grade for all EN courses : " + allenspassed +
-            "<br>Has not obtained a grade below D grade: " + conditionstatement +
-            "<br> " +
-            "<br>Year Progression : " + proceedtonextyear;
-
-
     const datum = {"gpa":year1gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
-
-
-
 
     const stsmsg = this.dg.open(MessageComponent, {
       width: '500px',
@@ -282,10 +266,13 @@ export class HomeComponent implements OnInit{
     var year2gpa = Math.round(yr2gpa * 100) / 100;
 
     //Condition 1 : GPA Level Should Be Greater Than 1.5
+    let c1 = true;
     var haveminimumgpa = "";
     if(year2gpa >= 1.50){
+      c1 = true;
       haveminimumgpa = "Yes";
     }else{
+      c1=false;
       haveminimumgpa = "No";
     }
 
@@ -294,50 +281,55 @@ export class HomeComponent implements OnInit{
     var creditcount = 0;
     var minimumcreditcount = "";
 
-    if(this.dsa>2){
+    if(this.dsa>=2){
       creditcount += 3;
     }
-    if(this.dms>2){
+    if(this.dms>=2){
       creditcount += 3;
     }
-    if(this.web2>2){
+    if(this.web2>=2){
       creditcount += 4;
     }
-    if(this.ooad>2){
+    if(this.ooad>=2){
       creditcount += 3;
     }
 
-    if(this.asd>2){
+    if(this.asd>=2){
       creditcount += 3;
     }
-    if(this.ead>2){
+    if(this.ead>=2){
       creditcount += 4;
     }
-    if(this.cn>2){
+    if(this.cn>=2){
       creditcount += 3;
     }
-    if(this.pm>2){
+    if(this.pm>=2){
       creditcount += 3;
     }
-    if(this.uxd>2){
+    if(this.uxd>=2){
       creditcount += 3;
     }
 
-
+    let c2 = true;
     if(creditcount >= 20){
       minimumcreditcount = "Yes";
+      c2 = true;
     }else{
       minimumcreditcount = "No";
+      c2=false;
     }
 
     //Condition 3 - All En Subjects Should be passed
 
     var allenspassed = "";
+    let c3 = true;
 
     if(this.second.csk2 === 'Pass'){
       allenspassed = "Yes";
+      c3 = true;
     }else{
       allenspassed = "NO";
+      c3 = false;
     }
 
     //Condition 4 - No Grades Below D
@@ -345,75 +337,32 @@ export class HomeComponent implements OnInit{
 
     var conditionstatement = "";
 
-    if(this.second.dsa == 0){
+    if(this.second.dsa == 0 && this.second.dms == 0 && this.second.ooad == 0 && this.second.web2 == 0 && this.second.asd == 0 && this.second.cn == 0 && this.second.ead == 0 && this.second.pm == 0 && this.second.uxd == 0){
       condition4 = false;
     }
 
-    if(this.second.dms == 0){
-      condition4 = false;
-    }
-
-    if(this.second.ooad == 0){
-      condition4 = false;
-    }
-
-    if(this.second.web2 == 0){
-      condition4 = false;
-    }
-
-    if(this.second.asd == 0){
-      condition4 = false;
-    }
-
-    if(this.second.cn == 0){
-      condition4 = false;
-    }
-
-    if(this.second.ead == 0){
-      condition4 = false;
-    }
-
-    if(this.second.pm == 0){
-      condition4 = false;
-    }
-
-    if(this.second.uxd == 0){
-      condition4 = false;
-    }
-
-    if(!condition4){
+    let c4 = true;
+    if(condition4){
+      c4 = true;
       conditionstatement = "Yes";
     }else{
+      c4 = false;
       conditionstatement = "No";
     }
 
     var proceedtonextyear = "";
     var clr = "";
-    if(haveminimumgpa !== "Yes" || minimumcreditcount !== "Yes" || allenspassed !== "Yes"  || conditionstatement !== "Yes"){
-      proceedtonextyear = "Sorry You Can't Proceed To Next Year";
-      clr = "RED";
-    }else{
+    if(c1 && c2 && c3 && c4){
       proceedtonextyear = "Congradulations! You Can Proceed To Next Year";
-      clr = "GREEN";
+    }else{
+      proceedtonextyear = "Sorry You Can't Proceed To Next Year";
     }
 
-    const msg = "Your Year 2 GPA : " + year2gpa +
-      "<br> " +
-      "<br>Progression Conditions" +
-      "<br> " +
-      "<br>A Minimum GPA of 1.50 : " + haveminimumgpa +
-      "<br>A minimum of 20 credits of C grade for GPA courses: " + minimumcreditcount  +
-      "<br>A “PASS” grade for all EN courses : " + allenspassed +
-      "<br>Has not obtained a grade below D grade: " + conditionstatement +
-      "<br> " +
-      "<br>Year Progression : " + proceedtonextyear;
-
-
-
+    const datum = {"gpa":year2gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
 
     const stsmsg = this.dg.open(MessageComponent, {
       width: '500px',
-      data: {heading: "Year 2 GPA Status", message: msg}
+      data: {heading: "Year 2 GPA Status", message: datum}
     });
 
     //console.log(yr1gpaRound);
@@ -442,9 +391,106 @@ export class HomeComponent implements OnInit{
 
 
     var yr3gpa=(this.sdp*8 + this.pp*3 + this.pis*3 + this.sana*3 + this.qa*3 + this.mad*4 + this.nsa*3 + this.bt*3)/30
-    var yr3gpaRound = Math.round(yr3gpa * 100) / 100;
+    var year3gpa = Math.round(yr3gpa * 100) / 100;
 
-    console.log(yr3gpaRound);
+    //Condition 1 : GPA Level Should Be Greater Than 1.5
+    let c1 = true;
+    var haveminimumgpa = "";
+    if(year3gpa >= 1.50){
+      c1 = true;
+      haveminimumgpa = "Yes";
+    }else{
+      c1=false;
+      haveminimumgpa = "No";
+    }
+
+    //Condition 2: Minimum of 20 Credits Of C Grade of GPA Courses
+
+    var creditcount = 0;
+    var minimumcreditcount = "";
+
+    if(this.pp>=2){
+      creditcount += 3;
+    }
+    if(this.sdp>=2){
+      creditcount += 8;
+    }
+    if(this.pis>=2){
+      creditcount += 3;
+    }
+    if(this.sana>=2){
+      creditcount += 3;
+    }
+
+    if(this.mad>=2){
+      creditcount += 4;
+    }
+    if(this.nsa>=2){
+      creditcount += 3;
+    }
+    if(this.bt>=2){
+      creditcount += 3;
+    }
+    if(this.qa>=2){
+      creditcount += 3;
+    }
+
+    let c2 = true;
+    if(creditcount >= 20){
+      minimumcreditcount = "Yes";
+      c2 = true;
+    }else{
+      minimumcreditcount = "No";
+      c2=false;
+    }
+
+    //Condition 3 - All En Subjects Should be passed
+
+    var allenspassed = "";
+    let c3 = true;
+
+    if(this.third.fme === 'Pass' && this.third.etit === 'Pass'){
+      allenspassed = "Yes";
+      c3 = true;
+    }else{
+      allenspassed = "NO";
+      c3 = false;
+    }
+
+    //Condition 4 - No Grades Below D
+    var condition4 = true;
+
+    var conditionstatement = "";
+
+    if(this.third.sdp == 0 && this.third.pp == 0 && this.third.pis == 0 && this.third.sana == 0 && this.third.mad == 0 && this.third.nsa == 0 && this.third.bt == 0 && this.third.qa == 0){
+      condition4 = false;
+    }
+
+    let c4 = true;
+    if(condition4){
+      c4 = true;
+      conditionstatement = "Yes";
+    }else{
+      c4 = false;
+      conditionstatement = "No";
+    }
+
+    var proceedtonextyear = "";
+    var clr = "";
+    if(c1 && c2 && c3 && c4){
+      proceedtonextyear = "Congradulations! You Have Completed The Year 3";
+    }else{
+      proceedtonextyear = "Sorry You Have To try Again";
+    }
+
+    const datum = {"gpa":year3gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
+
+    const stsmsg = this.dg.open(MessageComponent, {
+      width: '500px',
+      data: {heading: "Year 3 GPA Status", message: datum}
+    });
+
+    console.log(year3gpa);
 
   }
 
