@@ -1,6 +1,81 @@
+@font-face {
+  font-family: 'poppins';
+  src: url("src/assets/Font/Poppins-Thin.ttf") format('truetype');
+}
+
 img{
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+  margin-top: auto;
+  margin-bottom: auto;
+  transform: scale(0.7);
+  opacity: 0.1;
+
 }
+
+.navbar-brand{
+  /*align-content: flex-start;*/
+  margin-left: -27rem;
+  height: 50px;
+  margin-top: -440px;
+}
+
+.title{
+  font-family: poppins,sans-serif;
+  font-size: 30px;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.logo {
+  transform: scale(0.1);
+  /*margin-left: 0;*/
+}
+
+.nav {
+  /*margin-left: 25vw;*/
+}
+
+.navlist {
+  list-style-type: none;
+  flex: 10;
+  display: flex;
+  gap: 20px;
+  font-family: poppins, sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+a:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.navbar, .back {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(136, 235, 255, 1) 100%);
+  width: 100%;
+}
+
+.navbar{
+  position: fixed;
+  z-index: 1;
+  text-align: center;
+}
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+footer{
+  background: #000000;
+  color: white;
+  text-align: center;
+  height: 2rem;
+}
+

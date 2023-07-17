@@ -494,4 +494,14 @@ export class HomeComponent implements OnInit{
 
   }
 
+  overollgpacalculate(){
+
+    let allsub = (this.ooad*3 + this.dsa*3 + this.dms*3 + this.web2*4 + this.uxd*3 + this.ead*4 + this.pm*3 + this.asd*4 + this.cn*3 + this.ooad*3 + this.dsa*3 + this.dms*3 + this.web2*4 + this.uxd*3 + this.ead*4 + this.pm*3 + this.asd*4 + this.cn*3 +
+                          this.sdp*8 + this.pp*3 + this.pis*3 + this.sana*3 + this.qa*3 + this.mad*4 + this.nsa*3 + this.bt*3)/90;
+
+    let overallgpa = Math.round(allsub*100)/100;
+
+    console.log(overallgpa);
+  }
+
 }
