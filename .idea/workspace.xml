@@ -5,93 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79c9331e-44ad-4170-b138-be97658d45d6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/gpacal/.angular/cache/15.2.9/angular-webpack/e4524d83858d1b9221833cda64f6544e7d290281/0.pack" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gpacal/.angular/cache/15.2.9/angular-webpack/e4524d83858d1b9221833cda64f6544e7d290281/index.pack" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/angular.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/3rdpartylicenses.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/404.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/Poppins-Thin.605324f7af12a99a.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/LilitaOne-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-Black.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-BlackItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-BoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-ExtraBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-ExtraBoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-ExtraLight.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-ExtraLightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-Italic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-Light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-LightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-Medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-MediumItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-SemiBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-SemiBoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-Thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/Font/Poppins-ThinItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/assets/pagenotfound.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/main.b0070601bbb8feb4.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/polyfills.c81d40b9161b77a2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/runtime.840dd74e95be323d.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/docs/styles.e06a9809e0fa01f5.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/app-routing.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/app.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/app.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/app.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/app.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/component/about/about.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/component/about/about.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/component/about/about.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/component/contact-us/contact-us.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/component/contact-us/contact-us.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/component/contact-us/contact-us.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/component/home/home.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/component/home/home.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/component/home/home.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/entity/yearone.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/entity/yearthree.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/entity/yeartwo.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/util/dialog/message/message.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/util/dialog/message/message.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/app/util/dialog/message/message.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/LilitaOne-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-Black.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-BlackItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-BoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-ExtraBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-ExtraBoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-ExtraLight.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-ExtraLightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-Italic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-Light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-LightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-Medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-MediumItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-SemiBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-SemiBoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-Thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/Font/Poppins-ThinItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/assets/pagenotfound.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/main.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/src/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/tsconfig.app.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpacal/tsconfig.spec.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +61,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "E:/My Projects/BIT-GPA-Calculator/gpacal/docs",
+    "last_opened_file_path": "E:/My Projects/BIT-GPA-Calculator/docs",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -159,6 +74,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\My Projects\BIT-GPA-Calculator\docs" />
       <recent name="E:\My Projects\BIT-GPA-Calculator\gpacal\docs" />
       <recent name="E:\My Projects\BIT-GPA-Calculator\gpacal\src\app\entity" />
       <recent name="E:\My Projects\BIT-GPA-Calculator\gpacal\src\app\util\dialog" />
@@ -200,7 +116,7 @@
       <workItem from="1689340331965" duration="8440000" />
       <workItem from="1689534797597" duration="5225000" />
       <workItem from="1689611982590" duration="923000" />
-      <workItem from="1689613885884" duration="491000" />
+      <workItem from="1689613885884" duration="1477000" />
     </task>
     <servers />
   </component>
