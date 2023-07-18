@@ -16,12 +16,18 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MessageComponent} from "./util/dialog/message/message.component";
 import {MatDialogModule} from "@angular/material/dialog";
+import { AboutComponent } from './component/about/about.component';
+import { ContactUsComponent } from './component/contact-us/contact-us.component';
+import { FinalmessageComponent } from './util/dialog/finalmessage/finalmessage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MessageComponent
+    MessageComponent,
+    AboutComponent,
+    ContactUsComponent,
+    FinalmessageComponent
   ],
   imports: [
     BrowserModule,

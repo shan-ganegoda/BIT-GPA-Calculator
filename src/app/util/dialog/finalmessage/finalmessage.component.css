@@ -1,0 +1,21 @@
+mat-card {
+  padding: 20px;
+  background: #00FA9A;
+}
+
+mat-card-title {
+  padding: 10px 20px 10px 20px;
+}
+
+mat-card-content {
+  padding: 10px 20px 20px 20px;
+}
+
+button {
+  margin-left: 10px;
+  padding: 5px 40px 5px 40px !important;
+}
+
+.result{
+  font-weight: bold;
+}
