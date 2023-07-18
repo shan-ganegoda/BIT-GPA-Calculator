@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {MessageComponent} from "../../util/dialog/message/message.component";
+import {FinalmessageComponent} from "../../util/dialog/finalmessage/finalmessage.component";
 
 @Component({
   selector: 'app-home',
@@ -358,7 +359,10 @@ export class HomeComponent implements OnInit{
       proceedtonextyear = "Sorry You Can't Proceed To Next Year";
     }
 
-    const datum = {"gpa":year2gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
+    let year = 1;
+
+    const datum = {"gpa":year2gpa,"condition1":haveminimumgpa,
+      "condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear,"yearc":year};
 
     const stsmsg = this.dg.open(MessageComponent, {
       width: '500px',
@@ -496,11 +500,193 @@ export class HomeComponent implements OnInit{
 
   overollgpacalculate(){
 
+    this.first = JSON.stringify(this.yearone.getRawValue());
+    this.first = JSON.parse(this.first);
+
+    this.second = JSON.stringify(this.yeartwo.getRawValue());
+    this.second = JSON.parse(this.second);
+
+    this.third = JSON.stringify(this.yearthree.getRawValue());
+    this.third = JSON.parse(this.third);
+
+    this.is = this.getValue(this.first.is);
+    this.ip = this.getValue(this.first.ip);
+    this.cs = this.getValue(this.first.cs);
+    this.pc = this.getValue(this.first.pc);
+
+    this.web1 = this.getValue(this.first.web1);
+    this.se = this.getValue(this.first.se);
+    this.ds = this.getValue(this.first.ds);
+    this.mc = this.getValue(this.first.mc);
+
+    this.dms = this.getValue(this.second.dms);
+    this.dsa = this.getValue(this.second.dsa);
+    this.ooad = this.getValue(this.second.ooad);
+    this.web2 = this.getValue(this.second.web2);
+
+    this.uxd = this.getValue(this.second.uxd);
+    this.ead = this.getValue(this.second.ead);
+    this.asd = this.getValue(this.second.asd);
+    this.cn = this.getValue(this.second.cn);
+    this.pm = this.getValue(this.second.pm);
+
+    this.fme = this.getValue(this.third.fme);
+    this.pp = this.getValue(this.third.pp);
+    this.sdp = this.getValue(this.third.sdp);
+    this.pis = this.getValue(this.third.pis);
+    this.sana = this.getValue(this.third.sana);
+
+    this.etit = this.getValue(this.third.etit);
+    this.mad = this.getValue(this.third.mad);
+    this.nsa = this.getValue(this.third.nsa);
+    this.bt = this.getValue(this.third.bt);
+    this.qa = this.getValue(this.third.qa);
+
     let allsub = (this.ooad*3 + this.dsa*3 + this.dms*3 + this.web2*4 + this.uxd*3 + this.ead*4 + this.pm*3 + this.asd*4 + this.cn*3 + this.ooad*3 + this.dsa*3 + this.dms*3 + this.web2*4 + this.uxd*3 + this.ead*4 + this.pm*3 + this.asd*4 + this.cn*3 +
                           this.sdp*8 + this.pp*3 + this.pis*3 + this.sana*3 + this.qa*3 + this.mad*4 + this.nsa*3 + this.bt*3)/90;
 
     let overallgpa = Math.round(allsub*100)/100;
 
+    //Condition1 - Cumulative Gpa should be over 2.00
+    let c1 = true;
+    let condition1 = "yes";
+    if(overallgpa >= 2.00){
+      c1=true;
+      condition1 = "yes";
+    }else{
+      c1=false;
+      condition1 = "No";
+    }
+
+    //Condition 2- minimum 90 credits
+
+
+    let creditcount = 0;
+    let minimumcreditcount = "";
+
+    if(this.is>=2){
+      creditcount += 4;
+    }
+    if(this.pc>=2){
+      creditcount += 3;
+    }
+    if(this.cs>=2){
+      creditcount += 4;
+    }
+    if(this.ip>=2){
+      creditcount += 4;
+    }
+
+    if(this.mc>=2){
+      creditcount += 3;
+    }
+    if(this.se>=2){
+      creditcount += 4;
+    }
+    if(this.web1>=2){
+      creditcount += 4;
+    }
+    if(this.ds>=2){
+      creditcount += 4;
+    }
+
+    if(this.dsa>=2){
+      creditcount += 3;
+    }
+    if(this.dms>=2){
+      creditcount += 3;
+    }
+    if(this.web2>=2){
+      creditcount += 4;
+    }
+    if(this.ooad>=2){
+      creditcount += 3;
+    }
+
+    if(this.asd>=2){
+      creditcount += 3;
+    }
+    if(this.ead>=2){
+      creditcount += 4;
+    }
+    if(this.cn>=2){
+      creditcount += 3;
+    }
+    if(this.pm>=2){
+      creditcount += 3;
+    }
+    if(this.uxd>=2){
+      creditcount += 3;
+    }
+
+    if(this.pp>=2){
+      creditcount += 3;
+    }
+    if(this.sdp>=2){
+      creditcount += 8;
+    }
+    if(this.pis>=2){
+      creditcount += 3;
+    }
+    if(this.sana>=2){
+      creditcount += 3;
+    }
+
+    if(this.mad>=2){
+      creditcount += 4;
+    }
+    if(this.nsa>=2){
+      creditcount += 3;
+    }
+    if(this.bt>=2){
+      creditcount += 3;
+    }
+    if(this.qa>=2){
+      creditcount += 3;
+    }
+
+    let c2 = true;
+    if(creditcount >= 90){
+      minimumcreditcount = "Yes";
+      c2 = true;
+    }else{
+      minimumcreditcount = "No";
+      c2=false;
+    }
+
+
+    //Condition 3 - All En Subjects Should be passed
+
+    var allenspassed = "";
+    let c3 = true;
+
+    if(this.third.fme === 'Pass' && this.third.etit === 'Pass' && this.second.csk2 === 'Pass' && this.first.im === 'Pass' && this.first.csk1 === 'Pass'){
+      allenspassed = "Yes";
+      c3 = true;
+    }else{
+      allenspassed = "No";
+      c3 = false;
+    }
+
+    let prmsg = ""
+    if(c1 && c2 && c3){
+      prmsg = "Congradulation You Are Graduated!"
+    }else{
+      prmsg = "Better Luck Next Time!"
+    }
+
+
+    const datum = {"gpa":overallgpa,"condition1":c1,
+      "condition2":minimumcreditcount,"condition3":allenspassed,"condition4":"no","prmsg":prmsg };
+
+    const stsmsg = this.dg.open(FinalmessageComponent, {
+      width: '500px',
+      data: {heading: "Degree Status", message: datum}
+    });
+
+
+
+    console.log(c2 + " - " + creditcount);
     console.log(overallgpa);
   }
 

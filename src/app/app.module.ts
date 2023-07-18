@@ -18,6 +18,7 @@ import {MessageComponent} from "./util/dialog/message/message.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import { AboutComponent } from './component/about/about.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
+import { FinalmessageComponent } from './util/dialog/finalmessage/finalmessage.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ContactUsComponent } from './component/contact-us/contact-us.component'
     HomeComponent,
     MessageComponent,
     AboutComponent,
-    ContactUsComponent
+    ContactUsComponent,
+    FinalmessageComponent
   ],
   imports: [
     BrowserModule,
