@@ -5,7 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79c9331e-44ad-4170-b138-be97658d45d6" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/util/dialog/finalmessage/finalmessage.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/util/dialog/finalmessage/finalmessage.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/util/dialog/finalmessage/finalmessage.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/3rdpartylicenses.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/404.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/Poppins-Thin.605324f7af12a99a.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/LilitaOne-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Black.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-BlackItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Bold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-BoldItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-ExtraBold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-ExtraBoldItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-ExtraLight.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-ExtraLightItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Light.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-LightItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Medium.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-MediumItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-SemiBold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-SemiBoldItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Thin.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-ThinItalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/logo.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/assets/pagenotfound.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/main.b0070601bbb8feb4.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/polyfills.c81d40b9161b77a2.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/runtime.840dd74e95be323d.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/styles.e06a9809e0fa01f5.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/component/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/home/home.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/component/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/home/home.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/util/dialog/message/message.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/util/dialog/message/message.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +154,8 @@
       <workItem from="1689611982590" duration="923000" />
       <workItem from="1689613885884" duration="1477000" />
       <workItem from="1689615633906" duration="1871000" />
-      <workItem from="1689691629921" duration="5426000" />
+ GPA-Calculator-Lakshan
+      <workItem from="1689691629921" duration="4601000" />
     </task>
     <servers />
   </component>
