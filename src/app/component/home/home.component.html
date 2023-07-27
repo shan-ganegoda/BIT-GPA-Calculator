@@ -11,8 +11,8 @@
     <div class="nav">
       <ul class="navlist">
         <li><a routerLink="">Home</a></li>
-        <li><a routerLink="contactus">Contact us</a></li>
-        <li><a routerLink="about">About</a></li>
+        <li><a routerLink="../contactus">Contact us</a></li>
+        <li><a routerLink="../about">About</a></li>
       </ul>
     </div>
 
@@ -63,8 +63,8 @@
 
               <mat-label>Information Systems</mat-label>
               <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="is">
-                  <mat-option value=null selected>Not Selected</mat-option>
+                <mat-select formControlName="is" [(value)]="selected">
+                  <mat-option value="null">Not Selected</mat-option>
                   <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
@@ -72,7 +72,7 @@
               <mat-label>Personal Computing With FOSS</mat-label>
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="pc">
-                  <mat-option value=null>Not Selected</mat-option>
+                  <mat-option value="null">Not Selected</mat-option>
                   <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
@@ -80,7 +80,7 @@
               <mat-label>Computer Systems</mat-label>
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="cs">
-                  <mat-option value=null>Not Selected</mat-option>
+                  <mat-option value="null">Not Selected</mat-option>
                   <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
@@ -88,7 +88,7 @@
               <mat-label>Introduction to Programming</mat-label>
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="ip">
-                  <mat-option value=null>Not Selected</mat-option>
+                  <mat-option value="null">Not Selected</mat-option>
                   <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
@@ -96,7 +96,7 @@
               <mat-label>Introduction to Mathematics</mat-label>
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="im">
-                  <mat-option value=null>Not Selected</mat-option>
+                  <mat-option value="null">Not Selected</mat-option>
                   <mat-option *ngFor="let grade of ens" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
@@ -106,7 +106,7 @@
               <mat-label>Web Development I</mat-label>
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="web1">
-                  <mat-option value=null>Not Selected</mat-option>
+                  <mat-option value="null">Not Selected</mat-option>
                   <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
@@ -114,7 +114,7 @@
               <mat-label>Fundementals of Software Engineering</mat-label>
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="se">
-                  <mat-option value=null>Not Selected</mat-option>
+                  <mat-option value="null">Not Selected</mat-option>
                   <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
@@ -122,7 +122,7 @@
               <mat-label>Database Systems</mat-label>
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="ds">
-                  <mat-option value=null>Not Selected</mat-option>
+                  <mat-option value="null">Not Selected</mat-option>
                   <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
@@ -130,7 +130,7 @@
               <mat-label>Mathematics For Computing</mat-label>
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="mc">
-                  <mat-option value=null>Not Selected</mat-option>
+                  <mat-option value="null">Not Selected</mat-option>
                   <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
@@ -138,7 +138,7 @@
               <mat-label>Communication Skills I</mat-label>
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="csk1">
-                  <mat-option value=null>Not Selected</mat-option>
+                  <mat-option value="null">Not Selected</mat-option>
                   <mat-option *ngFor="let grade of ens" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
