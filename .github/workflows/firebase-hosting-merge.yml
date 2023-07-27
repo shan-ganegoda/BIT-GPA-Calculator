@@ -22,7 +22,7 @@ jobs:
       run: npm install
 
     - name: Build
-      run: ng build --prod
+      run: bash -c "ng build --prod"
 
     - uses: FirebaseExtended/action-hosting-deploy@v0
       with:
