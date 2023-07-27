@@ -9,6 +9,7 @@ import {FinalmessageComponent} from "../../util/dialog/finalmessage/finalmessage
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit{
 
   is !: any; ip !: any; pc !: any; cs !: any;
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit{
   fme !: any; pp !: any; sdp !: any; pis !: any; sana!: any;
   etit !: any; mad !: any; nsa !: any; bt !: any; qa!:any;
 
+  selected = 'notselected';
 
   grades: string[] = ['A+', 'A', "A-",'B+', 'B', "B-",'C+', 'C', "C-",'D+', 'D', "E"];
   ens: string[] = ['Pass', 'Fail'];
@@ -97,7 +99,7 @@ export class HomeComponent implements OnInit{
     //first : this.yearone.getRawValue();
 
     switch (value){
-      case null : return 0; break;
+      case null : return 0.00; break;
       case 'A+' : return 4.00; break;
       case 'A' : return 4.00; break;
       case 'A-' : return 3.70; break;
@@ -208,25 +210,24 @@ export class HomeComponent implements OnInit{
     }
 
     //Condition 4 - No Grades Below D
-    var c4 = true;
+    let conditionstatement = "";
 
-    var conditionstatement = "";
+    console.log(this.is);
 
-    if(this.first.is == 0 && this.first.mc == 0 && this.first.cs == 0 && this.first.ip == 0 && this.first.pc == 0 && this.first.web1 == 0 && this.first.ds == 0 && this.first.se == 0){
-      c4 = false;
-    }else{
-      c4 = true;
-    }
+    if(this.is == 0 || this.mc == 0 || this.cs == 0 || this.ip == 0 ||
+      this.pc == 0 || this.web1 == 0 || this.ds == 0 || this.se == 0){
 
-    if(!c4){
       conditionstatement = "Yes";
     }else{
       conditionstatement = "No";
     }
 
+    // console.log("Below D - " + c4);
+
+
     var proceedtonextyear = "";
     var clr = "";
-    if(c1 && c2 && c3 && c4){
+    if(c1 && c2 && c3 && conditionstatement === "No"){
       proceedtonextyear = "Congratulations! You Can Proceed To Next Year";
       clr = "RED";
     }else{
@@ -334,26 +335,20 @@ export class HomeComponent implements OnInit{
     }
 
     //Condition 4 - No Grades Below D
-    var condition4 = true;
 
     var conditionstatement = "";
 
-    if(this.second.dsa == 0 && this.second.dms == 0 && this.second.ooad == 0 && this.second.web2 == 0 && this.second.asd == 0 && this.second.cn == 0 && this.second.ead == 0 && this.second.pm == 0 && this.second.uxd == 0){
-      condition4 = false;
-    }
+    if(this.dsa == 0 || this.dms == 0 || this.ooad == 0 || this.web2 == 0 || this.asd == 0 ||
+      this.cn == 0 || this.ead == 0 || this.pm == 0 || this.uxd == 0){
 
-    let c4 = true;
-    if(condition4){
-      c4 = true;
       conditionstatement = "Yes";
     }else{
-      c4 = false;
       conditionstatement = "No";
     }
 
     var proceedtonextyear = "";
     var clr = "";
-    if(c1 && c2 && c3 && c4){
+    if(c1 && c2 && c3 && conditionstatement === "No"){
       proceedtonextyear = "Congradulations! You Can Proceed To Next Year";
     }else{
       proceedtonextyear = "Sorry You Can't Proceed To Next Year";
@@ -462,26 +457,19 @@ export class HomeComponent implements OnInit{
     }
 
     //Condition 4 - No Grades Below D
-    var condition4 = true;
 
     var conditionstatement = "";
 
-    if(this.third.sdp == 0 && this.third.pp == 0 && this.third.pis == 0 && this.third.sana == 0 && this.third.mad == 0 && this.third.nsa == 0 && this.third.bt == 0 && this.third.qa == 0){
-      condition4 = false;
-    }
-
-    let c4 = true;
-    if(condition4){
-      c4 = true;
+    if(this.sdp == 0 || this.pp == 0 || this.pis == 0 || this.sana == 0 || this.mad == 0 ||
+      this.nsa == 0 || this.bt == 0 || this.qa == 0){
       conditionstatement = "Yes";
     }else{
-      c4 = false;
       conditionstatement = "No";
     }
 
     var proceedtonextyear = "";
     var clr = "";
-    if(c1 && c2 && c3 && c4){
+    if(c1 && c2 && c3 && conditionstatement === "No"){
       proceedtonextyear = "Congradulations! You Have Completed The Year 3";
     }else{
       proceedtonextyear = "Sorry You Have To try Again";

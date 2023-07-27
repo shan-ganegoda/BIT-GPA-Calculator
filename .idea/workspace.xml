@@ -4,45 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79c9331e-44ad-4170-b138-be97658d45d6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/app/util/dialog/finalmessage/finalmessage.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/util/dialog/finalmessage/finalmessage.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/util/dialog/finalmessage/finalmessage.component.ts" afterDir="false" />
+    <list default="true" id="4da0f342-871c-435f-a19a-d41320e60e76" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.firebase/hosting.ICAgIA.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.firebase/hosting.ZGlzdA.cache" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.firebaserc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/workflows/firebase-hosting-merge.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.github/workflows/firebase-hosting-pull-request.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/firebase.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/3rdpartylicenses.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/404.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Poppins-Thin.605324f7af12a99a.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/LilitaOne-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Black.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-BlackItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-BoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-ExtraBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-ExtraBoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-ExtraLight.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-ExtraLightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Italic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-LightItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-MediumItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-SemiBold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-SemiBoldItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-Thin.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/Font/Poppins-ThinItalic.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/logo.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/pagenotfound.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/main.b0070601bbb8feb4.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/polyfills.c81d40b9161b77a2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/runtime.840dd74e95be323d.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/styles.e06a9809e0fa01f5.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gpacal/.angular/cache/15.2.9/angular-webpack/e4524d83858d1b9221833cda64f6544e7d290281/0.pack" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gpacal/.angular/cache/15.2.9/angular-webpack/e4524d83858d1b9221833cda64f6544e7d290281/index.pack" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/component/about/about.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/about/about.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/component/contact-us/contact-us.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/contact-us/contact-us.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/component/contact-us/contact-us.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/contact-us/contact-us.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/component/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/home/home.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/component/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/home/home.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/util/dialog/message/message.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/util/dialog/message/message.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/util/dialog/finalmessage/finalmessage.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/util/dialog/finalmessage/finalmessage.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/util/dialog/message/message.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/util/dialog/message/message.component.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,36 +39,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitToolBoxStore">
-    <option name="recentBranches">
-      <RecentBranches>
-        <option name="branchesForRepo">
-          <list>
-            <RecentBranchesForRepo>
-              <option name="branches">
-                <list>
-                  <RecentBranch>
-                    <option name="branchName" value="GPA-Calculator-Lakshan" />
-                    <option name="lastUsedInstant" value="1689092569" />
-                  </RecentBranch>
-                  <RecentBranch>
-                    <option name="branchName" value="main" />
-                    <option name="lastUsedInstant" value="1689092568" />
-                  </RecentBranch>
-                </list>
-              </option>
-              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$/.." />
-            </RecentBranchesForRepo>
-          </list>
-        </option>
-      </RecentBranches>
-    </option>
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\Program Files\PHP\php.exe" />
-  <component name="ProjectId" id="2SFit81cyUf0JXMsbpZBO1mKcyA" />
+  <component name="ProjectId" id="2SniWP3QlzlHxmT9sxnQlQ5j2tv" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -92,28 +51,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/My Projects/BIT-GPA-Calculator/docs&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;E:\\My Projects\\BIT-GPA-Calculator\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "GPA-Calculator-Lakshan",
+    "last_opened_file_path": "E:/My Projects/BIT-GPA-Calculator/    ",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "E:\\My Projects\\BIT-GPA-Calculator\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\My Projects\BIT-GPA-Calculator\docs" />
-      <recent name="E:\My Projects\BIT-GPA-Calculator\gpacal\docs" />
-      <recent name="E:\My Projects\BIT-GPA-Calculator\gpacal\src\app\entity" />
-      <recent name="E:\My Projects\BIT-GPA-Calculator\gpacal\src\app\util\dialog" />
+      <recent name="E:\My Projects\BIT-GPA-Calculator\    " />
     </key>
   </component>
   <component name="RunManager" selected="npm.Angular CLI Server">
@@ -134,28 +90,15 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="79c9331e-44ad-4170-b138-be97658d45d6" name="Changes" comment="" />
-      <created>1688748945202</created>
+      <changelist id="4da0f342-871c-435f-a19a-d41320e60e76" name="Changes" comment="" />
+      <created>1689788780973</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1688748945202</updated>
-      <workItem from="1688748945334" duration="7168000" />
-      <workItem from="1688823425905" duration="16229000" />
-      <workItem from="1689008783028" duration="14136000" />
-      <workItem from="1689024522228" duration="6245000" />
-      <workItem from="1689062764504" duration="10800000" />
-      <workItem from="1689086960451" duration="596000" />
-      <workItem from="1689088060483" duration="3764000" />
-      <workItem from="1689138718971" duration="2031000" />
-      <workItem from="1689181318109" duration="4236000" />
-      <workItem from="1689319951399" duration="17335000" />
-      <workItem from="1689340331965" duration="8440000" />
-      <workItem from="1689534797597" duration="5225000" />
-      <workItem from="1689611982590" duration="923000" />
-      <workItem from="1689613885884" duration="1477000" />
-      <workItem from="1689615633906" duration="1871000" />
- GPA-Calculator-Lakshan
-      <workItem from="1689691629921" duration="4601000" />
+      <updated>1689788780973</updated>
+      <workItem from="1689788782188" duration="6668000" />
+      <workItem from="1690190028345" duration="1199000" />
+      <workItem from="1690466012910" duration="7060000" />
+
     </task>
     <servers />
   </component>
