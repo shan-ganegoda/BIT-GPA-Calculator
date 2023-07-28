@@ -1,27 +1,56 @@
-# Gpacal
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.6.
+# BIT GPA CALCULATOR
 
-## Development server
+The University GPA Calculator Project is a web-based application developed by our team to assist students in calculating their Grade Point Average (GPA) at the university level. The tool simplifies the often complex and time-consuming process of manually computing GPA and provides students with a user-friendly interface to obtain accurate and instant results. This project was initiated in response to the growing need for an efficient GPA calculator to streamline academic planning and decision-making.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- User-Friendly Interface
+- Real-Time GPA Calculation
+- Year and Cumulative GPA
+- Data Privacy
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Tech Stack
 
-## Running unit tests
+Angular, Boostrap, 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🚀 About Team
+Our team of dedicated and passionate university undergraduates came together with a shared vision to enhance our skills and unlock our full potential through a skill development project. Recognizing the importance of practical experience in complementing theoretical knowledge, we embarked on this journey to work collaboratively, explore new technologies, and create innovative solutions that add value to our academic and personal growth.
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![Logo](https://cdn.icon-icons.com/icons2/2699/PNG/512/angular_logo_icon_169598.png)
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/shan-ganegoda/BIT-GPA-Calculator.git
+```
+
+Go to the project directory
+
+```bash
+  cd BIT-GPA-Calculator
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  ng serve
+```
+
+
+## Feedback
+
+If you have any feedback, please mail out to me gglakshan@gmail.com
+
