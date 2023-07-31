@@ -19,6 +19,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import { AboutComponent } from './component/about/about.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { FinalmessageComponent } from './util/dialog/finalmessage/finalmessage.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -29,21 +30,22 @@ import { FinalmessageComponent } from './util/dialog/finalmessage/finalmessage.c
     ContactUsComponent,
     FinalmessageComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatInputModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatIconModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatToolbarModule,
-    MatDialogModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatExpansionModule,
+        MatInputModule,
+        MatSelectModule,
+        MatGridListModule,
+        MatIconModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatToolbarModule,
+        MatDialogModule,
+        MatMenuModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

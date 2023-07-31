@@ -25,7 +25,7 @@
 .forms > mat-form-field {
   margin-top: 5px;
   height: 50px;
-  width: 400px;
+  width: 100%;
 }
 
 h3{
@@ -79,7 +79,7 @@ mat-card-title {
 }
 
 .nav {
-  /*margin-left: 25vw;*/
+  margin-right: 0;
 }
 
 .navlist {
@@ -141,10 +141,95 @@ footer{
   height: 2rem;
 }
 
+.menu{
+  display: none;
+}
+
+@media screen and (min-width: 2561px) {
+
+  .year3 {
+    margin-top: -17.8rem;
+    width: 30vw;
+  }
+
+  .year2,.year1 {
+    width: 30vw;
+  }
+
+  .title{
+    position: relative;
+    left: -5vw;
+    margin-left: 15rem;
+  }
+
+  .btnoverall{
+    margin-left: 10vw;
+  }
+
+  mat-card-title{
+    margin-left: 13vw;
+  }
+}
+
 @media screen and (max-width: 2560px) {
 
   .year3 {
-  margin-top: -18.1rem;
+    margin-top: -18.1rem;
+    width: 30vw;
+  }
+
+  .year2,.year1 {
+    width: 30vw;
+  }
+
+  .title{
+    margin-left: 15vw;
+  }
+
+  .title{
+    position: relative;
+    left: -13vw;
+  }
+
+  .btnoverall{
+    margin-left: 10vw;
+  }
+
+  mat-card-title{
+    margin-left: 13vw;
+  }
+}
+
+@media screen and (max-width: 1920px) {
+
+  .year3 {
+    margin-top: -18.1rem;
+    width: 30vw;
+  }
+
+  .year2,.year1 {
+    width: 30vw;
+  }
+
+  .title{
+    margin-left: 15rem;
+  }
+
+  .title{
+    position: relative;
+    left: -13vw;
+  }
+}
+
+@media screen and (max-width: 1560px) {
+
+  .year3 {
+    margin-top: -16.8rem;
+    width: 30vw;
+  }
+
+  .year2,.year1 {
+    width: 30vw;
   }
 
   .title{
@@ -160,7 +245,7 @@ footer{
 @media screen and (max-width: 1440px ) {
 
   .year3 {
-    margin-top: -26vh;
+    margin-top: -28vh;
   }
 
   mat-card {
@@ -175,53 +260,131 @@ footer{
     width: 100%;
   }
 
+  .btnoverall{
+    top: -18rem;
+  }
+
+
+  mat-card-title{
+    margin-left: 11vw;
+  }
+
+  .title{
+    position: relative;
+    left: -16vw;
+  }
+
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1280px ) {
 
+  .year3 {
+    margin-top: -26.5vh;
+  }
   .forms > mat-form-field {
     margin-top: 5px;
     height: 50px;
     width: 100%;
   }
 
-  .year1 {
-    margin-top: -24rem;
+  .btnoverall{
+    top: -18rem;
   }
 
+  mat-card-title{
+    margin-left: 11vw;
+  }
+
+  .title{
+    position: relative;
+    left: -25vw;
+  }
+  .nav{
+    margin-left: -15vw;
+  }
+
+}
+
+@media screen and (max-width: 1024px) {
+
   .year3 {
-    margin-top: -21.5rem;
+    margin-top: -22.5vh;
   }
 
   .year2 {
-    margin-top: -25.25rem;
+    margin-top: -29.5vh;
   }
 
-
-
-  mat-card {
-    width: max-content;
-    height: max-content;
-
+  .year1 {
+    margin-top: -31.5vh;
+  }
+  .forms > mat-form-field {
+    margin-top: 5px;
+    height: 50px;
+    width: 100%;
   }
 
-  mat-card-title {
-    color: white;
-    margin-left: 115px;
+  .btnoverall{
+    top: -14rem;
   }
 
-  .logo {
+  mat-card-title{
+    margin-left: 11vw;
+  }
+
+  .title{
     position: relative;
-    transform: scale(0.1);
-    /*margin-left: -38vw;*/
+    left: -43.5vw;
+  }
+  .nav{
+    margin-left: -40vw;
+  }
+}
+
+@media screen and (max-width: 850px) {
+
+  .year3 {
+    margin-top: -7.5vh;
   }
 
-  .nav {
-    /*margin-left: 15vw;*/
+  .year2 {
+    margin-top: -19.5vh;
   }
 
-  .btns {
-    width: 200px;
+  .year1 {
+    margin-top: -22vh;
+  }
+  .forms > mat-form-field {
+    margin-top: 5px;
+    height: 50px;
+    width: 100%;
+  }
+
+  .btnoverall{
+    top: -7rem;
+  }
+
+  mat-card-title{
+    margin-left: 11vw;
+  }
+
+  .title{
+    position: relative;
+    left: -69.5vw;
+  }
+  .menu{
+    display: block;
+    margin-left: -55vw;
+    margin-top: 0;
+  }
+
+  .menuicon{
+    transform: scale(2);
+  }
+
+
+  .nav{
+    display: none;
   }
 }
 
@@ -234,27 +397,29 @@ footer{
   }
 
   .year1 {
-    /*margin-top: -18rem;*/
+    margin-top: -30vh;
+    width: 90%;
   }
 
   .year3 {
-    /*margin-top: -7.5vh;*/
+    margin-top: -38.5vh;
+    width: 30%;
+    position: relative;
+    top: -5vh;
+    width: 90%;
   }
 
   .year2 {
-    /*margin-top: -16.6rem;*/
-  }
-
-  mat-card {
-    width: fit-content;
-    height: max-content;
-
+    margin-top: -30.6rem;
+    width: 30%;
+    position: relative;
+    top: 5vh;
+    width: 90%;
   }
 
   mat-card-title {
     color: white;
-    /*margin-left: 75px;*/
-    align-content: center;
+    margin-left: 9vw;
   }
 
   .logo {
@@ -263,13 +428,37 @@ footer{
     /*margin-left: -35vw;*/
   }
 
-  .nav {
-    margin-left: 5vw;
+  .title{
+    position: relative;
+    left: -73.5vw;
   }
 
-  .btns {
-    width: 200px;
+  .btnoverall{
+    top: -22rem;
+    width: 75vw;
+    margin-left: 12.5vw;
   }
+
+  .btns{
+    margin-left: 12vw;
+
+  }
+
+  .menu{
+    display: block;
+    margin-left: -55vw;
+    margin-top: 0;
+  }
+
+  .menuicon{
+    transform: scale(2);
+  }
+
+
+  .nav{
+    display: none;
+  }
+
 }
 
 @media screen and (max-width: 425px) {
@@ -282,48 +471,55 @@ footer{
 
   .year1 {
     /*margin-top: -18rem;*/
+    width: 90%;
   }
 
-  .year3 {
-    margin-top: -30vh;
+  .year3  {
+    margin-top: -33vh;
+    width: 90%;
   }
 
   .year2 {
-    /*margin-top: -25rem;*/
-  }
-
-  mat-card {
-    width: max-content;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 12px;
-  }
-
-  mat-card-content {
-    width: max-content;
-    align-self: center;
+    margin-top: -30rem;
+    width: 90%;
   }
 
   mat-card-title {
     color: white;
-    margin-left: 75px;
+    margin-left: 33vw;
   }
 
   .logo {
     transform: scale(0.05);
-    /*margin-left: -25vw;*/
+    margin-left: -10vw;
+    margin-top: 0;
   }
 
-  .nav {
-    /*margin-left: -10vw;*/
+  .title{
+    margin-left: -26vw;
+    font-size: 25px ;
   }
 
-  .navlist {
-    font-size: 13px;
+  .btnoverall{
+    top: -20rem;
+    width: 80vw;
+    margin-left: 10.5vw;
   }
 
-  .btns {
-    width: 200px;
+  .btns{
+    margin-left: 0;
   }
+
+  .menu{
+    display: block;
+    margin-left: -58vw;
+    margin-top: 0;
+  }
+
+  .menuicon{
+    transform: scale(2);
+  }
+
 }
 
 .spacer {
