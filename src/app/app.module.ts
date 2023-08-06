@@ -20,6 +20,7 @@ import { AboutComponent } from './component/about/about.component';
 import { ContactUsComponent } from './component/contact-us/contact-us.component';
 import { FinalmessageComponent } from './util/dialog/finalmessage/finalmessage.component';
 import {MatMenuModule} from "@angular/material/menu";
+import { LandingPageComponent } from './component/landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatMenuModule} from "@angular/material/menu";
     MessageComponent,
     AboutComponent,
     ContactUsComponent,
-    FinalmessageComponent
+    FinalmessageComponent,
+    LandingPageComponent
   ],
     imports: [
         BrowserModule,
