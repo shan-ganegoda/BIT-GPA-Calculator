@@ -35,5 +35,5 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BIT_GPA_CALCULATER }}'
           channelId: live
-          projectId: bit-gpacalculater
+          projectId: bit-gpacalculator
           
