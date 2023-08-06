@@ -26,6 +26,9 @@ jobs:
 
     - name: Build
       run: bash -c "ng build --configuration production"
+      
+    - run: "npm install firebase-admin --save"
+    
     - name: Deploy to Firebase
       uses: FirebaseExtended/action-hosting-deploy@v0
       with:
