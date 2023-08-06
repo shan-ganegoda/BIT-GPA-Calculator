@@ -32,7 +32,7 @@ jobs:
     - name: Deploy to Firebase
       uses: FirebaseExtended/action-hosting-deploy@v0
       with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          repoToken: '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'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BIT_GPA_CALCULATER }}'
           channelId: live
           projectId: bit-gpacalculator
