@@ -3,7 +3,12 @@
   src: url("src/assets/Font/Poppins-Thin.ttf") format('truetype');
 }
 
-img{
+@font-face {
+  font-family: 'poppins-SemiBold';
+  src: url("src/assets/Font/Poppins-SemiBold.ttf") format('truetype');
+}
+
+img {
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -11,19 +16,19 @@ img{
   margin-top: auto;
   margin-bottom: auto;
   transform: scale(0.7);
-  opacity: 0.1;
+  /* opacity: 0.1; */
 
 }
 
-.navbar-brand{
+.navbar-brand {
   /*align-content: flex-start;*/
   margin-left: -27rem;
   height: 50px;
   margin-top: -440px;
 }
 
-.title{
-  font-family: poppins,sans-serif;
+.title {
+  font-family: poppins, sans-serif;
   font-size: 30px;
   font-weight: bold;
   margin-left: auto;
@@ -55,27 +60,162 @@ a:hover {
   cursor: pointer;
 }
 
-.navbar, .back {
+.navbar,
+.back {
   background: rgb(2, 0, 36);
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(136, 235, 255, 1) 100%);
   width: 100%;
 }
 
-.navbar{
+.navbar {
   position: fixed;
   z-index: 1;
   text-align: center;
 }
 
-a{
+a {
   color: black;
   text-decoration: none;
 }
 
-footer{
+footer {
   background: #000000;
   color: white;
   text-align: center;
   height: 2rem;
 }
 
+mat-card-header {
+  justify-content: center;
+
+}
+
+.about-logo {
+  padding-top: 2.5%;
+  justify-content: center;
+}
+
+.about-logo img {
+  width: 35%;
+  height: 40%;
+}
+
+.approach-mission .approach h3 {
+  font-size: 24px;
+}
+
+.approach-mission .mission h3 {
+  font-size: 24px;
+}
+
+.approach-mission .approach {
+  width: 70%;
+  margin-left: 15%;
+}
+
+.approach-mission .approach h3 {
+  text-align: center;
+}
+
+.approach-mission .approach p {
+  border: none;
+}
+
+.approach-mission .mission {
+  width: 70%;
+  margin-left: 15%;
+}
+
+.approach-mission .mission h3 {
+  text-align: center;
+}
+
+main {
+  margin-bottom: 5%;
+  height: 100%;
+  padding-bottom: 20%;
+  /* font-family: poppins,sans-serif; */
+  font-family: poppins-SemiBold;
+  font-weight: 100;
+}
+
+.approach-mission {
+  justify-content: center;
+}
+
+.services {
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  height: 150px;
+  padding-top: 30px;
+  /* margin-bottom: 20%; */
+
+}
+
+.services .solutions {
+  justify-content: center;
+  /* border: 1px solid #000; */
+  box-shadow: grey;
+  margin-left: 100px;
+  width: 300px;
+  height: 300px;
+  background: #d4ebf2;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.solutions:hover {
+  transform: scale(1.06)
+}
+
+.services mat-card-title {
+  padding-bottom: 20%;
+}
+
+.services .mobile {
+  justify-content: center;
+  /* border: 1px solid #000; */
+  margin-left: 100px;
+  width: 300px;
+  height: 300px;
+  background: #d4ebf2;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.mobile:hover {
+  transform: scale(1.06)
+}
+
+.services .web {
+  justify-content: center;
+  /* border: 1px solid #000; */
+  margin-left: 100px;
+  width: 300px;
+  height: 300px;
+  background: #d4ebf2;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.web:hover {
+  transform: scale(1.06)
+}
+
+.languages {
+  padding-top: 20%;
+  padding-left: 5%;
+  padding-right: 4%;
+  width: 145px;
+  height: 125px;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+
+}
+
+.languages img {
+  width: 100%;
+  height: 100%;
+}
