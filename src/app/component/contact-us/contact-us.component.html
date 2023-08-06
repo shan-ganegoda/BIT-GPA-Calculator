@@ -1,7 +1,7 @@
 <header>
   <mat-toolbar class="navbar">
     <div class="navbar-brand">
-      <img class="logo" src="assets/logo.jpg">
+      <img class="logo" [src]="logo">
     </div>
 
     <span class="title">BIT GPA CALCULATOR</span>
@@ -10,11 +10,103 @@
     <div class="nav">
       <ul class="navlist">
         <li><a routerLink="">Home</a></li>
-        <li><a routerLink="contactus">Contact us</a></li>
+        <li><a routerLink="../contactus">Contact us</a></li>
         <li><a routerLink="../about">About</a></li>
       </ul>
     </div>
 
   </mat-toolbar>
 </header>
-<img src="assets/pagenotfound.svg" alt="Page Not Found">
+<main>
+  
+  <section>
+    
+    <div class="section-header">
+      <div class="container">
+        <h2>Contact Us</h2>
+      </div>
+    </div>
+    
+    <div class="container">
+      <div class="row">
+        
+        <div class="contact-info">
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <i class='bx bxl-facebook'></i>
+              <!-- <img src="assets/facebook.png" alt=""> -->
+            </div>
+            
+            <div class="contact-info-content">
+              <h4>FaceBook</h4>
+              <p><a href="https://www.facebook.com/codehelio">codehelio</a></p>
+            </div>
+          </div>
+          
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <i class='bx bxl-whatsapp' ></i>
+              <!-- <img src=assets\whatsapp.png alt=""> -->
+            </div>
+            
+            <div class="contact-info-content">
+              <h4>Whatsapp</h4>
+              <p><a href="https://wa.me/message/EADZXD5WYNK4L1">071 396 6621</a></p>
+            </div>
+          </div>
+          
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <i class='bx bx-envelope'></i>
+              <!-- <img src="assets\email.png" alt=""> -->
+            </div>
+            
+            <div class="contact-info-content">
+              <h4>Email</h4>
+             <p><a href="hr.codehelio@gmail.com">hr.codehelio@gmail.com</a></p>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon">
+              <i class='bx bxl-linkedin' ></i>
+              <!-- <img src="assets\linkedin.png" alt=""> -->
+            </div>
+            
+            <div class="contact-info-content">
+              <h4>Linkedin</h4>
+             <p><a href="https://www.linkedin.com/company/codehelio/">Codehelio</a></p>
+            </div>
+          </div>
+
+        </div>
+        
+        <div class="contact-form">
+          <form action="" id="contact-form">
+            <h2>Send Message</h2>
+            <div class="input-box">
+              <input type="text" required="true" name="">
+              <span>Full Name</span>
+            </div>
+            
+            <div class="input-box">
+              <input type="email" required="true" name="">
+              <span>Email</span>
+            </div>
+            
+            <div class="input-box">
+              <textarea required="true" name=""></textarea>
+              <span>Type your Message...</span>
+            </div>
+            
+            <div class="input-box">
+              <input type="submit" value="Send" name="">
+            </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+</main>
