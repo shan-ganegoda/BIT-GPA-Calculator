@@ -1,6 +1,6 @@
 <header>
   <mat-toolbar class="navbar">
-      <img class="logo" [src]="logo">
+    <img class="logo" [src]="logo">
 
     <span class="spacer"></span>
     <span class="title">BIT GPA CALCULATOR</span>
@@ -44,7 +44,7 @@
 
           <div class="contact-info-item">
             <div class="contact-info-icon">
-              <i class='bx bxl-whatsapp' ></i>
+              <i class='bx bxl-whatsapp'></i>
               <!-- <img src=assets\whatsapp.png alt=""> -->
             </div>
 
@@ -62,41 +62,39 @@
 
             <div class="contact-info-content">
               <h4>Email</h4>
-             <p><a href="hr.codehelio@gmail.com">hr.codehelio@gmail.com</a></p>
+              <p><a href="hr.codehelio@gmail.com">hr.codehelio@gmail.com</a></p>
             </div>
           </div>
 
           <div class="contact-info-item">
             <div class="contact-info-icon">
-              <i class='bx bxl-linkedin' ></i>
+              <i class='bx bxl-linkedin'></i>
               <!-- <img src="assets\linkedin.png" alt=""> -->
             </div>
 
             <div class="contact-info-content">
               <h4>Linkedin</h4>
-             <p><a href="https://www.linkedin.com/company/codehelio/">Codehelio</a></p>
+              <p><a href="https://www.linkedin.com/company/codehelio/">Codehelio</a></p>
             </div>
           </div>
 
         </div>
 
         <div class="contact-form">
-          <form action="" id="contact-form">
+          <form (ngSubmit)="sendFeedBack()" [formGroup]="feedbackForm">
             <h2>Send Message</h2>
-            <div class="input-box">
-              <input type="text" required="true" name="">
-              <span>Full Name</span>
-            </div>
-
-            <div class="input-box">
-              <input type="email" required="true" name="">
-              <span>Email</span>
-            </div>
-
-            <div class="input-box">
-              <textarea required="true" name=""></textarea>
-              <span>Type your Message...</span>
-            </div>
+            <mat-form-field appearance="outline" >
+              <mat-label>Full Name</mat-label>
+              <input formControlName="name" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input formControlName="email" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Type your Message...</mat-label>
+              <textarea matInput formControlName="message"></textarea>
+            </mat-form-field>
 
             <div class="input-box">
               <input type="submit" value="Send" name="">
