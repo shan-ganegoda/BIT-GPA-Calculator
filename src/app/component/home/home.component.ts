@@ -592,7 +592,7 @@ export class HomeComponent implements OnInit{
     }
 
     if(this.asd>=2){
-      creditcount += 3;
+      creditcount += 4;
     }
     if(this.ead>=2){
       creditcount += 4;
@@ -633,8 +633,9 @@ export class HomeComponent implements OnInit{
       creditcount += 3;
     }
 
+    console.log("Credit Count :- "+creditcount);
     let c2 = true;
-    if(creditcount >= 90){
+    if(creditcount == 90){
       minimumcreditcount = "Yes";
       c2 = true;
     }else{
@@ -656,6 +657,13 @@ export class HomeComponent implements OnInit{
       c3 = false;
     }
 
+    let condition4 = "Yes";
+    if(creditcount != 90){
+      condition4 = "Yes";
+    }else{
+      condition4 = "No";
+    }
+
     let prmsg = ""
     if(c1 && c2 && c3){
       prmsg = "Congradulation You Are Graduated!"
@@ -664,8 +672,8 @@ export class HomeComponent implements OnInit{
     }
 
 
-    const datum = {"gpa":overallgpa,"condition1":c1,
-      "condition2":minimumcreditcount,"condition3":allenspassed,"condition4":"no","prmsg":prmsg };
+    const datum = {"gpa":overallgpa,"condition1":condition1,
+      "condition2":minimumcreditcount,"condition3":allenspassed,"condition4":condition4,"prmsg":prmsg };
 
     const stsmsg = this.dg.open(FinalmessageComponent, {
       width: '500px',

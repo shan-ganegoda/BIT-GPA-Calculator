@@ -8,26 +8,10 @@ jobs:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-           node-version: 18
-          
-    - name: Install Angular CLI
-      run: npm install -g @angular/cli
-      
-    - name: Install dependencies
-      run: npm install
-    
-    - name: Build
-      run: bash -c "ng build --configuration production"
-         
-    - uses: FirebaseExtended/action-hosting-deploy@v0
-      with:
+      - uses: actions/checkout@v3
+      - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BIT_GPA_CALCULATER }}'
-          channelId: live
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BIT_GPACALCULATOR }}'
           projectId: bit-gpacalculator

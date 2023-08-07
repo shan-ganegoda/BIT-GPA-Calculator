@@ -2,20 +2,31 @@
   font-family: 'poppins';
   src: url("src/assets/Font/Poppins-Thin.ttf") format('truetype');
 }
-.navbar-brand{
-  /*align-content: flex-start;*/
-  margin-left: -27rem;
+
+.blogo {
+  width: 80px;
   height: 50px;
-  margin-top: -440px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 15px;
 }
+
 .title{
   font-family: poppins,sans-serif;
   font-size: 30px;
   font-weight: bold;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+
+  /*position: absolute;*/
+  /*right: 0;*/
+  /*margin: 0 auto;*/
+
 }
+
+.spacer {
+  flex: 1 1 auto;
+}
+
 
 .forms > mat-label {
   color: red;
@@ -25,7 +36,7 @@
 .forms > mat-form-field {
   margin-top: 5px;
   height: 50px;
-  width: 400px;
+  width: 100%;
 }
 
 h3{
@@ -73,13 +84,13 @@ mat-card-title {
   margin-left: 180px;
 }
 
-.logo {
-  transform: scale(0.1);
-  /*margin-left: 0;*/
-}
+
 
 .nav {
-  /*margin-left: 25vw;*/
+  position: fixed;
+ top: 0;
+  right: 0;
+  padding-right: 15px;
 }
 
 .navlist {
@@ -105,7 +116,6 @@ a:hover {
 .navbar{
   position: fixed;
   z-index: 1;
-  text-align: center;
 }
 
 a{
@@ -141,26 +151,78 @@ footer{
   height: 2rem;
 }
 
+.menu{
+  display: none;
+}
+
+@media screen and (min-width: 2561px) {
+
+  .year3 {
+    margin-top: -17.8rem;
+    width: 30vw;
+  }
+
+  .year2,.year1 {
+    width: 30vw;
+  }
+
+  .btnoverall{
+    margin-left: 10vw;
+  }
+
+  mat-card-title{
+    margin-left: 13vw;
+  }
+}
+
 @media screen and (max-width: 2560px) {
 
   .year3 {
-  margin-top: -18.1rem;
+    margin-top: -18.1rem;
+    width: 30vw;
   }
 
-  .title{
-    margin-left: 15rem;
+  .year2,.year1 {
+    width: 30vw;
+  }
+  .btnoverall{
+    margin-left: 10vw;
   }
 
-  .title{
-    position: relative;
-    left: -13vw;
+  mat-card-title{
+    margin-left: 13vw;
+  }
+}
+
+@media screen and (max-width: 1920px) {
+
+  .year3 {
+    margin-top: -18.1rem;
+    width: 30vw;
+  }
+
+  .year2,.year1 {
+    width: 30vw;
+  }
+
+}
+
+@media screen and (max-width: 1560px) {
+
+  .year3 {
+    margin-top: -16.8rem;
+    width: 30vw;
+  }
+
+  .year2,.year1 {
+    width: 30vw;
   }
 }
 
 @media screen and (max-width: 1440px ) {
 
   .year3 {
-    margin-top: -26vh;
+    margin-top: -28vh;
   }
 
   mat-card {
@@ -175,53 +237,109 @@ footer{
     width: 100%;
   }
 
+  .btnoverall{
+    top: -18rem;
+  }
+
+
+  mat-card-title{
+    margin-left: 11vw;
+  }
+
+
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 1280px ) {
 
+  .year3 {
+    margin-top: -26.5vh;
+  }
   .forms > mat-form-field {
     margin-top: 5px;
     height: 50px;
     width: 100%;
   }
 
-  .year1 {
-    margin-top: -24rem;
+  .btnoverall{
+    top: -18rem;
   }
 
+  mat-card-title{
+    margin-left: 11vw;
+  }
+
+}
+
+@media screen and (max-width: 1024px) {
+
   .year3 {
-    margin-top: -21.5rem;
+    margin-top: -22.5vh;
   }
 
   .year2 {
-    margin-top: -25.25rem;
+    margin-top: -29.5vh;
+  }
+
+  .year1 {
+    margin-top: -31.5vh;
+  }
+  .forms > mat-form-field {
+    margin-top: 5px;
+    height: 50px;
+    width: 100%;
+  }
+
+  .btnoverall{
+    top: -14rem;
   }
 
 
+}
 
-  mat-card {
-    width: max-content;
-    height: max-content;
+@media screen and (max-width: 850px) {
 
+  .year3 {
+    margin-top: -7.5vh;
   }
 
-  mat-card-title {
-    color: white;
-    margin-left: 115px;
+  .year2 {
+    margin-top: -19.5vh;
   }
 
-  .logo {
-    position: relative;
-    transform: scale(0.1);
-    /*margin-left: -38vw;*/
+  .year1 {
+    margin-top: -22vh;
+  }
+  .forms > mat-form-field {
+    margin-top: 5px;
+    height: 50px;
+    width: 100%;
   }
 
-  .nav {
-    /*margin-left: 15vw;*/
+  .btnoverall{
+    top: -7rem;
   }
 
-  .btns {
-    width: 200px;
+  mat-card-title{
+    margin-left: 11vw;
+  }
+
+  /*.title{*/
+  /*  position: relative;*/
+  /*  left: -69.5vw;*/
+  /*}*/
+  .menu{
+    display: block;
+    margin-left: -55vw;
+    margin-top: 0;
+  }
+
+  .menuicon{
+    transform: scale(2);
+  }
+
+
+  .nav{
+    display: none;
   }
 }
 
@@ -234,98 +352,241 @@ footer{
   }
 
   .year1 {
-    /*margin-top: -18rem;*/
+    margin-top: -30vh;
+    width: 90%;
   }
 
   .year3 {
-    /*margin-top: -7.5vh;*/
+    margin-top: -38.5vh;
+    width: 30%;
+    position: relative;
+    top: -5vh;
+    width: 90%;
   }
 
   .year2 {
-    /*margin-top: -16.6rem;*/
-  }
-
-  mat-card {
-    width: fit-content;
-    height: max-content;
-
+    margin-top: -30.6rem;
+    width: 30%;
+    position: relative;
+    top: 5vh;
+    width: 90%;
   }
 
   mat-card-title {
     color: white;
-    /*margin-left: 75px;*/
-    align-content: center;
+    margin-left: 9vw;
   }
 
   .logo {
     transform: scale(0.1);
-    align-self: center;
+
     /*margin-left: -35vw;*/
   }
 
-  .nav {
-    margin-left: 5vw;
+  /*.title{*/
+  /*  position: relative;*/
+  /*  left: -73.5vw;*/
+  /*}*/
+
+  .btnoverall{
+    top: -22rem;
+    width: 75vw;
+    margin-left: 12.5vw;
   }
 
-  .btns {
-    width: 200px;
+  .btns{
+    margin-left: 12vw;
+
   }
+
+  .menu{
+    display: block;
+    margin-left: -55vw;
+    margin-top: 0;
+  }
+
+  .menuicon{
+    transform: scale(2);
+  }
+
+
+  .nav{
+    display: none;
+  }
+
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 426px) {
 
   .forms > mat-form-field {
-    /*margin-top: 5px;*/
+    /*margin-top: -15vh;*/
     height: 50px;
     width: 100%;
   }
 
   .year1 {
-    /*margin-top: -18rem;*/
+    /*margin-top: 30vh;*/
+    width: 90%;
+    /*margin-bottom: -60vh;*/
   }
 
-  .year3 {
-    margin-top: -30vh;
+  .year3  {
+    margin-top: -33vh;
+    width: 90%;
   }
 
   .year2 {
-    /*margin-top: -25rem;*/
-  }
-
-  mat-card {
-    width: max-content;
-    border-top-left-radius: 15px;
-    border-top-right-radius: 12px;
-  }
-
-  mat-card-content {
-    width: max-content;
-    align-self: center;
+    margin-top: -30rem;
+    width: 90%;
   }
 
   mat-card-title {
     color: white;
-    margin-left: 75px;
+    margin-left: 33vw;
   }
 
   .logo {
     transform: scale(0.05);
-    /*margin-left: -25vw;*/
   }
 
-  .nav {
-    /*margin-left: -10vw;*/
+  /*.title{*/
+  /*  margin-left: -28vw;*/
+  /*  font-size: 25px ;*/
+  /*}*/
+
+  .btnoverall{
+    top: -19rem;
+    width: 80vw;
+    margin-left: 10.5vw;
   }
 
-  .navlist {
-    font-size: 13px;
+  .btns{
+    margin-left: 0;
   }
 
-  .btns {
-    width: 200px;
+  .menu{
+    display: block;
+    margin-left: -58vw;
+    margin-top: 0;
   }
+
+  .menuicon{
+    transform: scale(2);
+  }
+
 }
 
-.spacer {
-  flex: 1 1 auto;
+@media screen and (max-width: 400px) {
+
+  .year1 {
+    /*margin-top: -18rem;*/
+    width: 90%;
+  }
+
+  .year3  {
+    margin-top: -33vh;
+    width: 90%;
+  }
+
+  .year2 {
+    margin-top: -30rem;
+    width: 90%;
+  }
+
+  mat-card-title {
+    color: white;
+    margin-left: 33vw;
+  }
+
+  .logo {
+    transform: scale(0.05);
+    margin-left: -10vw;
+    margin-top: 0;
+  }
+
+  .title{
+    margin-left: -35vw;
+    font-size: 25px ;
+    transform: scale(0.7);
+
+  }
+
+  .btnoverall{
+    top: -20rem;
+    width: 80vw;
+    margin-left: 10.5vw;
+  }
+
+  .btns{
+    margin-left: 0;
+  }
+
+  .menu{
+    display: block;
+    margin-left: -58vw;
+    margin-top: 0;
+  }
+
+  .menuicon{
+    transform: scale(2);
+  }
+
 }
+
+@media screen and (max-width: 375px) {
+
+  .year1 {
+    /*margin-top: -18rem;*/
+    width: 90%;
+  }
+
+  .year3  {
+    margin-top: -33vh;
+    width: 90%;
+  }
+
+  .year2 {
+    margin-top: -30rem;
+    width: 90%;
+  }
+
+  mat-card-title {
+    color: white;
+    margin-left: 33vw;
+  }
+
+  .logo {
+    transform: scale(0.05);
+    margin-left: -10vw;
+    margin-top: 0;
+  }
+
+  .title{
+    /*margin-left: -43vw;*/
+    /*font-size: 25px ;*/
+    transform: scale(0.7);
+
+  }
+
+  .btnoverall{
+    top: -20rem;
+    width: 80vw;
+    margin-left: 10.5vw;
+  }
+
+  .btns{
+    margin-left: 0;
+  }
+
+  .menu{
+    display: block;
+    margin-left: -58vw;
+    margin-top: 0;
+  }
+
+  .menuicon{
+    transform: scale(2);
+  }
+
+}
+
