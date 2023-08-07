@@ -9,6 +9,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  padding-top: 5px;
   padding-left: 15px;
 }
 
@@ -57,19 +58,14 @@ h3{
   padding: 20px;
 }
 
-.year1 {
-  margin-top: -18rem;
-  height: fit-content;
+mat-card{
+  display: flex;
+  flex-direction: column;
+  top: -8%;
 }
 
-.year2 {
-  margin-top: -18rem;
-  height: fit-content;
-}
-
-.year3 {
-  margin-top: 0rem;
-  height: fit-content;
+.year2,.year1,.year3 {
+  width: 30vw;
 }
 
 mat-card-header {
@@ -81,10 +77,9 @@ mat-card-header {
 
 mat-card-title {
   color: white;
-  margin-left: 180px;
+  margin-left: 13vw;
+
 }
-
-
 
 .nav {
   position: fixed;
@@ -123,7 +118,7 @@ a{
   text-decoration: none;
 }
 .btns {
-  width: 400px;
+  width: 100%;
   background: #4169E1;
 }
 
@@ -157,78 +152,32 @@ footer{
 
 @media screen and (min-width: 2561px) {
 
-  .year3 {
-    margin-top: -17.8rem;
-    width: 30vw;
-  }
-
-  .year2,.year1 {
-    width: 30vw;
-  }
-
   .btnoverall{
     margin-left: 10vw;
-  }
-
-  mat-card-title{
-    margin-left: 13vw;
   }
 }
 
 @media screen and (max-width: 2560px) {
 
-  .year3 {
-    margin-top: -18.1rem;
-    width: 30vw;
-  }
-
-  .year2,.year1 {
-    width: 30vw;
-  }
   .btnoverall{
     margin-left: 10vw;
   }
-
-  mat-card-title{
-    margin-left: 13vw;
-  }
 }
 
-@media screen and (max-width: 1920px) {
+/*@media screen and (max-width: 1920px) {*/
 
-  .year3 {
-    margin-top: -18.1rem;
-    width: 30vw;
-  }
-
-  .year2,.year1 {
-    width: 30vw;
-  }
-
-}
+/*}*/
 
 @media screen and (max-width: 1560px) {
-
-  .year3 {
-    margin-top: -16.8rem;
-    width: 30vw;
-  }
-
-  .year2,.year1 {
-    width: 30vw;
-  }
+    .year3{
+      top: -7.5%;
+    }
 }
 
-@media screen and (max-width: 1440px ) {
+@media screen and (max-width: 1385px ) {
 
   .year3 {
-    margin-top: -28vh;
-  }
-
-  mat-card {
-    width: max-content;
-    height: fit-content;
-
+    top: -7%;
   }
 
   .forms > mat-form-field {
@@ -240,20 +189,14 @@ footer{
   .btnoverall{
     top: -18rem;
   }
-
-
-  mat-card-title{
-    margin-left: 11vw;
-  }
-
-
 }
 
-@media screen and (max-width: 1280px ) {
+@media screen and (max-width: 1233px ) {
 
   .year3 {
-    margin-top: -26.5vh;
+    top: -6.5%;
   }
+
   .forms > mat-form-field {
     margin-top: 5px;
     height: 50px;
@@ -262,10 +205,6 @@ footer{
 
   .btnoverall{
     top: -18rem;
-  }
-
-  mat-card-title{
-    margin-left: 11vw;
   }
 
 }
@@ -273,15 +212,15 @@ footer{
 @media screen and (max-width: 1024px) {
 
   .year3 {
-    margin-top: -22.5vh;
+    top: -5.5%;
   }
 
   .year2 {
-    margin-top: -29.5vh;
+    top: -7.4%;
   }
 
   .year1 {
-    margin-top: -31.5vh;
+    /*margin-top: -31.5vh;*/
   }
   .forms > mat-form-field {
     margin-top: 5px;
@@ -292,23 +231,56 @@ footer{
   .btnoverall{
     top: -14rem;
   }
+}
 
+@media screen and (max-width: 980px) {
+  .year1{
+    top: -7%;
+  }
+  .year2{
+    top: -6.4%;
+  }
+  .year3{
+    top: -4.6%;
+  }
+
+  mat-card-title {
+    margin-left: 11vw;
+
+  }
+
+  .btnoverall{
+    top: -10rem;
+  }
+}
+
+
+@media screen and (max-width: 900px) {
+
+  .year1{
+    top: -5.5%;
+  }
+  .year2{
+    top: -6.2%;
+  }
+  .year3{
+    top: -2.4%;
+  }
+  .btnoverall{
+    top: -8rem;
+  }
 
 }
 
 @media screen and (max-width: 850px) {
 
-  .year3 {
-    margin-top: -7.5vh;
+  .year2{
+    top: -4.9%;
+  }
+  .year3{
+    top: -1.7%;
   }
 
-  .year2 {
-    margin-top: -19.5vh;
-  }
-
-  .year1 {
-    margin-top: -22vh;
-  }
   .forms > mat-form-field {
     margin-top: 5px;
     height: 50px;
@@ -316,11 +288,11 @@ footer{
   }
 
   .btnoverall{
-    top: -7rem;
+    top: -6rem;
   }
 
   mat-card-title{
-    margin-left: 11vw;
+    /*margin-left: 11vw;*/
   }
 
   /*.title{*/
@@ -352,12 +324,13 @@ footer{
   }
 
   .year1 {
-    margin-top: -30vh;
+    top: -8%;
     width: 90%;
   }
 
   .year3 {
-    margin-top: -38.5vh;
+    /*margin-top: -38.5vh;*/
+    top: 8%;
     width: 30%;
     position: relative;
     top: -5vh;
@@ -374,7 +347,7 @@ footer{
 
   mat-card-title {
     color: white;
-    margin-left: 9vw;
+    margin-left: 38vw;
   }
 
   .logo {
@@ -383,21 +356,20 @@ footer{
     /*margin-left: -35vw;*/
   }
 
-  /*.title{*/
-  /*  position: relative;*/
-  /*  left: -73.5vw;*/
-  /*}*/
+  .title{
+    display: none;
+  }
 
   .btnoverall{
-    top: -22rem;
+    top: -14rem;
     width: 75vw;
     margin-left: 12.5vw;
   }
 
-  .btns{
-    margin-left: 12vw;
+  /*.btns{*/
+  /*  margin-left: 12vw;*/
 
-  }
+  /*}*/
 
   .menu{
     display: block;
@@ -424,21 +396,6 @@ footer{
     width: 100%;
   }
 
-  .year1 {
-    /*margin-top: 30vh;*/
-    width: 90%;
-    /*margin-bottom: -60vh;*/
-  }
-
-  .year3  {
-    margin-top: -33vh;
-    width: 90%;
-  }
-
-  .year2 {
-    margin-top: -30rem;
-    width: 90%;
-  }
 
   mat-card-title {
     color: white;
@@ -455,14 +412,12 @@ footer{
   /*}*/
 
   .btnoverall{
-    top: -19rem;
+    top: -12rem;
     width: 80vw;
     margin-left: 10.5vw;
   }
 
-  .btns{
-    margin-left: 0;
-  }
+
 
   .menu{
     display: block;
@@ -478,20 +433,6 @@ footer{
 
 @media screen and (max-width: 400px) {
 
-  .year1 {
-    /*margin-top: -18rem;*/
-    width: 90%;
-  }
-
-  .year3  {
-    margin-top: -33vh;
-    width: 90%;
-  }
-
-  .year2 {
-    margin-top: -30rem;
-    width: 90%;
-  }
 
   mat-card-title {
     color: white;
@@ -512,14 +453,12 @@ footer{
   }
 
   .btnoverall{
-    top: -20rem;
+    top: -13rem;
     width: 80vw;
     margin-left: 10.5vw;
   }
 
-  .btns{
-    margin-left: 0;
-  }
+
 
   .menu{
     display: block;
@@ -535,21 +474,6 @@ footer{
 
 @media screen and (max-width: 375px) {
 
-  .year1 {
-    /*margin-top: -18rem;*/
-    width: 90%;
-  }
-
-  .year3  {
-    margin-top: -33vh;
-    width: 90%;
-  }
-
-  .year2 {
-    margin-top: -30rem;
-    width: 90%;
-  }
-
   mat-card-title {
     color: white;
     margin-left: 33vw;
@@ -561,12 +485,6 @@ footer{
     margin-top: 0;
   }
 
-  .title{
-    /*margin-left: -43vw;*/
-    /*font-size: 25px ;*/
-    transform: scale(0.7);
-
-  }
 
   .btnoverall{
     top: -20rem;
@@ -574,9 +492,7 @@ footer{
     margin-left: 10.5vw;
   }
 
-  .btns{
-    margin-left: 0;
-  }
+
 
   .menu{
     display: block;
