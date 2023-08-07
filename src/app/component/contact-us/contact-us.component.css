@@ -186,10 +186,9 @@ section {
 .contact-form {
   position: relative;
   background-color: #FFF;
-  padding: 40px 20px;
   width: 50%;
-  height: 60%;
-  padding-bottom: 20px;
+  height: 65%;
+  padding: 40px 20px 20px;
   top: -55%;
   left: 40%;
   border: 2px solid #1da9c0;
@@ -209,7 +208,10 @@ section {
   width: 100%;
   margin-top: 10px;
 }
-
+.contact-form mat-form-field{
+  width: 100%;
+  background: none !important;
+}
 .contact-form .input-box input,
 .contact-form .input-box textarea{
   width: 100%;
