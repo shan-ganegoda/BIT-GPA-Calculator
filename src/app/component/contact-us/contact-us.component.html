@@ -14,6 +14,15 @@
       </ul>
     </div>
 
+    <div class="menu">
+      <button mat-button [matMenuTriggerFor]="menu"> <mat-icon class="menuicon">view_headline</mat-icon></button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item ><a routerLink="">Home</a></button>
+        <button mat-menu-item ><a routerLink="../contactus">Contact Us</a></button>
+        <button mat-menu-item ><a routerLink="../about">About</a></button>
+      </mat-menu>
+    </div>
+
   </mat-toolbar>
 </header>
 <main>

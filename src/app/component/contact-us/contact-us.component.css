@@ -1,8 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
 @font-face {
   font-family: 'poppins';
-  src: url("src/assets/Font/Poppins-Thin.ttf") format('truetype');
+  src: url("src/assets/Font/Poppins-Thin.ttf")format('truetype');
 }
 
 .logo {
@@ -11,6 +9,7 @@
   position: fixed;
   top: 0;
   left: 0;
+  padding-top: 5px;
   padding-left: 15px;
 }
 
@@ -262,13 +261,12 @@ section {
   color: #00bcd4;
 }
 
-@media (max-width: 991px) {
-  section {
-    padding-top: 50px;
-    padding-bottom: 50px;
-  }
+.menu{
+  display: none;
+}
 
-  .row {
+@media (max-width: 991px) {
+    .row {
     flex-direction: column;
   }
 
@@ -278,6 +276,67 @@ section {
   }
 
   .contact-form {
-    width: 100%;
+    top: 13%;
+    left: -63%;
+  }
+
+  .title{
+    display: none;
   }
 }
+
+@media (max-width: 798px) {
+  .row {
+    height: 100%;
+    width: 100%;
+  }
+  .contact-info{
+    margin-top: 10%;
+    width: 65%;
+  }
+
+  main{
+    width: 100%;
+  }
+
+  .contact-form {
+    margin-top: -5%;
+    left: 0%;
+    width: 80%;
+    margin-bottom: 5rem;
+  }
+
+  .title{
+    display: none;
+  }
+
+  .menu{
+    display: block;
+    transform: scale(1.6);
+  }
+
+  .nav{
+    display: none;
+  }
+
+}
+
+@media (max-width: 798px) {
+  .row {
+    height: 100%;
+    width: 100%;
+  }
+  .contact-info{
+    margin-top: 10%;
+    width: 80%;
+  }
+
+  /*.contact-info-item:nth-child(odd){*/
+  /*  margin-left: 40%;*/
+  /*  margin-bottom: -12%;*/
+  /*}*/
+
+
+}
+
+

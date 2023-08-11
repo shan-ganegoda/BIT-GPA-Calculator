@@ -41,6 +41,7 @@ export class ContactUsComponent {
       EmailService.send( emailParams ).then((response: EmailJSResponseStatus) => {
 
         console.log('Email sent:', response);
+        this.clearFeedback();
         // You can display a success message to the user here
       })
         .catch((error: any) => {
@@ -48,5 +49,9 @@ export class ContactUsComponent {
           // You can display an error message to the user here
         });
     }
+  }
+
+  clearFeedback(){
+    this.feedbackForm.reset();
   }
 }

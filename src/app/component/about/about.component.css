@@ -2,7 +2,6 @@
   font-family: 'poppins';
   src: url("src/assets/Font/Poppins-Thin.ttf") format('truetype');
 }
-
 @font-face {
   font-family: 'poppins-SemiBold';
   src: url("src/assets/Font/Poppins-SemiBold.ttf") format('truetype');
