@@ -260,6 +260,48 @@ section {
   color: #00bcd4;
 }
 
+<<<<<<< Updated upstream
+=======
+.menu{
+  display: none;
+}
+
+.sidenav {
+  height: 50rem;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 0 0 0 20px;
+  font-family: poppins, sans-serif;
+  text-decoration: none;
+  font-size: 16px;
+  color: #fff;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: red;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+>>>>>>> Stashed changes
 @media (max-width: 991px) {
   section {
     padding-top: 50px;

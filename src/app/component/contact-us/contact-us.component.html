@@ -1,21 +1,42 @@
+<<<<<<< Updated upstream
 <header>
   <mat-toolbar class="navbar">
       <img class="logo" [src]="logo">
+=======
+<!--<header>-->
+<!--  <mat-toolbar class="navbar">-->
+<!--    <img class="logo" [src]="logo">-->
+>>>>>>> Stashed changes
 
-    <span class="spacer"></span>
-    <span class="title">BIT GPA CALCULATOR</span>
-    <span class="spacer"></span>
+<!--    <span class="spacer"></span>-->
+<!--    <span class="title">BIT GPA CALCULATOR</span>-->
+<!--    <span class="spacer"></span>-->
 
-    <div class="nav">
-      <ul class="navlist">
-        <li><a routerLink="../gpacalculator">Calculator</a></li>
-        <li><a routerLink="../contactus">Contact us</a></li>
-        <li><a routerLink="../about">About</a></li>
-      </ul>
-    </div>
+<!--    <div class="nav">-->
+<!--      <ul class="navlist">-->
+<!--        <li><a routerLink="../gpacalculator">Calculator</a></li>-->
+<!--        <li><a routerLink="../contactus">Contact us</a></li>-->
+<!--        <li><a routerLink="../about">About</a></li>-->
+<!--      </ul>-->
+<!--    </div>-->
 
+<<<<<<< Updated upstream
   </mat-toolbar>
 </header>
+=======
+<!--    <div class="menu">-->
+<!--      <button mat-button (click)="openNav()"> <mat-icon class="menuicon">view_headline</mat-icon></button>-->
+<!--      <div id="mySidenav" class="sidenav">-->
+<!--        <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>-->
+<!--        <a routerLink="">Home</a>-->
+<!--        <a routerLink="../contactus">Contact Us</a>-->
+<!--        <a routerLink="../about">About</a>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </mat-toolbar>-->
+<!--</header>-->
+>>>>>>> Stashed changes
 <main>
 
   <section>
@@ -81,6 +102,7 @@
         </div>
 
         <div class="contact-form">
+<<<<<<< Updated upstream
           <form action="" id="contact-form">
             <h2>Send Message</h2>
             <div class="input-box">
@@ -97,6 +119,22 @@
               <textarea required="true" name=""></textarea>
               <span>Type your Message...</span>
             </div>
+=======
+          <form (ngSubmit)="sendFeedBack()" [formGroup]="feedbackForm">
+            <h2>Feedback</h2>
+            <mat-form-field appearance="outline" >
+              <mat-label>Full Name</mat-label>
+              <input formControlName="name" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input formControlName="email" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Type your Message...</mat-label>
+              <textarea matInput formControlName="message"></textarea>
+            </mat-form-field>
+>>>>>>> Stashed changes
 
             <div class="input-box">
               <input type="submit" value="Send" name="">

@@ -1,0 +1,88 @@
+<article class="back">
+  <mat-grid-list [cols]="breakpoint" rowHeight="12rem" class="tiles" (window:resize)="onResize($event)">
+
+    <mat-grid-tile>
+        <mat-card class="infocard" >
+          <mat-card-content>
+            <span class="headline">Current Progressive Year</span>
+            <span class="data">{{year}}</span>
+            <span class="posttext">rd Year</span>
+            <img src="assets/trophy.png" />
+          </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+
+      <mat-grid-tile>
+          <mat-card class="infocard">
+            <mat-card-content>
+              <span class="headline">Current Credit Count</span>
+              <span class="data">{{credit}}</span>
+              <img src="assets/credit.png" />
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="infocard">
+        <mat-card-content>
+          <span class="headline">Current GPA Level</span>
+          <span class="data">{{gpalevel}}</span>
+          <img src="assets/gpalevel.png" />
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-card class="infocard">
+        <mat-card-content>
+          <span class="headline">Current Progressive Year</span>
+          <span class="data">{{year}}</span>
+          <img src="assets/trophy.png" />
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+
+  <mat-grid-list [cols]="breakpoint2" rowHeight="25rem" class="background" (window:resize)="onResize($event)">
+
+    <mat-grid-tile [colspan]="2" >
+      <mat-card class="infocardchart">
+        <mat-card-content>
+          <canvas  id="MyChart" >{{ yearchart }}</canvas>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" >
+      <mat-card class="semcardchart">
+        <mat-card-content>
+          <canvas  id="SemChart" >{{ semchart }}</canvas>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+ <mat-grid-tile [colspan]="1" >
+      <mat-card class="sem1creditchart">
+        <mat-card-content>
+          <canvas  id="MyChart1" >{{ sem1creditchart }}</canvas>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2" >
+      <mat-card class="semcardchart">
+        <mat-card-content>
+          <canvas  id="SemChart2" >{{ semchart }}</canvas>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+</article>
+<footer>
+  <h4>© 2023 CODEHELIO, Sri Lanka. All rights reserved.</h4>
+</footer>
+

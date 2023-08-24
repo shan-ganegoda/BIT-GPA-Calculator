@@ -4,13 +4,18 @@ import {HomeComponent} from "./component/home/home.component";
 import {AboutComponent} from "./component/about/about.component";
 import {ContactUsComponent} from "./component/contact-us/contact-us.component";
 import {LandingPageComponent} from "./component/landing-page/landing-page.component";
+import {ProgressionpageComponent} from "./component/progressionpage/progressionpage.component";
+import {MainwindowComponent} from "./component/mainwindow/mainwindow.component";
 
 const routes: Routes = [
-  // { path: "", redirectTo: '/gpacalculator', pathMatch: 'full' },
-  { path:"" , component: LandingPageComponent },
-  { path:"gpacalculator" , component: HomeComponent },
-  { path:"contactus" , component: ContactUsComponent },
-  { path:"about" , component: AboutComponent },
+  { path: "", redirectTo: '/main/gpacalculator', pathMatch: 'full' },
+  // { path:"" , component: LandingPageComponent },
+  { path:"main" , component: MainwindowComponent, children:[
+      { path:"gpacalculator" , component: HomeComponent },
+      { path:"contactus" , component: ContactUsComponent },
+      { path:"about" , component: AboutComponent },
+      { path:"progression" , component: ProgressionpageComponent },
+    ]},
 ];
 
 @NgModule({

@@ -5,18 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2bf336fe-6985-410e-8cf1-0b1d0b396234" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/component/mainwindow/mainwindow.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/component/mainwindow/mainwindow.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/component/mainwindow/mainwindow.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/component/navbar/navbar.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/component/navbar/navbar.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/component/navbar/navbar.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/component/progressionpage/progressionpage.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/component/progressionpage/progressionpage.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/component/progressionpage/progressionpage.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/trophy.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.firebase/hosting.ZGlzdA.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.firebase/hosting.ZGlzdA.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/angular.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/firebase-debug.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/component/about/about.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/about/about.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/component/about/about.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/about/about.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/component/about/about.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/about/about.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/component/contact-us/contact-us.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/contact-us/contact-us.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/component/contact-us/contact-us.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/contact-us/contact-us.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/component/contact-us/contact-us.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/contact-us/contact-us.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/component/home/home.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/home/home.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/component/home/home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/home/home.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/component/home/home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/component/home/home.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/config/emailConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/config/emailConfig.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,22 +39,58 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="main" />
+                    <option name="lastUsedInstant" value="1691431056" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="GPA-Calculator-Lakshan" />
+                    <option name="lastUsedInstant" value="1691431055" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\Program Files\PHP\php.exe" />
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2TM3yfi4Vxxh6iY5XEUoHaRUheY" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;GPA-Calculator-Lakshan&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -85,6 +136,19 @@
       <workItem from="1691073274342" duration="2062000" />
       <workItem from="1691314836372" duration="1936000" />
       <workItem from="1691319558121" duration="6988000" />
+      <workItem from="1691431719034" duration="1112000" />
+      <workItem from="1691539761760" duration="71000" />
+      <workItem from="1691690786802" duration="8883000" />
+      <workItem from="1691758946281" duration="2849000" />
+      <workItem from="1691769536935" duration="144000" />
+      <workItem from="1691770775960" duration="15278000" />
+      <workItem from="1692196917864" duration="8612000" />
+      <workItem from="1692213545293" duration="9794000" />
+      <workItem from="1692726690106" duration="2977000" />
+      <workItem from="1692803948817" duration="8569000" />
+      <workItem from="1692840181833" duration="798000" />
+      <workItem from="1692851130992" duration="10257000" />
+      <workItem from="1692884733833" duration="9002000" />
     </task>
     <servers />
   </component>
@@ -93,5 +157,8 @@
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="angular.json" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

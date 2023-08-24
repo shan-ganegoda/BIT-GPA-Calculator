@@ -21,6 +21,10 @@ import { ContactUsComponent } from './component/contact-us/contact-us.component'
 import { FinalmessageComponent } from './util/dialog/finalmessage/finalmessage.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { LandingPageComponent } from './component/landing-page/landing-page.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { ProgressionpageComponent } from './component/progressionpage/progressionpage.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
+import { MainwindowComponent } from './component/mainwindow/mainwindow.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,10 @@ import { LandingPageComponent } from './component/landing-page/landing-page.comp
     AboutComponent,
     ContactUsComponent,
     FinalmessageComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    ProgressionpageComponent,
+    NavbarComponent,
+    MainwindowComponent
   ],
     imports: [
         BrowserModule,
@@ -46,7 +53,9 @@ import { LandingPageComponent } from './component/landing-page/landing-page.comp
         ReactiveFormsModule,
         MatToolbarModule,
         MatDialogModule,
-        MatMenuModule
+        MatMenuModule,
+        MatSnackBarModule,
+
     ],
   providers: [],
   bootstrap: [AppComponent]

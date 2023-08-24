@@ -12,6 +12,15 @@ import {FinalmessageComponent} from "../../util/dialog/finalmessage/finalmessage
 
 export class HomeComponent implements OnInit{
 
+  openNav() {
+    // @ts-ignore
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+  closeNav() {
+    // @ts-ignore
+    document.getElementById("mySidenav").style.width = "0";
+  }
+
   is !: any; ip !: any; pc !: any; cs !: any;
   mc !: any; ds !: any; se !: any; web1 !: any;
 
@@ -21,7 +30,7 @@ export class HomeComponent implements OnInit{
   fme !: any; pp !: any; sdp !: any; pis !: any; sana!: any;
   etit !: any; mad !: any; nsa !: any; bt !: any; qa!:any;
 
-  selected = 'notselected';
+  selected = true;
 
   grades: string[] = ['A+', 'A', "A-",'B+', 'B', "B-",'C+', 'C', "C-",'D+', 'D', "E"];
   ens: string[] = ['Pass', 'Fail'];
@@ -112,6 +121,7 @@ export class HomeComponent implements OnInit{
       case 'D+' : return 1.30; break;
       case 'D' : return 1.00; break;
       case 'E' : return 0.00; break;
+      default: return 0.00;
 
     }
   }
@@ -151,7 +161,7 @@ export class HomeComponent implements OnInit{
       c1 = false;
     }
 
-    console.log("Minimum GPA level-" +haveminimumgpa + "(" + year1gpa + ")");
+    // console.log("Minimum GPA level-" +haveminimumgpa + "(" + year1gpa + ")");
 
     //Condition 2: Minimum of 20 Credits Of C Grade of GPA Courses
 
@@ -194,7 +204,7 @@ export class HomeComponent implements OnInit{
       c2=false;
     }
 
-    console.log("Credit Count - " + creditcount);
+    // console.log("Credit Count - " + creditcount);
 
     //Condition 3 - All En Subjects Should be passed
 
@@ -212,7 +222,7 @@ export class HomeComponent implements OnInit{
     //Condition 4 - No Grades Below D
     let conditionstatement = "";
 
-    console.log(this.is);
+    // console.log(this.is);
 
     if(this.is == 0 || this.mc == 0 || this.cs == 0 || this.ip == 0 ||
       this.pc == 0 || this.web1 == 0 || this.ds == 0 || this.se == 0){
@@ -366,7 +376,7 @@ export class HomeComponent implements OnInit{
 
     //console.log(yr1gpaRound);
 
-    console.log(year2gpa);
+    // console.log(year2gpa);
 
   }
 
@@ -482,7 +492,7 @@ export class HomeComponent implements OnInit{
       data: {heading: "Year 3 GPA Status", message: datum}
     });
 
-    console.log(year3gpa);
+    // console.log(year3gpa);
 
   }
 
@@ -633,7 +643,7 @@ export class HomeComponent implements OnInit{
       creditcount += 3;
     }
 
-    console.log("Credit Count :- "+creditcount);
+    // console.log("Credit Count :- "+creditcount);
     let c2 = true;
     if(creditcount == 90){
       minimumcreditcount = "Yes";
@@ -682,8 +692,8 @@ export class HomeComponent implements OnInit{
 
 
 
-    console.log(c2 + " - " + creditcount);
-    console.log(overallgpa);
+    // console.log(c2 + " - " + creditcount);
+    // console.log(overallgpa);
   }
 
 }

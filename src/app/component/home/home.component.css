@@ -150,6 +150,41 @@ footer{
   display: none;
 }
 
+.sidenav {
+  height: 50rem;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 20px;
+  font-family: poppins, sans-serif;
+  text-decoration: none;
+  font-size: 22px;
+  color: #fff;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: red;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
 @media screen and (min-width: 2561px) {
 
   .btnoverall{
@@ -172,6 +207,10 @@ footer{
     .year3{
       top: -7.5%;
     }
+
+  .btnoverall{
+    top: -18rem;
+  }
 }
 
 @media screen and (max-width: 1385px ) {
@@ -330,10 +369,10 @@ footer{
 
   .year3 {
     /*margin-top: -38.5vh;*/
-    top: 8%;
+    /*top: 10%;*/
     width: 30%;
     position: relative;
-    top: -5vh;
+    top: -25vh;
     width: 90%;
   }
 
@@ -361,7 +400,7 @@ footer{
   }
 
   .btnoverall{
-    top: -14rem;
+    top: -22rem;
     width: 75vw;
     margin-left: 12.5vw;
   }
@@ -396,6 +435,9 @@ footer{
     width: 100%;
   }
 
+  .year3 {
+    top: -20vh;
+  }
 
   mat-card-title {
     color: white;
@@ -412,7 +454,7 @@ footer{
   /*}*/
 
   .btnoverall{
-    top: -12rem;
+    top: -18rem;
     width: 80vw;
     margin-left: 10.5vw;
   }

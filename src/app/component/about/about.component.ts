@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AboutComponent {
 
+  openNav() {
+    // @ts-ignore
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+
+  closeNav() {
+    // @ts-ignore
+    document.getElementById("mySidenav").style.width = "0";
+  }
+
 }
