@@ -2,6 +2,9 @@ import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EmailService} from "../../Services/EmailService/email.service";
 import {EmailJSResponseStatus} from "emailjs-com";
+import {MatSnackBar} from "@angular/material/snack-bar";
+// import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-contact-us',
@@ -10,6 +13,8 @@ import {EmailJSResponseStatus} from "emailjs-com";
 })
 export class ContactUsComponent {
   logo: string = 'assets/logo.jpg';
+
+   constructor(private snackBar:MatSnackBar) { }
 
 
   feedbackForm = new FormGroup({
@@ -40,7 +45,16 @@ export class ContactUsComponent {
       console.log(emailParams)
       EmailService.send( emailParams ).then((response: EmailJSResponseStatus) => {
 
+        this.snackBar.open('Email sent:','OK',{
+          duration: 3000, // Duration in milliseconds
+          horizontalPosition: 'center', // Position: 'start', 'center', 'end', 'left', 'right'
+          verticalPosition: 'top', // Position: 'top', 'bottom'
+          panelClass: 'custom-snackbar', // Add custom CSS classes
+          // ... other options
+        })
+
         console.log('Email sent:', response);
+        // this.toastr.success('Hello world!', 'Toastr fun!');
         this.clearFeedback();
         // You can display a success message to the user here
       })

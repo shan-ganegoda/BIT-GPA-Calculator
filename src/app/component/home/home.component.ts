@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {MessageComponent} from "../../util/dialog/message/message.component";
 import {FinalmessageComponent} from "../../util/dialog/finalmessage/finalmessage.component";
+import {DatatransferService} from "../../Services/datatransfer.service";
 
 @Component({
   selector: 'app-home',
@@ -25,7 +26,6 @@ export class HomeComponent implements OnInit{
 
   grades: string[] = ['A+', 'A', "A-",'B+', 'B', "B-",'C+', 'C', "C-",'D+', 'D', "E"];
   ens: string[] = ['Pass', 'Fail'];
-  gpas: number[] = [4.00, 4.00, 3.70,3.30, 3.00, 2.70,2.30, 2.00, 1.70,1.30, 1.00, 0.00];
 
   logo: string = 'assets/logo.jpg';
 
@@ -40,9 +40,11 @@ export class HomeComponent implements OnInit{
   breakpoint : number = 3;
 
   constructor(private fb:FormBuilder,
-              private dg:MatDialog
+              private dg:MatDialog,
+              private dt:DatatransferService
               ){
-     this.yearone = this.fb.group({
+
+    this.yearone = this.fb.group({
        "ip" : new FormControl(),
        "is" : new FormControl(),
        "im" : new FormControl(),
@@ -194,7 +196,7 @@ export class HomeComponent implements OnInit{
       c2=false;
     }
 
-    console.log("Credit Count - " + creditcount);
+    //console.log("Credit Count - " + creditcount);
 
     //Condition 3 - All En Subjects Should be passed
 
@@ -235,6 +237,9 @@ export class HomeComponent implements OnInit{
       clr = "GREEN";
     }
 
+    const datas = {"y1gpa": year1gpa,"y1credit" :creditcount,"is": this.is , "ip": this.ip,"pc": this.pc,"cs": this.cs,"se":this.se,"ds": this.ds,"mc":this.mc,"web1": this.web1};
+
+    this.dt.setY1Data(datas);
     const datum = {"gpa":year1gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
 
     const stsmsg = this.dg.open(MessageComponent, {
