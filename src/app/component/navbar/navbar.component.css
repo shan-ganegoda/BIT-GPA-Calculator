@@ -73,7 +73,7 @@ a{
   height: 50rem;
   width: 0;
   position: fixed;
-  z-index: 1;
+  z-index: 100000;
   top: 0;
   right: 0;
   background-color: #111;
@@ -103,8 +103,7 @@ a{
   font-size: 36px;
   margin-left: 50px;
 }
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 870px) {
 
 
   .menu{

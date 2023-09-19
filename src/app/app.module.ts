@@ -25,6 +25,7 @@ import { MainwindowComponent } from './component/mainwindow/mainwindow.component
 import { NavbarComponent } from './component/navbar/navbar.component';
 import { ProgressionpageComponent } from './component/progressionpage/progressionpage.component';
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatBadgeModule} from "@angular/material/badge";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
         MatToolbarModule,
         MatDialogModule,
         MatMenuModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatBadgeModule
     ],
   providers: [],
   bootstrap: [AppComponent]

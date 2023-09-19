@@ -42,24 +42,31 @@ export class ContactUsComponent {
         from_email: this.emailField.value,
         message: this.messageField.value
       };
-      console.log(emailParams)
+
       EmailService.send( emailParams ).then((response: EmailJSResponseStatus) => {
 
-        this.snackBar.open('Email sent:','OK',{
+        this.snackBar.open('Email sent','',{
           duration: 3000, // Duration in milliseconds
-          horizontalPosition: 'center', // Position: 'start', 'center', 'end', 'left', 'right'
+          direction: 'ltr',
+          horizontalPosition: 'right', // Position: 'start', 'center', 'end', 'left', 'right'
           verticalPosition: 'top', // Position: 'top', 'bottom'
-          panelClass: 'custom-snackbar', // Add custom CSS classes
+          panelClass: 'success-snackbar', // Add custom CSS classes
           // ... other options
         })
 
-        console.log('Email sent:', response);
-        // this.toastr.success('Hello world!', 'Toastr fun!');
+
         this.clearFeedback();
         // You can display a success message to the user here
       })
         .catch((error: any) => {
-          console.error('Error sending email:', error);
+          this.snackBar.open('Email Sent Failed','',{
+            duration: 3000, // Duration in milliseconds
+            direction: 'ltr',
+            horizontalPosition: 'right', // Position: 'start', 'center', 'end', 'left', 'right'
+            verticalPosition: 'top', // Position: 'top', 'bottom'
+            panelClass: 'error-snackbar', // Add custom CSS classes
+            // ... other options
+          })
           // You can display an error message to the user here
         });
     }

@@ -24,6 +24,13 @@ export class HomeComponent implements OnInit{
 
   selected = 'notselected';
 
+  datas:any;
+  year2values:any;
+  year3values:any;
+
+
+  datum:any;
+
   grades: string[] = ['A+', 'A', "A-",'B+', 'B', "B-",'C+', 'C', "C-",'D+', 'D', "E"];
   ens: string[] = ['Pass', 'Fail'];
 
@@ -118,7 +125,7 @@ export class HomeComponent implements OnInit{
     }
   }
 
-  calculatey1gpa(){
+  calculatey1gpa(condition:boolean){
 
     this.first = JSON.stringify(this.yearone.getRawValue());
     this.first = JSON.parse(this.first);
@@ -153,7 +160,7 @@ export class HomeComponent implements OnInit{
       c1 = false;
     }
 
-    console.log("Minimum GPA level-" +haveminimumgpa + "(" + year1gpa + ")");
+    //console.log("Minimum GPA level-" +haveminimumgpa + "(" + year1gpa + ")");
 
     //Condition 2: Minimum of 20 Credits Of C Grade of GPA Courses
 
@@ -214,7 +221,7 @@ export class HomeComponent implements OnInit{
     //Condition 4 - No Grades Below D
     let conditionstatement = "";
 
-    console.log(this.is);
+    //console.log(this.is);
 
     if(this.is == 0 || this.mc == 0 || this.cs == 0 || this.ip == 0 ||
       this.pc == 0 || this.web1 == 0 || this.ds == 0 || this.se == 0){
@@ -237,21 +244,30 @@ export class HomeComponent implements OnInit{
       clr = "GREEN";
     }
 
-    const datas = {"y1gpa": year1gpa,"y1credit" :creditcount,"is": this.is , "ip": this.ip,"pc": this.pc,"cs": this.cs,"se":this.se,"ds": this.ds,"mc":this.mc,"web1": this.web1};
+    this.datas = {"y1gpa": year1gpa,"y1credit" :creditcount,"is": this.is , "ip": this.ip,"pc": this.pc,"cs": this.cs,"se":this.se,"ds": this.ds,"mc":this.mc,"web1": this.web1};
 
-    this.dt.setY1Data(datas);
-    const datum = {"gpa":year1gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
 
-    const stsmsg = this.dg.open(MessageComponent, {
-      width: '500px',
-      data: {heading: "Year 1 GPA Status", message: datum}
-    });
+    this.datum = {"heading": "Year 1 GPA Status","gpa":year1gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
 
-    //console.log(yr1gpaRound);
+    if(condition){
+      this.MessageDialog();
+    }
 
   }
 
-  calculatey2gpa(){
+  MessageDialog(){
+    const stsmsg = this.dg.open(MessageComponent, {
+      width: '500px',
+      data: {message: this.datum}
+    });
+  }
+
+  sendY1Data(){
+    this.calculatey1gpa(false);
+    this.dt.setY1Data(this.datas);
+  }
+
+  calculatey2gpa(condition:boolean){
 
     this.second = JSON.stringify(this.yeartwo.getRawValue());
     this.second = JSON.parse(this.second);
@@ -302,7 +318,7 @@ export class HomeComponent implements OnInit{
     }
 
     if(this.asd>=2){
-      creditcount += 3;
+      creditcount += 4;
     }
     if(this.ead>=2){
       creditcount += 4;
@@ -361,21 +377,25 @@ export class HomeComponent implements OnInit{
 
     let year = 1;
 
-    const datum = {"gpa":year2gpa,"condition1":haveminimumgpa,
+    this.datum = {"heading": "Year 2 GPA Status","gpa":year2gpa,"condition1":haveminimumgpa,
       "condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear,"yearc":year};
 
-    const stsmsg = this.dg.open(MessageComponent, {
-      width: '500px',
-      data: {heading: "Year 2 GPA Status", message: datum}
-    });
+    if(condition){
+      this.MessageDialog();
+    }
 
-    //console.log(yr1gpaRound);
 
-    console.log(year2gpa);
+    this.year2values = {"y2gpa": year2gpa,"y2credit" :creditcount,"dsa": this.dsa , "dms": this.dms,"ooad": this.ooad,"web2": this.web2,"ead":this.ead,"cn": this.cn,"asd":this.asd,"pm": this.pm,"uxd": this.uxd};
 
   }
 
-  calculatey3gpa(){
+  sendY2Data(){
+    this.sendY1Data();
+    this.calculatey2gpa(false);
+    this.dt.setY2Data(this.year2values);
+  }
+
+  calculatey3gpa(condition:boolean){
 
     this.third = JSON.stringify(this.yearthree.getRawValue());
     this.third = JSON.parse(this.third);
@@ -480,15 +500,22 @@ export class HomeComponent implements OnInit{
       proceedtonextyear = "Sorry You Have To try Again";
     }
 
-    const datum = {"gpa":year3gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
+    this.datum = {"heading": "Year 3 GPA Status","gpa":year3gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
 
-    const stsmsg = this.dg.open(MessageComponent, {
-      width: '500px',
-      data: {heading: "Year 3 GPA Status", message: datum}
-    });
+    this.year3values = {"y3gpa": year3gpa,"y3credit" :creditcount,"pp": this.pp , "sdp": this.sdp,"pis": this.pis,"sana": this.sana,"mad":this.mad,"nsa": this.nsa,"bt":this.bt,"qa": this.qa };
 
-    console.log(year3gpa);
+    if(condition){
+      this.MessageDialog();
+    }
 
+    // console.log(year3gpa);
+
+  }
+
+  sendY3Data(){
+    this.sendY2Data();
+    this.calculatey3gpa(false);
+    this.dt.setY3Data(this.year3values);
   }
 
   overollgpacalculate(){
@@ -638,7 +665,7 @@ export class HomeComponent implements OnInit{
       creditcount += 3;
     }
 
-    console.log("Credit Count :- "+creditcount);
+    //console.log("Credit Count :- "+creditcount);
     let c2 = true;
     if(creditcount == 90){
       minimumcreditcount = "Yes";
@@ -687,8 +714,8 @@ export class HomeComponent implements OnInit{
 
 
 
-    console.log(c2 + " - " + creditcount);
-    console.log(overallgpa);
+    //console.log(c2 + " - " + creditcount);
+    //console.log(overallgpa);
   }
 
 }

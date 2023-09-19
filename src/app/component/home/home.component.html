@@ -1,6 +1,5 @@
 <article class="back">
 
-
     <mat-grid-list [cols]="breakpoint" rowHeight="100rem" class="background" (window:resize)="onResize($event)">
       <mat-grid-tile-header>
 
@@ -98,8 +97,11 @@
                 </mat-select>
               </mat-form-field><br>
 
-              <button class="btns" (click)="calculatey1gpa()" mat-fab extended color="primary">
+              <button class="btns" (click)="calculatey1gpa(true)" mat-fab extended color="primary">
                 <mat-icon>table_view</mat-icon>Calculate</button>
+
+              <button class="progbtn" (click)="sendY1Data()"  routerLink="../progression" mat-fab extended color="primary">
+                <mat-icon>leaderboard</mat-icon>Progress Report<span class="btnbadge">Beta</span></button>
 
             </form>
 
@@ -203,8 +205,11 @@
                 </mat-select>
               </mat-form-field><br>
 
-              <button class="btns" mat-fab extended color="primary" (click)="calculatey2gpa()">
+              <button class="btns" mat-fab extended color="primary" (click)="calculatey2gpa(true)">
                 <mat-icon>table_view</mat-icon>Calculate</button>
+
+              <button class="progbtn" (click)="sendY2Data()" routerLink="../progression" mat-fab extended color="primary">
+                <mat-icon>leaderboard</mat-icon>Progress Report<span class="btnbadge">Beta</span></button>
 
             </form>
 
@@ -314,8 +319,11 @@
                 </mat-select>
               </mat-form-field><br>
 
-              <button class="btns" mat-fab extended color="primary" (click)="calculatey3gpa()">
+              <button class="btns" mat-fab extended color="primary" (click)="calculatey3gpa(true)">
                 <mat-icon>table_view</mat-icon>Calculate</button>
+
+              <button class="progbtn" (click)="sendY3Data()" routerLink="../progression" mat-fab extended color="primary">
+                <mat-icon>leaderboard</mat-icon>Progress Report<span class="btnbadge">Beta</span></button>
 
             </form>
 
@@ -330,6 +338,14 @@
   <button class="btnoverall" mat-fab extended color="primary" (click)="overollgpacalculate()">
     <mat-icon>table_view</mat-icon>Calculate Overall GPA</button>
 </span>
+
+<!--  <div class="notice">-->
+<!--    <span>-->
+<!--      Please note that this GPA Calculation is based on the BIT Handbook.And this GPA Calculator And Progessive Review-->
+<!--      is provided as a value added support for BIT students.The UCSC decision will be the final decision on your GPA level-->
+<!--      and you should stick to their results.-->
+<!--    </span>-->
+<!--  </div>-->
 
 </article>
 <footer>
