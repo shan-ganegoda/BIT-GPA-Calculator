@@ -18,7 +18,7 @@
               <mat-label>Information Systems</mat-label>
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="is" [(value)]="selected">
-                  <mat-option value="null">Not Selected</mat-option>
+                  <mat-option value="">Not Selected</mat-option>
                   <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
@@ -246,14 +246,6 @@
                 </mat-select>
               </mat-form-field><br>
 
-              <mat-label>Software Development Project</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="sdp">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
               <mat-label>Principles of Information Security</mat-label>
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="pis">
@@ -284,6 +276,14 @@
                 <mat-select formControlName="etit">
                   <mat-option value=null>Not Selected</mat-option>
                   <mat-option *ngFor="let grade of ens" [value]=grade>{{grade}}</mat-option>
+                </mat-select>
+              </mat-form-field><br>
+
+              <mat-label>Software Development Project</mat-label>
+              <mat-form-field class="inputs" appearance="outline">
+                <mat-select formControlName="sdp">
+                  <mat-option value=null>Not Selected</mat-option>
+                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
 

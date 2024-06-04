@@ -52,46 +52,46 @@ export class HomeComponent implements OnInit{
               ){
 
     this.yearone = this.fb.group({
-       "ip" : new FormControl(),
-       "is" : new FormControl(),
-       "im" : new FormControl(),
-       "cs" : new FormControl(),
-       "pc" : new FormControl(),
+       "ip" : new FormControl("null"),
+       "is" : new FormControl(""),
+       "im" : new FormControl("null"),
+       "cs" : new FormControl("null"),
+       "pc" : new FormControl("null"),
 
-       "ds" : new FormControl(),
-       "web1" : new FormControl(),
-       "csk1" : new FormControl(),
-       "se" : new FormControl(),
-       "mc" : new FormControl()
+       "ds" : new FormControl("null"),
+       "web1" : new FormControl("null"),
+       "csk1" : new FormControl("null"),
+       "se" : new FormControl("null"),
+       "mc" : new FormControl("null")
      });
 
     this.yeartwo = this.fb.group({
-      "dsa" : new FormControl(),
-      "web2" : new FormControl(),
-      "csk2" : new FormControl(),
-      "dms" : new FormControl(),
-      "ooad" : new FormControl(),
+      "dsa" : new FormControl("null"),
+      "web2" : new FormControl("null"),
+      "csk2" : new FormControl("null"),
+      "dms" : new FormControl("null"),
+      "ooad" : new FormControl("null"),
 
-      "asd" : new FormControl(),
-      "ead" : new FormControl(),
-      "cn" : new FormControl(),
-      "uxd" : new FormControl(),
-      "pm" : new FormControl()
+      "asd" : new FormControl("null"),
+      "ead" : new FormControl("null"),
+      "cn" : new FormControl("null"),
+      "uxd" : new FormControl("null"),
+      "pm" : new FormControl("null")
     });
 
     this.yearthree = this.fb.group({
-      "fme" : new FormControl(),
-      "pp" : new FormControl(),
-      "sdp" : new FormControl(),
-      "pis" : new FormControl(),
-      "sana" : new FormControl(),
-      "mc2" : new FormControl(),
+      "fme" : new FormControl("null"),
+      "pp" : new FormControl("null"),
+      "pis" : new FormControl("null"),
+      "sana" : new FormControl("null"),
+      "mc2" : new FormControl("null"),
 
-      "etit" : new FormControl(),
-      "mad" : new FormControl(),
-      "nsa" : new FormControl(),
-      "bt" : new FormControl(),
-      "qa" : new FormControl()
+      "etit" : new FormControl("null"),
+      "sdp" : new FormControl("null"),
+      "mad" : new FormControl("null"),
+      "nsa" : new FormControl("null"),
+      "bt" : new FormControl("null"),
+      "qa" : new FormControl("null")
     });
   }
 
