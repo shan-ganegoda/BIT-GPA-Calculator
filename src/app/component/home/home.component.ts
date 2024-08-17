@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit{
 
     this.yearone = this.fb.group({
        "ip" : new FormControl("null"),
-       "is" : new FormControl(""),
+       "is" : new FormControl("null"),
        "im" : new FormControl("null"),
        "cs" : new FormControl("null"),
        "pc" : new FormControl("null"),
@@ -108,7 +108,7 @@ export class HomeComponent implements OnInit{
     //first : this.yearone.getRawValue();
 
     switch (value){
-      case null : return 0.00; break;
+      case "null" : return 0.00; break;
       case 'A+' : return 4.00; break;
       case 'A' : return 4.00; break;
       case 'A-' : return 3.70; break;
@@ -143,16 +143,18 @@ export class HomeComponent implements OnInit{
     this.ds = this.getValue(this.first.ds);
     this.mc = this.getValue(this.first.mc);
 
+    console.log(this.ip,this.is,this.cs,this.pc,this.web1, this.se,this.ds,this.mc)
+
 
 
 //Calcutate GPA
     var yr1gpa=(this.is*4 + this.ip*4 + this.cs*4 + this.pc*3 + this.ds*4 + this.web1*4 + this.mc*3 + this.se*4)/30
     var year1gpa = Math.round(yr1gpa * 100) / 100;
 
-    //Condition 1 : GPA Level Should Be Greater Than 1.5
+    //Condition 1 : GPA Level Should Be Greater Than 2
     var c1 = true;
     var haveminimumgpa = "";
-    if(year1gpa >= 1.50){
+    if(year1gpa >= 2.00){
       haveminimumgpa = "Yes";
       c1 = true;
     }else{
@@ -291,7 +293,7 @@ export class HomeComponent implements OnInit{
     //Condition 1 : GPA Level Should Be Greater Than 1.5
     let c1 = true;
     var haveminimumgpa = "";
-    if(year2gpa >= 1.50){
+    if(year2gpa >= 2.00){
       c1 = true;
       haveminimumgpa = "Yes";
     }else{
@@ -420,7 +422,7 @@ export class HomeComponent implements OnInit{
     //Condition 1 : GPA Level Should Be Greater Than 1.5
     let c1 = true;
     var haveminimumgpa = "";
-    if(year3gpa >= 1.50){
+    if(year3gpa >= 2.00){
       c1 = true;
       haveminimumgpa = "Yes";
     }else{

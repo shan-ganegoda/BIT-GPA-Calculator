@@ -8,7 +8,8 @@ import {ProgressionpageComponent} from "./component/progressionpage/progressionp
 import {MainwindowComponent} from "./component/mainwindow/mainwindow.component";
 
 const routes: Routes = [
-  //{ path: "", redirectTo: '/main/gpacalculator', pathMatch: 'full' },
+  { path: "home", redirectTo: '/main/gpacalculator', pathMatch: 'full' },
+  { path: "", redirectTo: '/main/gpacalculator', pathMatch: 'full' },
   // { path:"" , component: LandingPageComponent },
   { path:"main" , component: MainwindowComponent, children:[
       { path:"gpacalculator" , component: HomeComponent },

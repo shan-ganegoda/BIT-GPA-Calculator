@@ -18,7 +18,7 @@
               <mat-label>Information Systems</mat-label>
               <mat-form-field class="inputs" appearance="outline">
                 <mat-select formControlName="is" [(value)]="selected">
-                  <mat-option value="">Not Selected</mat-option>
+                  <mat-option value="null">Not Selected</mat-option>
                   <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
                 </mat-select>
               </mat-form-field><br>
