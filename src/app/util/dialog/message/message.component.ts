@@ -1,10 +1,16 @@
+import {DecimalPipe} from '@angular/common';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatIconModule} from '@angular/material/icon';
 import {Component, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
+  imports: [DecimalPipe, MatButtonModule, MatCardModule, MatDialogModule, MatIconModule],
   selector: 'app-dialog',
   templateUrl: './message.component.html',
-  styleUrls: ['./message.component.css']
+  styleUrl: './message.component.css'
 })
 export class MessageComponent {
 

@@ -30,7 +30,7 @@ yarn-error.log
 .history/*
 
 # Miscellaneous
-/.angular/cache
+/.angular/
 .sass-cache/
 /connect.lock
 /coverage
@@ -41,6 +41,4 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-*.pack
-*.pack
 .idea/workspace.xml

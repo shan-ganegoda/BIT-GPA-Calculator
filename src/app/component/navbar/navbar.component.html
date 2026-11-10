@@ -1,25 +1,29 @@
 <header>
   <mat-toolbar class="navbar">
-    <a routerLink=""><img class="blogo" [src]="logo"></a>
+    <a routerLink="" class="logo-link"><img class="blogo" [src]="logo" alt="Codehelio home"></a>
     <span class="spacer"></span>
-    <span class="title">BIT GPA CALCULATOR</span>
+    <h1 class="title">BIT GPA Calculator</h1>
     <span class="spacer"></span>
-    <div class="nav">
+    <nav class="nav" aria-label="Main">
       <ul class="navlist">
         <li><a routerLink="">Home</a></li>
         <li><a routerLink="contactus">Contact us</a></li>
         <li><a routerLink="about">About</a></li>
       </ul>
-    </div>
+    </nav>
 
     <div class="menu">
-      <button mat-button (click)="openNav()"> <mat-icon class="menuicon">view_headline</mat-icon></button>
-      <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" (click)="closeNav()">&times;</a>
-        <a routerLink="../">Home</a>
-        <a routerLink="contactus">Contact Us</a>
-        <a routerLink="about">About</a>
-      </div>
+      <button mat-icon-button type="button" class="menubtn" (click)="openNav()" aria-label="Open menu"
+              aria-controls="mySidenav" [attr.aria-expanded]="navOpen">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <nav id="mySidenav" class="sidenav" [class.open]="navOpen" [attr.aria-hidden]="!navOpen" [attr.inert]="navOpen ? null : ''"
+           aria-label="Main">
+        <button type="button" class="closebtn" (click)="closeNav()" aria-label="Close menu">&times;</button>
+        <a routerLink="../" (click)="closeNav()">Home</a>
+        <a routerLink="contactus" (click)="closeNav()">Contact us</a>
+        <a routerLink="about" (click)="closeNav()">About</a>
+      </nav>
     </div>
 
   </mat-toolbar>

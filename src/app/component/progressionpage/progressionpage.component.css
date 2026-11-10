@@ -1,130 +1,258 @@
-@font-face {
-  font-family: 'poppins';
-  src: url("src/assets/Font/Poppins-Thin.ttf")format('truetype');
+/* Same light look as the calculator. */
+:host {
+  --navy: #1b4780;
+  --ink: #14213d;
+  --muted: #5b6b82;
+  --line: #d9e3f0;
+  display: block;
 }
 
-*{
-  padding: 0;
+.report {
+  background: linear-gradient(90deg, #ffffff 0%, #88ebff 100%);
+  min-height: calc(100vh - 40px);
+  padding: 76px 24px 32px;
+  box-sizing: border-box;
+  color: var(--ink);
+}
+
+.topbar {
+  max-width: 1400px;
+  margin: 0 auto 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.back-link {
+  margin-left: -8px !important;
+  padding: 0 8px !important;
+  color: var(--navy) !important;
+}
+
+.back-link mat-icon {
+  margin-right: 4px;
+}
+
+.intake {
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.page-title {
+  max-width: 1400px;
+  margin: 0 auto 12px;
+  font-size: 1.3rem;
+  color: var(--navy);
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.infocard,
+.chartcard,
+.empty {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(20, 33, 61, .08);
+}
+
+.infocard {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.headline {
+  font-size: .78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.data {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.data small {
+  font-size: .9rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.charts {
+  display: grid;
+  gap: 16px;
+  max-width: 1400px;
+  margin: 16px auto 0;
+}
+
+.charts.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.charts.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.chartcard {
   margin: 0;
-  font-family: poppins,sans-serif;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
 }
 
-.back {
-  background: #000015;
-  /*background: rgb(2, 0, 36);*/
-  /*background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(136, 235, 255, 1) 100%);*/
-  width: 100%;
+figcaption h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: var(--ink);
 }
 
-.infocard{
-  background: #12143b;
-  width: 98%;
-  height:10rem;
-  top: 10px;
-  color: white;
+figcaption .sub {
+  display: block;
+  margin-top: 2px;
+  font-size: .8rem;
+  color: var(--muted);
 }
 
-.infocard .headline{
-  position: absolute;
-  top: 14px;
-  left: 0.5rem;
-  font-weight: 900;
-  font-size: 20px;
-}
-
-.infocard .data{
-  position: absolute;
-  top: 6rem;
-  left: 2rem;
-  font-weight: 900;
-  font-size: 75px;
-  color: gold;
-}
-
-.infocard .posttext{
+.canvas-box {
   position: relative;
-  top: 6rem;
-  left: 5rem;
-  font-weight: 900;
-  font-size: 15px;
-
+  height: 260px;
 }
 
-.postyeartext{
+.nogrades {
   position: absolute;
-  top: -2rem;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  color: var(--muted);
 }
 
-.infocard img{
-  position: absolute;
-  right: 1rem;
-  bottom: 10px;
-  width: 120px;
-  height: 120px;
-
+details {
+  font-size: .85rem;
 }
 
-.infocardchart{
-  position: absolute;
-  top: 5rem;
-  width: 98%;
-  height: fit-content;
-  border-radius: 10px;
+summary {
+  cursor: pointer;
+  color: var(--navy);
+  font-weight: 500;
+  padding: 4px 0;
 }
 
-.semcardchart{
-  position: absolute;
-  top: 5rem;
-  width: 98%;
-  height: fit-content;
-  margin: 0 ;
-  border-radius: 10px;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 6px;
 }
 
-.yearprogdetails{
-  width: 95%;
-  background: #12143b;
-  font-weight: 800;
-  color: #fffbff;
-  font-size: 25px;
-  height: 23rem;
+th, td {
+  text-align: left;
+  padding: 4px 6px;
+  border-bottom: 1px solid #edf1f7;
 }
 
-.tiles{
-  top: 4rem;
-  height: 10px;
+th {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+tr.muted td {
+  color: var(--muted);
+}
+
+.legend {
+  max-width: 1400px;
+  margin: 16px auto 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  color: var(--ink);
+  font-size: .85rem;
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+.dash {
+  display: inline-block;
+  width: 22px;
+  border-top: 2px dashed var(--ink);
+}
+
+.empty {
+  max-width: 480px;
+  margin: 8vh auto;
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.empty h2 {
+  color: var(--navy);
+}
+
+.empty mat-icon {
+  font-size: 48px;
+  width: 48px;
+  height: 48px;
+  color: var(--navy);
+}
+
+.empty p {
+  color: var(--muted);
+  margin: 8px 0 20px;
+}
+
+.empty a {
+  padding: 0 24px !important;
 }
 
 footer {
-  background: #000000;
-  color: white;
+  background: #000;
+  color: #fff;
   text-align: center;
-  height: 2rem;
+  padding: 8px 16px;
 }
 
-@media screen and (max-width: 1200px) {
-  .infocard img{
-    right: 0;
-    /*bottom: 10px;*/
-    width: 100px;
-    height: 100px;
-
-  }
+footer p {
+  margin: 0;
+  font-size: .85rem;
 }
 
-@media screen and (max-width: 1000px) {
-  .infocard img{
-   display: none;
-  }
+@media (max-width: 1100px) {
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .charts.three { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
-@media screen and (max-width: 768px) {
-  .infocard img{
-    display: block;
-    position: absolute;
-    right: 1rem;
-    bottom: 10px;
-    width: 120px;
-    height: 120px;
-  }
+@media (max-width: 768px) {
+  .report { padding: 72px 16px 16px; }
+  .charts.two, .charts.three { grid-template-columns: 1fr; }
+  .tiles { gap: 12px; }
+  .infocard { padding: 12px 14px; }
+  .data { font-size: 1.6rem; }
+  .canvas-box { height: 240px; }
 }

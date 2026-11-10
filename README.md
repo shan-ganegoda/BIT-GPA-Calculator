@@ -6,15 +6,18 @@ The University GPA Calculator Project is a web-based application developed by ou
 
 ## Features
 
-- User-Friendly Interface
-- Real-Time GPA Calculation
-- Year and Cumulative GPA
-- Data Privacy
+- GPA and progression rules from the BIT student handbooks 2022 to 2026
+- Intake-year picker (2022, 2023, 2024, 2025, 2026/27) for the per-year course lists and rules
+- Live level and cumulative GPA as you pick grades, with clear pass/fail checks
+- Progress report with year, semester and per-course charts
+- Grades are saved in your own browser only (Data Privacy)
+
+The course data lives in `src/app/gpa/handbook.ts` and the rules in `src/app/gpa/gpa-engine.ts`.
 
 
 ## Tech Stack
 
-Angular, Boostrap, 
+Angular 22 (standalone components, signals, zoneless), Angular Material, Chart.js
 
 ## 🚀 About Team
 Our team of dedicated and passionate university undergraduates came together with a shared vision to enhance our skills and unlock our full potential through a skill development project. Recognizing the importance of practical experience in complementing theoretical knowledge, we embarked on this journey to work collaboratively, explore new technologies, and create innovative solutions that add value to our academic and personal growth.
@@ -43,10 +46,16 @@ Install dependencies
   npm install
 ```
 
-Start the server
+Start the server (needs Node 22.22.3+, 24.15+ or 26+; `.nvmrc` pins Node 24 LTS)
 
 ```bash
-  ng serve
+  npm start
+```
+
+Run the unit tests
+
+```bash
+  npm test
 ```
 
 

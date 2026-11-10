@@ -1,3 +1,45 @@
+/* Poppins is used by the navbar, about and contact pages. */
+@font-face {
+  font-family: 'poppins';
+  src: url("/assets/Font/Poppins-Thin.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'poppins-SemiBold';
+  src: url("/assets/Font/Poppins-SemiBold.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'poppins-medium';
+  src: url("/assets/Font/Poppins-Medium.ttf") format('truetype');
+}
+
+/* Grade dropdown: show every grade without scrolling, Clear at the end. */
+.grade-panel {
+  max-height: min(600px, 80vh) !important;
+}
+
+.grade-panel .mat-mdc-option {
+  min-height: 40px;
+}
+
+.grade-panel .clear-option {
+  border-top: 1px solid #d9e3f0;
+  color: #5b6b82;
+  font-size: .9rem;
+}
+
+/* Hidden visually, still read by screen readers. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }

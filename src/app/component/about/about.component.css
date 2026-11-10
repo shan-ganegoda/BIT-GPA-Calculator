@@ -1,14 +1,3 @@
-@font-face {
-  font-family: 'poppins';
-  src: url("src/assets/Font/Poppins-Thin.ttf") format('truetype');
-}
-
-@font-face {
-  font-family: 'poppins-SemiBold';
-  src: url("src/assets/Font/Poppins-SemiBold.ttf") format('truetype');
-}
-
-
 main {
   background: rgb(2, 0, 36);
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(136, 235, 255, 1) 100%);

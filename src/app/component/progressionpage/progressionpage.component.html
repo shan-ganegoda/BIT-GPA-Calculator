@@ -1,102 +1,127 @@
-<article class="back">
-  <mat-grid-list [cols]="breakpoint" rowHeight="12rem" class="tiles" (window:resize)="onResize($event)">
+<article class="report">
 
-    <mat-grid-tile>
-      <mat-card class="infocard" >
-        <mat-card-content>
-          <span class="headline">Current Progressive Year</span>
-          <span class="data">{{year}}</span>
-          <span class="posttext"><span class="postyeartext">{{postyeartext}}</span> Year</span>
-          <img class="yearimg" src="assets/trophy.png" />
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+  <div class="topbar">
+    <a mat-button routerLink="../gpacalculator" class="back-link">
+      <mat-icon>arrow_back</mat-icon> Back to calculator
+    </a>
+    @if (hasData) {
+      <span class="intake">Rules for the {{ intakeLabel }}</span>
+    }
+  </div>
 
-    <mat-grid-tile>
-      <mat-card class="infocard">
-        <mat-card-content>
-          <span class="headline">Current Credit Count</span>
-          <span class="data">{{credit}}</span>
-          <img class="creditimg" src="assets/credit.png" />
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+  @if (!hasData) {
+  <div class="empty">
+    <mat-icon aria-hidden="true">insights</mat-icon>
+    <h2>No results yet</h2>
+    <p>Enter your grades on the calculator and your charts will appear here.</p>
+    <a mat-flat-button color="primary" routerLink="../gpacalculator">Go to the calculator</a>
+  </div>
+  } @else {
+    <h2 class="page-title">Your progress report</h2>
 
-    <mat-grid-tile>
-      <mat-card class="infocard">
-        <mat-card-content>
-          <span class="headline">Current GPA Level</span>
-          <span class="data">{{gpalevel}}</span>
-          <img class="gpaimg" src="assets/gpalevel.png" />
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+    <section class="tiles">
+      <div class="infocard">
+        <span class="headline">Current year</span>
+        <span class="data">Year {{ year }}</span>
+      </div>
+      <div class="infocard">
+        <span class="headline">Latest semester with grades</span>
+        <span class="data">{{ semester }}</span>
+      </div>
+      <div class="infocard">
+        <span class="headline">Cumulative GPA</span>
+        <span class="data">{{ gpalevel }}@if (partial) {<small> so far</small>}</span>
+      </div>
+      <div class="infocard">
+        <span class="headline">Credits ≥ C</span>
+        <span class="data">{{ credit }}</span>
+      </div>
+    </section>
 
-    <mat-grid-tile>
-      <mat-card class="infocard">
-        <mat-card-content>
-          <span class="headline">Current Progressive Semester</span>
-          <span class="data">{{semester}}</span>
-          <img class="semimg" src="assets/trophy.png" />
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
+    <section class="charts two">
+      <figure class="chartcard">
+        <figcaption>
+          <h3>GPA by year</h3>
+          <span class="sub">Dashed line: GPA needed to progress ({{ passGpa | number:'1.2-2' }}).@if (partial) { Lighter bars still have grades to enter.}</span>
+        </figcaption>
+        <div class="canvas-box"><canvas #yearCanvas role="img" [attr.aria-label]="describe('GPA by year', yearBars)"></canvas></div>
+        <details>
+          <summary>Show as table</summary>
+          <table>
+            <thead><tr><th scope="col">Year</th><th scope="col">GPA</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              @for (b of yearBars; track b.label) {
+                <tr><td>{{ b.label }}</td><td>{{ b.tag }}</td><td>{{ b.partial ? 'So far: ' + b.note : 'All grades entered' }}</td></tr>
+              }
+            </tbody>
+          </table>
+        </details>
+      </figure>
 
-  </mat-grid-list>
+      <figure class="chartcard">
+        <figcaption>
+          <h3>GPA by semester</h3>
+          <span class="sub">Dashed line: {{ passGpa | number:'1.2-2' }}. Semesters with no grades yet are left out.</span>
+        </figcaption>
+        <div class="canvas-box"><canvas #semCanvas role="img" [attr.aria-label]="describe('GPA by semester', semBars)"></canvas></div>
+        <details>
+          <summary>Show as table</summary>
+          <table>
+            <thead><tr><th scope="col">Semester</th><th scope="col">GPA</th><th scope="col">Status</th></tr></thead>
+            <tbody>
+              @for (b of semBars; track b.label) {
+                <tr><td>{{ b.label }}</td><td>{{ b.tag }}</td><td>{{ b.partial ? 'So far: ' + b.note : 'All grades entered' }}</td></tr>
+              }
+            </tbody>
+          </table>
+        </details>
+      </figure>
+    </section>
 
+    <section class="charts three">
+      @for (lc of levelCharts; track lc.level) {
+        <figure class="chartcard">
+          <figcaption>
+            <h3>{{ lc.title }}</h3>
+            @if (lc.notEntered.length) {
+              <span class="sub">Not entered yet: {{ lc.notEntered.join(', ') }}</span>
+            }
+          </figcaption>
+          <div class="canvas-box">
+            @switch (lc.level) {
+              @case (1) { <canvas #level1Canvas role="img" [attr.aria-label]="describe(lc.title, lc.bars)"></canvas> }
+              @case (2) { <canvas #level2Canvas role="img" [attr.aria-label]="describe(lc.title, lc.bars)"></canvas> }
+              @case (3) { <canvas #level3Canvas role="img" [attr.aria-label]="describe(lc.title, lc.bars)"></canvas> }
+            }
+            @if (!lc.bars.length) { <p class="nogrades">No grades entered for this year yet.</p> }
+          </div>
+          <details>
+            <summary>Show as table</summary>
+            <table>
+              <thead><tr><th scope="col">Course</th><th scope="col">Grade</th><th scope="col">Points</th></tr></thead>
+              <tbody>
+                @for (b of lc.bars; track b.label) {
+                  <tr><td>{{ b.note }} ({{ b.label }})</td><td>{{ b.tag }}</td><td>{{ b.value | number:'1.1-1' }}</td></tr>
+                }
+                @for (n of lc.notEntered; track n) {
+                  <tr class="muted"><td>{{ n }}</td><td>Not entered</td><td>–</td></tr>
+                }
+              </tbody>
+            </table>
+          </details>
+        </figure>
+      }
+    </section>
 
-  <mat-grid-list [cols]="breakpoint2" rowHeight="26rem" class="background" (window:resize)="onResize($event)">
-
-    <mat-grid-tile [colspan]="6">
-      <mat-card class="infocardchart">
-        <mat-card-content>
-          <canvas  id="MyChart" >{{ yearchart }}</canvas>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-
-    <mat-grid-tile  [colspan]="6">
-      <mat-card class="semcardchart">
-        <mat-card-content>
-          <canvas  id="SemChart" >{{ semchart }}</canvas>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-
-  </mat-grid-list>
-
-  <mat-grid-list [cols]="breakpoint3" rowHeight="26rem" class="background" (window:resize)="onResize($event)">
-
-    <mat-grid-tile [colspan]="4">
-     <mat-card class="yearprogdetails">
-      <mat-card-content>
-        <canvas  id="Year1Chart" >{{ createYear1Chart }}</canvas>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-
-  <mat-grid-tile [colspan]="4">
-    <mat-card class="yearprogdetails" >
-      <mat-card-content>
-        <canvas  id="Year2Chart" >{{ createYear2Chart }}</canvas>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-
-    <mat-grid-tile [colspan]="4">
-      <mat-card class="yearprogdetails">
-        <mat-card-content>
-          <canvas  id="Year3Chart" >{{ createYear3Chart }}</canvas>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-
-
-
-  </mat-grid-list>
+    <p class="legend">
+      <span class="key"><span class="dot" [style.background]="good"></span> C or above</span>
+      <span class="key"><span class="dot" [style.background]="warn"></span> C- to D</span>
+      <span class="key"><span class="dot" [style.background]="bad"></span> E (fail)</span>
+      <span class="key"><span class="dash"></span> GPA needed to progress ({{ passGpa | number:'1.2-2' }})</span>
+    </p>
+  }
 
 </article>
 <footer>
-  <h4>© 2023 CODEHELIO, Sri Lanka. All rights reserved.</h4>
+  <p>© {{ thisYear }} CODEHELIO, Sri Lanka. All rights reserved.</p>
 </footer>
-

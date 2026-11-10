@@ -1,15 +1,19 @@
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EmailService} from "../../Services/EmailService/email.service";
-import {EmailJSResponseStatus} from "emailjs-com";
+import {EmailJSResponseStatus} from "@emailjs/browser";
 import {MatSnackBar} from "@angular/material/snack-bar";
 // import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule],
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
-  styleUrls: ['./contact-us.component.css']
+  styleUrl: './contact-us.component.css'
 })
 export class ContactUsComponent {
   logo: string = 'assets/logo.jpg';

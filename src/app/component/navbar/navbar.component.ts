@@ -1,9 +1,14 @@
+import {RouterLink} from '@angular/router';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
 import {Component, OnInit} from '@angular/core';
 
 @Component({
+  imports: [RouterLink, MatToolbarModule, MatButtonModule, MatIconModule],
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit{
 
@@ -18,12 +23,13 @@ export class NavbarComponent implements OnInit{
     this.breakpoint = (event.target.innerWidth <= 768) ? 1 : 3;
   }
 
+  navOpen = false;
+
   openNav() {
-    // @ts-ignore
-    document.getElementById("mySidenav").style.width = "250px";
+    this.navOpen = true;
   }
+
   closeNav() {
-    // @ts-ignore
-    document.getElementById("mySidenav").style.width = "0";
+    this.navOpen = false;
   }
 }

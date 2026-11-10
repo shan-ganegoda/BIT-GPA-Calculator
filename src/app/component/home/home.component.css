@@ -1,527 +1,402 @@
-@font-face {
-  font-family: 'poppins';
-  src: url("src/assets/Font/Poppins-Thin.ttf")format('truetype');
+:host {
+  --navy: #1b4780;
+  --blue: #1e6fd9;
+  --ink: #14213d;
+  --muted: #5b6b82;
+  --line: #d9e3f0;
+  --card: #ffffff;
+  --good: #18703d;
+  --good-bg: #e5f6ec;
+  --warn: #8a5000;
+  --warn-bg: #fff3dd;
+  --bad: #c0392b;
+  --bad-bg: #fde8e6;
+  display: block;
 }
 
-
-.forms > mat-label {
-  color: black;
-  margin-right: 20px;
+.calc {
+  background: linear-gradient(90deg, #ffffff 0%, #88ebff 100%);
+  min-height: 100vh;
+  padding: 84px 24px 32px;
+  box-sizing: border-box;
+  color: var(--ink);
 }
 
-.forms > mat-form-field {
-  margin-top: 5px;
-  height: 50px;
-  width: 100%;
+/* The global stylesheet pads every button by 40px; undo that inside the calculator. */
+:host ::ng-deep .calc button {
+  margin-left: 0;
+  padding: 0 16px !important;
 }
 
-h3{
-  background: dodgerblue;
-  width: 95px;
-  padding: 0 0 0 10px;
-  border-radius: 25px;
-  color: white;
+:host ::ng-deep .calc .mat-button-toggle-button {
+  padding: 0 !important;
 }
 
-.inputs {
-  display: flex;
-  align-items: center;
+/* ---------- Intake + summary ---------- */
 
-}
-
-.forms {
+.toolbar-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 16px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
   padding: 20px;
+  box-shadow: 0 4px 16px rgba(20, 33, 61, .08);
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-mat-card{
-  display: flex;
-  flex-direction: column;
-  top: -8%;
+.intake-head h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--navy);
 }
 
-.year2,.year1,.year3 {
-  margin-top: 4rem;
-  width: 30vw;
+.intake-head p {
+  margin: 4px 0 12px;
+  color: var(--muted);
+  font-size: .9rem;
 }
 
-mat-card-header {
-  background: #1b4780;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-
-}
-
-
-mat-card-title {
-  color: white;
-  margin-left: 12vw;
-
-
-}
-
-.navbar, .back {
-  background: rgb(2, 0, 36);
-  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(136, 235, 255, 1) 100%);
-  width: 100%;
-}
-
-.btns {
-  width: 100%;
-  background: #4169E1;
-  z-index: 0;
-}
-
-.progbtn {
-  width: 100%;
-  background: #073fe5;
-  margin-top: 1rem;
-  z-index: 0;
-}
-
-.active {
-  text-decoration: underline;
-}
-
-.btnoverall{
-  width: 80vw;
-  position: relative;
-  margin-left: 10rem;
-  margin-bottom: 25px;
-  top: -14rem;
-  background: #4169E1;
-  z-index: 0;
-}
-
-.btnall{
-  margin-top: -20rem;
-
-}
-footer{
-  background: #000000;
-  color: white;
-  text-align: center;
-  height: 2rem;
-}
-
-.menu{
-  display: none;
-}
-
-/*.notice{*/
-/*  width: 30rem;*/
-/*  height: 10rem;*/
-/*  background: rgb(0,198,251);*/
-/*  background: radial-gradient(circle, rgba(0,198,251,1) 0%, rgba(0,91,234,1) 100%);*/
-/*}*/
-
-.btnbadge{
-  position: absolute;
-  right:  0;
-  top: -0.5rem;
-  background-color: red;
-  padding: 5px;
+.intake-toggle {
+  flex-wrap: wrap;
   border-radius: 10px;
 }
 
-@media screen and (min-width: 2561px) {
-
-  .btnoverall{
-    margin-left: 10vw;
-  }
+.howto summary {
+  margin-top: 12px;
+  cursor: pointer;
+  color: var(--navy);
+  font-size: .9rem;
+  font-weight: 500;
 }
 
-@media screen and (max-width: 2560px) {
-
-  .btnoverall{
-    margin-left: 10vw;
-  }
-
-  /*mat-card-title {*/
-  /*  margin-left: 13vw;*/
-
-  /*}*/
+.notes {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+  font-size: .85rem;
 }
 
-/*@media screen and (max-width: 1920px) {*/
-
-/*}*/
-
-@media screen and (max-width: 1560px) {
-    .year3{
-      top: -7.5%;
-    }
+.notes li + li {
+  margin-top: 2px;
 }
 
-@media screen and (max-width: 1385px ) {
-
-  .year3 {
-    top: -7%;
-  }
-
-  .forms > mat-form-field {
-    margin-top: 5px;
-    height: 50px;
-    width: 100%;
-  }
-
-
+.summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-content: start;
+  background: #f3f7fd;
+  border-radius: 12px;
+  padding: 16px;
 }
 
-@media screen and (max-width: 1233px ) {
-
-  .year3 {
-    top: -6.5%;
-  }
-
-  .forms > mat-form-field {
-    margin-top: 5px;
-    height: 50px;
-    width: 100%;
-  }
-
-  .btnoverall{
-    top: -12rem;
-  }
-
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-@media screen and (max-width: 1024px) {
-
-  .year3 {
-    top: -5.5%;
-  }
-
-  .year2 {
-    top: -7.4%;
-  }
-
-  .year1 {
-    /*margin-top: -31.5vh;*/
-  }
-  .forms > mat-form-field {
-    margin-top: 5px;
-    height: 50px;
-    width: 100%;
-  }
-
-  .btnoverall{
-    top: -10rem;
-  }
+.stat-label {
+  font-size: .78rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
 }
 
-@media screen and (max-width: 980px) {
-  .year1{
-    top: -7%;
-  }
-  .year2{
-    top: -6.4%;
-  }
-  .year3{
-    top: -4.6%;
-  }
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--navy);
+  font-variant-numeric: tabular-nums;
+}
 
-  mat-card-title {
-    margin-left: 11vw;
+.pill {
+  align-self: flex-start;
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: .85rem;
+  font-weight: 600;
+}
 
-  }
+.pill-ok {
+  background: var(--good-bg);
+  color: var(--good);
+}
 
-  .btnoverall{
-    top: -8rem;
-  }
+.pill-wait {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+
+.summary-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.act mat-icon {
+  margin-right: 4px;
 }
 
 
-@media screen and (max-width: 900px) {
+/* ---------- Level cards ---------- */
 
-  .year1{
-    top: -5.5%;
-  }
-  .year2{
-    top: -6.2%;
-  }
-  .year3{
-    top: -2.4%;
-  }
-  .btnoverall{
-    top: -3rem;
-  }
-
+.levels {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1400px;
+  margin: 20px auto 0;
+  align-items: start;
 }
 
-@media screen and (max-width: 850px) {
+mat-card.level {
+  background: var(--card);
+  padding: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(20, 33, 61, .08);
+}
 
-  .year2{
-    top: -4.9%;
+.level-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--navy);
+  color: #fff;
+  padding: 14px 20px;
+}
+
+.level-head h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.level-sub {
+  font-size: .82rem;
+  opacity: .85;
+}
+
+.level-gpa {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1;
+}
+
+.level-gpa-value {
+  font-size: 1.7rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.level-gpa-label {
+  font-size: .72rem;
+  opacity: .85;
+  margin-top: 4px;
+}
+
+.level-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--warn-bg);
+  color: var(--warn);
+  font-size: .86rem;
+}
+
+.level-status.ok {
+  background: var(--good-bg);
+  color: var(--good);
+}
+
+.level-status mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+.forms {
+  padding: 4px 20px 8px;
+}
+
+.sem {
+  margin: 16px 0 6px;
+  font-size: .8rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--blue);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 6px;
+}
+
+.course {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 0;
+}
+
+.course + .course {
+  border-top: 1px dashed #edf1f7;
+}
+
+.course-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.course-name {
+  font-size: .93rem;
+  font-weight: 500;
+}
+
+.course-meta {
+  font-size: .76rem;
+  color: var(--muted);
+}
+
+.grade {
+  width: 104px;
+  flex: none;
+}
+
+:host ::ng-deep .grade .mat-mdc-text-field-wrapper {
+  height: 48px;
+}
+
+:host ::ng-deep .grade .mat-mdc-form-field-infix {
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
+  min-height: 48px;
+}
+
+:host ::ng-deep .g-good .mat-mdc-select-value-text {
+  color: var(--good);
+  font-weight: 700;
+}
+
+:host ::ng-deep .g-warn .mat-mdc-select-value-text {
+  color: var(--warn);
+  font-weight: 700;
+}
+
+:host ::ng-deep .g-bad .mat-mdc-select-value-text {
+  color: var(--bad);
+  font-weight: 700;
+}
+
+.level-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 20px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.act-small {
+  margin-left: auto !important;
+}
+
+.disclaimer {
+  max-width: 1400px;
+  margin: 24px auto 0;
+  font-size: .8rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+footer {
+  background: #000;
+  color: #fff;
+  text-align: center;
+  padding: 8px 16px;
+}
+
+footer p {
+  margin: 0;
+  font-size: .85rem;
+}
+
+.sticky-gpa {
+  display: none;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1200px) {
+  .levels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
-  .year3{
-    top: -1.7%;
-  }
 
-  .forms > mat-form-field {
-    margin-top: 5px;
-    height: 50px;
-    width: 100%;
-  }
-
-  .btnoverall{
-    top: -2rem;
-  }
-
-  mat-card-title{
-    /*margin-left: 11vw;*/
-  }
-
-  /*.title{*/
-  /*  position: relative;*/
-  /*  left: -69.5vw;*/
-  /*}*/
-  .menu{
-    display: block;
-    margin-left: -55vw;
-    margin-top: 0;
-  }
-
-  .menuicon{
-    transform: scale(2);
-  }
-
-
-  .nav{
-    display: none;
+  .toolbar-card {
+    grid-template-columns: 1fr;
   }
 }
 
-@media screen and (max-width: 768px) {
-
-  .forms > mat-form-field {
-    margin-top: 5px;
-    height: 50px;
-    width: 100%;
+@media (max-width: 768px) {
+  .calc {
+    padding: 76px 16px 24px;
   }
 
-  .year1 {
-    top: -8%;
-    width: 90%;
+  .levels {
+    grid-template-columns: 1fr;
   }
 
-  .year3 {
-    margin-top: -30vh;
-    top: 8%;
-    width: 30%;
-    position: relative;
-    top: -5vh;
-    width: 90%;
+  .summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .year2 {
-    margin-top: -26rem;
-    width: 30%;
-    position: relative;
-    top: 5vh;
-    width: 90%;
+  .summary .stat:nth-child(3) {
+    grid-column: 1 / -1;
   }
 
-  mat-card-title {
-    color: white;
-    margin-left: 38vw;
+  .stat-value {
+    font-size: 1.5rem;
   }
 
-  .logo {
-    transform: scale(0.1);
-
-    /*margin-left: -35vw;*/
+  .toolbar-card {
+    padding: 16px;
   }
 
-  .title{
-    display: none;
+  .intake-toggle {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 
-  .btnoverall{
-    top: -14rem;
-    width: 75vw;
-    margin-left: 12.5vw;
+  :host ::ng-deep .intake-toggle .mat-button-toggle-label-content {
+    padding: 0 4px;
+    font-size: .82rem;
   }
 
-  /*.btns{*/
-  /*  margin-left: 12vw;*/
-
-  /*}*/
-
-  .menu{
-    display: block;
-    margin-left: -55vw;
-    margin-top: 0;
+  .level-actions .act {
+    flex: 1 1 auto;
   }
 
-  .menuicon{
-    transform: scale(2);
+  .sticky-gpa {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    padding: 10px 16px;
+    background: var(--navy);
+    color: #fff;
+    font-size: .9rem;
+    box-shadow: 0 -4px 12px rgba(20, 33, 61, .2);
   }
 
-
-  .nav{
-    display: none;
+  .sticky-gpa strong {
+    font-size: 1.15rem;
+    margin-left: 4px;
   }
-
 }
-
-@media screen and (max-width: 426px) {
-
-  .forms > mat-form-field {
-    /*margin-top: -15vh;*/
-    height: 50px;
-    width: 100%;
-  }
-
-  .year3 {
-    margin-top: -24vh;
-
-  }
-
-
-  mat-card-title {
-    color: white;
-    margin-left: 33vw;
-  }
-
-  .logo {
-    transform: scale(0.05);
-  }
-
-  /*.title{*/
-  /*  margin-left: -28vw;*/
-  /*  font-size: 25px ;*/
-  /*}*/
-
-  .btnoverall{
-    top: -12rem;
-    width: 80vw;
-    margin-left: 10.5vw;
-  }
-
-
-
-  .menu{
-    display: block;
-    margin-left: -58vw;
-    margin-top: 0;
-  }
-
-  .menuicon{
-    transform: scale(2);
-  }
-
-}
-
-@media screen and (max-width: 400px) {
-
-
-  mat-card-title {
-    color: white;
-    margin-left: 33vw;
-  }
-
-  .logo {
-    transform: scale(0.05);
-    margin-left: -10vw;
-    margin-top: 0;
-  }
-
-  .title{
-    margin-left: -35vw;
-    font-size: 25px ;
-    transform: scale(0.7);
-
-  }
-
-  .btnoverall{
-    top: -13rem;
-    width: 80vw;
-    margin-left: 10.5vw;
-  }
-
-
-
-  .menu{
-    display: block;
-    margin-left: -58vw;
-    margin-top: 0;
-  }
-
-  .menuicon{
-    transform: scale(2);
-  }
-
-}
-
-@media screen and (max-width: 375px) {
-
-  mat-card-title {
-    color: white;
-    margin-left: 33vw;
-  }
-
-  .logo {
-    transform: scale(0.05);
-    margin-left: -10vw;
-    margin-top: 0;
-  }
-
-
-  .btnoverall{
-    top: -15rem;
-    width: 80vw;
-    margin-left: 10.5vw;
-  }
-
-
-
-  .menu{
-    display: block;
-    margin-left: -58vw;
-    margin-top: 0;
-  }
-
-  .menuicon{
-    transform: scale(2);
-  }
-
-}
-
-@media screen and (max-width: 356px) {
-
-  .year3 {
-    margin-top: -20vh;
-
-  }
-
-  .year2 {
-    margin-top: -44vh;
-
-  }
-
-  .btnoverall{
-    top: -10rem;
-
-  }
-
-}
-
-@media screen and (max-width: 325px) {
-
-  .year3 {
-    margin-top: -11vh;
-
-  }
-
-  .year2 {
-    margin-top: -40vh;
-
-  }
-
-  .btnoverall{
-    top: -8rem;
-
-  }
-
-}
-

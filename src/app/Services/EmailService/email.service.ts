@@ -1,15 +1,13 @@
 import {Injectable} from '@angular/core';
-import {EmailJSResponseStatus} from "emailjs-com";
-import * as emailjs from 'emailjs-com';
+import {EmailJSResponseStatus, send} from '@emailjs/browser';
 import {emailjsConfig} from "../../config/emailConfig";
+
 @Injectable({
   providedIn: 'root'
 })
 export class EmailService {
-  constructor() {
-     emailjs.init(emailjsConfig.userId)
-  }
 
-  static send(mailParams:any):Promise<EmailJSResponseStatus> {
-    return emailjs.send(emailjsConfig.serviceId,emailjsConfig.templateId, mailParams,emailjsConfig.userId);  }
+  static send(mailParams: Record<string, unknown>): Promise<EmailJSResponseStatus> {
+    return send(emailjsConfig.serviceId, emailjsConfig.templateId, mailParams, {publicKey: emailjsConfig.userId});
+  }
 }
