@@ -21,6 +21,11 @@ import { ContactUsComponent } from './component/contact-us/contact-us.component'
 import { FinalmessageComponent } from './util/dialog/finalmessage/finalmessage.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { LandingPageComponent } from './component/landing-page/landing-page.component';
+import { MainwindowComponent } from './component/mainwindow/mainwindow.component';
+import { NavbarComponent } from './component/navbar/navbar.component';
+import { ProgressionpageComponent } from './component/progressionpage/progressionpage.component';
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatBadgeModule} from "@angular/material/badge";
 
 @NgModule({
   declarations: [
@@ -30,7 +35,10 @@ import { LandingPageComponent } from './component/landing-page/landing-page.comp
     AboutComponent,
     ContactUsComponent,
     FinalmessageComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    MainwindowComponent,
+    NavbarComponent,
+    ProgressionpageComponent
   ],
     imports: [
         BrowserModule,
@@ -46,7 +54,9 @@ import { LandingPageComponent } from './component/landing-page/landing-page.comp
         ReactiveFormsModule,
         MatToolbarModule,
         MatDialogModule,
-        MatMenuModule
+        MatMenuModule,
+        MatSnackBarModule,
+        MatBadgeModule
     ],
   providers: [],
   bootstrap: [AppComponent]

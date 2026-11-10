@@ -3,34 +3,9 @@
   src: url("src/assets/Font/Poppins-Thin.ttf")format('truetype');
 }
 
-.blogo {
-  width: 80px;
-  height: 50px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding-top: 5px;
-  padding-left: 15px;
-}
-
-.title{
-  font-family: poppins,sans-serif;
-  font-size: 30px;
-  font-weight: bold;
-
-  /*position: absolute;*/
-  /*right: 0;*/
-  /*margin: 0 auto;*/
-
-}
-
-.spacer {
-  flex: 1 1 auto;
-}
-
 
 .forms > mat-label {
-  color: red;
+  color: black;
   margin-right: 20px;
 }
 
@@ -65,6 +40,7 @@ mat-card{
 }
 
 .year2,.year1,.year3 {
+  margin-top: 4rem;
   width: 30vw;
 }
 
@@ -75,32 +51,12 @@ mat-card-header {
 
 }
 
+
 mat-card-title {
   color: white;
-  margin-left: 13vw;
+  margin-left: 12vw;
 
-}
 
-.nav {
-  position: fixed;
- top: 0;
-  right: 0;
-  padding-right: 15px;
-}
-
-.navlist {
-  list-style-type: none;
-  flex: 10;
-  display: flex;
-  gap: 20px;
-  font-family: poppins, sans-serif;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-a:hover {
-  color: red;
-  cursor: pointer;
 }
 
 .navbar, .back {
@@ -108,18 +64,18 @@ a:hover {
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(136, 235, 255, 1) 100%);
   width: 100%;
 }
-.navbar{
-  position: fixed;
-  z-index: 1;
-}
 
-a{
-  color: black;
-  text-decoration: none;
-}
 .btns {
   width: 100%;
   background: #4169E1;
+  z-index: 0;
+}
+
+.progbtn {
+  width: 100%;
+  background: #073fe5;
+  margin-top: 1rem;
+  z-index: 0;
 }
 
 .active {
@@ -131,8 +87,9 @@ a{
   position: relative;
   margin-left: 10rem;
   margin-bottom: 25px;
-  top: -20rem;
+  top: -14rem;
   background: #4169E1;
+  z-index: 0;
 }
 
 .btnall{
@@ -150,6 +107,22 @@ footer{
   display: none;
 }
 
+/*.notice{*/
+/*  width: 30rem;*/
+/*  height: 10rem;*/
+/*  background: rgb(0,198,251);*/
+/*  background: radial-gradient(circle, rgba(0,198,251,1) 0%, rgba(0,91,234,1) 100%);*/
+/*}*/
+
+.btnbadge{
+  position: absolute;
+  right:  0;
+  top: -0.5rem;
+  background-color: red;
+  padding: 5px;
+  border-radius: 10px;
+}
+
 @media screen and (min-width: 2561px) {
 
   .btnoverall{
@@ -162,6 +135,11 @@ footer{
   .btnoverall{
     margin-left: 10vw;
   }
+
+  /*mat-card-title {*/
+  /*  margin-left: 13vw;*/
+
+  /*}*/
 }
 
 /*@media screen and (max-width: 1920px) {*/
@@ -186,9 +164,7 @@ footer{
     width: 100%;
   }
 
-  .btnoverall{
-    top: -18rem;
-  }
+
 }
 
 @media screen and (max-width: 1233px ) {
@@ -204,7 +180,7 @@ footer{
   }
 
   .btnoverall{
-    top: -18rem;
+    top: -12rem;
   }
 
 }
@@ -229,7 +205,7 @@ footer{
   }
 
   .btnoverall{
-    top: -14rem;
+    top: -10rem;
   }
 }
 
@@ -250,7 +226,7 @@ footer{
   }
 
   .btnoverall{
-    top: -10rem;
+    top: -8rem;
   }
 }
 
@@ -267,7 +243,7 @@ footer{
     top: -2.4%;
   }
   .btnoverall{
-    top: -8rem;
+    top: -3rem;
   }
 
 }
@@ -288,7 +264,7 @@ footer{
   }
 
   .btnoverall{
-    top: -6rem;
+    top: -2rem;
   }
 
   mat-card-title{
@@ -329,7 +305,7 @@ footer{
   }
 
   .year3 {
-    /*margin-top: -38.5vh;*/
+    margin-top: -30vh;
     top: 8%;
     width: 30%;
     position: relative;
@@ -338,7 +314,7 @@ footer{
   }
 
   .year2 {
-    margin-top: -30.6rem;
+    margin-top: -26rem;
     width: 30%;
     position: relative;
     top: 5vh;
@@ -394,6 +370,11 @@ footer{
     /*margin-top: -15vh;*/
     height: 50px;
     width: 100%;
+  }
+
+  .year3 {
+    margin-top: -24vh;
+
   }
 
 
@@ -487,7 +468,7 @@ footer{
 
 
   .btnoverall{
-    top: -20rem;
+    top: -15rem;
     width: 80vw;
     margin-left: 10.5vw;
   }
@@ -502,6 +483,44 @@ footer{
 
   .menuicon{
     transform: scale(2);
+  }
+
+}
+
+@media screen and (max-width: 356px) {
+
+  .year3 {
+    margin-top: -20vh;
+
+  }
+
+  .year2 {
+    margin-top: -44vh;
+
+  }
+
+  .btnoverall{
+    top: -10rem;
+
+  }
+
+}
+
+@media screen and (max-width: 325px) {
+
+  .year3 {
+    margin-top: -11vh;
+
+  }
+
+  .year2 {
+    margin-top: -40vh;
+
+  }
+
+  .btnoverall{
+    top: -8rem;
+
   }
 
 }

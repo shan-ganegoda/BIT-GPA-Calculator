@@ -3,59 +3,10 @@
   src: url("src/assets/Font/Poppins-Thin.ttf")format('truetype');
 }
 
-.logo {
-  width: 80px;
-  height: 50px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  padding-top: 5px;
-  padding-left: 15px;
-}
-
-.title{
-  font-family: poppins,sans-serif;
-  font-size: 30px;
-  font-weight: bold;
-
-}
-
-.spacer {
-  flex: 1 1 auto;
-}
-
-.navbar{
-  position: fixed;
-  z-index: 1;
-}
-
-
-.navlist {
-  list-style-type: none;
-  flex: 10;
-  display: flex;
-  gap: 20px;
-  font-family: poppins, sans-serif;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-a:hover {
-  color: red;
-  cursor: pointer;
-}
-
-.navbar, .back {
+.back {
   background: rgb(2, 0, 36);
   background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(136, 235, 255, 1) 100%);
   width: 100%;
-}
-
-.nav {
-  position: fixed;
-  top: 0;
-  right: 0;
-  padding-right: 15px;
 }
 
 a{
@@ -86,6 +37,11 @@ main {
 /*  width: 100%;*/
 /*  !* background-color: rgba(0,0,0,0.8); *!*/
 /*}*/
+/* styles.css */
+ .custom-snackbar {
+  background-color: #ff5722 !important; /* Change to your desired color */
+  color: white;
+}
 
 section {
   position: relative;

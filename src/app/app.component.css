@@ -1,0 +1,21 @@
+::ng-deep .success-snackbar {
+
+  --mdc-snackbar-container-color:lightgreen;
+  --mdc-snackbar-supporting-text-color:black;
+  border-left: 5px solid darkgreen;
+}
+
+::ng-deep .error-snackbar {
+
+  --mdc-snackbar-container-color: #ff7e7c;
+  --mdc-snackbar-supporting-text-color:black;
+  border-left: 5px solid red;
+}
+
+::ng-deep .success-snackbar button{
+  color:black;
+}
+
+
+
+

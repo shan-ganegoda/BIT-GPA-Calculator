@@ -2,6 +2,9 @@ import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {EmailService} from "../../Services/EmailService/email.service";
 import {EmailJSResponseStatus} from "emailjs-com";
+import {MatSnackBar} from "@angular/material/snack-bar";
+// import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-contact-us',
@@ -10,6 +13,8 @@ import {EmailJSResponseStatus} from "emailjs-com";
 })
 export class ContactUsComponent {
   logo: string = 'assets/logo.jpg';
+
+   constructor(private snackBar:MatSnackBar) { }
 
 
   feedbackForm = new FormGroup({
@@ -37,15 +42,31 @@ export class ContactUsComponent {
         from_email: this.emailField.value,
         message: this.messageField.value
       };
-      console.log(emailParams)
+
       EmailService.send( emailParams ).then((response: EmailJSResponseStatus) => {
 
-        console.log('Email sent:', response);
+        this.snackBar.open('Email sent','',{
+          duration: 3000, // Duration in milliseconds
+          direction: 'ltr',
+          horizontalPosition: 'right', // Position: 'start', 'center', 'end', 'left', 'right'
+          verticalPosition: 'top', // Position: 'top', 'bottom'
+          panelClass: 'success-snackbar', // Add custom CSS classes
+          // ... other options
+        })
+
+
         this.clearFeedback();
         // You can display a success message to the user here
       })
         .catch((error: any) => {
-          console.error('Error sending email:', error);
+          this.snackBar.open('Email Sent Failed','',{
+            duration: 3000, // Duration in milliseconds
+            direction: 'ltr',
+            horizontalPosition: 'right', // Position: 'start', 'center', 'end', 'left', 'right'
+            verticalPosition: 'top', // Position: 'top', 'bottom'
+            panelClass: 'error-snackbar', // Add custom CSS classes
+            // ... other options
+          })
           // You can display an error message to the user here
         });
     }

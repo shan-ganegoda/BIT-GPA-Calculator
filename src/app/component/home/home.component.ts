@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
 import {MessageComponent} from "../../util/dialog/message/message.component";
 import {FinalmessageComponent} from "../../util/dialog/finalmessage/finalmessage.component";
+import {DatatransferService} from "../../Services/datatransfer.service";
 
 @Component({
   selector: 'app-home',
@@ -23,9 +24,15 @@ export class HomeComponent implements OnInit{
 
   selected = 'notselected';
 
+  datas:any;
+  year2values:any;
+  year3values:any;
+
+
+  datum:any;
+
   grades: string[] = ['A+', 'A', "A-",'B+', 'B', "B-",'C+', 'C', "C-",'D+', 'D', "E"];
   ens: string[] = ['Pass', 'Fail'];
-  gpas: number[] = [4.00, 4.00, 3.70,3.30, 3.00, 2.70,2.30, 2.00, 1.70,1.30, 1.00, 0.00];
 
   logo: string = 'assets/logo.jpg';
 
@@ -40,49 +47,51 @@ export class HomeComponent implements OnInit{
   breakpoint : number = 3;
 
   constructor(private fb:FormBuilder,
-              private dg:MatDialog
+              private dg:MatDialog,
+              private dt:DatatransferService
               ){
-     this.yearone = this.fb.group({
-       "ip" : new FormControl(),
-       "is" : new FormControl(),
-       "im" : new FormControl(),
-       "cs" : new FormControl(),
-       "pc" : new FormControl(),
 
-       "ds" : new FormControl(),
-       "web1" : new FormControl(),
-       "csk1" : new FormControl(),
-       "se" : new FormControl(),
-       "mc" : new FormControl()
+    this.yearone = this.fb.group({
+       "ip" : new FormControl("null"),
+       "is" : new FormControl("null"),
+       "im" : new FormControl("null"),
+       "cs" : new FormControl("null"),
+       "pc" : new FormControl("null"),
+
+       "ds" : new FormControl("null"),
+       "web1" : new FormControl("null"),
+       "csk1" : new FormControl("null"),
+       "se" : new FormControl("null"),
+       "mc" : new FormControl("null")
      });
 
     this.yeartwo = this.fb.group({
-      "dsa" : new FormControl(),
-      "web2" : new FormControl(),
-      "csk2" : new FormControl(),
-      "dms" : new FormControl(),
-      "ooad" : new FormControl(),
+      "dsa" : new FormControl("null"),
+      "web2" : new FormControl("null"),
+      "csk2" : new FormControl("null"),
+      "dms" : new FormControl("null"),
+      "ooad" : new FormControl("null"),
 
-      "asd" : new FormControl(),
-      "ead" : new FormControl(),
-      "cn" : new FormControl(),
-      "uxd" : new FormControl(),
-      "pm" : new FormControl()
+      "asd" : new FormControl("null"),
+      "ead" : new FormControl("null"),
+      "cn" : new FormControl("null"),
+      "uxd" : new FormControl("null"),
+      "pm" : new FormControl("null")
     });
 
     this.yearthree = this.fb.group({
-      "fme" : new FormControl(),
-      "pp" : new FormControl(),
-      "sdp" : new FormControl(),
-      "pis" : new FormControl(),
-      "sana" : new FormControl(),
-      "mc2" : new FormControl(),
+      "fme" : new FormControl("null"),
+      "pp" : new FormControl("null"),
+      "pis" : new FormControl("null"),
+      "sana" : new FormControl("null"),
+      "mc2" : new FormControl("null"),
 
-      "etit" : new FormControl(),
-      "mad" : new FormControl(),
-      "nsa" : new FormControl(),
-      "bt" : new FormControl(),
-      "qa" : new FormControl()
+      "etit" : new FormControl("null"),
+      "sdp" : new FormControl("null"),
+      "mad" : new FormControl("null"),
+      "nsa" : new FormControl("null"),
+      "bt" : new FormControl("null"),
+      "qa" : new FormControl("null")
     });
   }
 
@@ -99,7 +108,7 @@ export class HomeComponent implements OnInit{
     //first : this.yearone.getRawValue();
 
     switch (value){
-      case null : return 0.00; break;
+      case "null" : return 0.00; break;
       case 'A+' : return 4.00; break;
       case 'A' : return 4.00; break;
       case 'A-' : return 3.70; break;
@@ -116,7 +125,7 @@ export class HomeComponent implements OnInit{
     }
   }
 
-  calculatey1gpa(){
+  calculatey1gpa(condition:boolean){
 
     this.first = JSON.stringify(this.yearone.getRawValue());
     this.first = JSON.parse(this.first);
@@ -134,16 +143,18 @@ export class HomeComponent implements OnInit{
     this.ds = this.getValue(this.first.ds);
     this.mc = this.getValue(this.first.mc);
 
+    console.log(this.ip,this.is,this.cs,this.pc,this.web1, this.se,this.ds,this.mc)
+
 
 
 //Calcutate GPA
     var yr1gpa=(this.is*4 + this.ip*4 + this.cs*4 + this.pc*3 + this.ds*4 + this.web1*4 + this.mc*3 + this.se*4)/30
     var year1gpa = Math.round(yr1gpa * 100) / 100;
 
-    //Condition 1 : GPA Level Should Be Greater Than 1.5
+    //Condition 1 : GPA Level Should Be Greater Than 2
     var c1 = true;
     var haveminimumgpa = "";
-    if(year1gpa >= 1.50){
+    if(year1gpa >= 2.00){
       haveminimumgpa = "Yes";
       c1 = true;
     }else{
@@ -151,7 +162,7 @@ export class HomeComponent implements OnInit{
       c1 = false;
     }
 
-    console.log("Minimum GPA level-" +haveminimumgpa + "(" + year1gpa + ")");
+    //console.log("Minimum GPA level-" +haveminimumgpa + "(" + year1gpa + ")");
 
     //Condition 2: Minimum of 20 Credits Of C Grade of GPA Courses
 
@@ -194,7 +205,7 @@ export class HomeComponent implements OnInit{
       c2=false;
     }
 
-    console.log("Credit Count - " + creditcount);
+    //console.log("Credit Count - " + creditcount);
 
     //Condition 3 - All En Subjects Should be passed
 
@@ -212,7 +223,7 @@ export class HomeComponent implements OnInit{
     //Condition 4 - No Grades Below D
     let conditionstatement = "";
 
-    console.log(this.is);
+    //console.log(this.is);
 
     if(this.is == 0 || this.mc == 0 || this.cs == 0 || this.ip == 0 ||
       this.pc == 0 || this.web1 == 0 || this.ds == 0 || this.se == 0){
@@ -235,18 +246,30 @@ export class HomeComponent implements OnInit{
       clr = "GREEN";
     }
 
-    const datum = {"gpa":year1gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
+    this.datas = {"y1gpa": year1gpa,"y1credit" :creditcount,"is": this.is , "ip": this.ip,"pc": this.pc,"cs": this.cs,"se":this.se,"ds": this.ds,"mc":this.mc,"web1": this.web1};
 
-    const stsmsg = this.dg.open(MessageComponent, {
-      width: '500px',
-      data: {heading: "Year 1 GPA Status", message: datum}
-    });
 
-    //console.log(yr1gpaRound);
+    this.datum = {"heading": "Year 1 GPA Status","gpa":year1gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
+
+    if(condition){
+      this.MessageDialog();
+    }
 
   }
 
-  calculatey2gpa(){
+  MessageDialog(){
+    const stsmsg = this.dg.open(MessageComponent, {
+      width: '500px',
+      data: {message: this.datum}
+    });
+  }
+
+  sendY1Data(){
+    this.calculatey1gpa(false);
+    this.dt.setY1Data(this.datas);
+  }
+
+  calculatey2gpa(condition:boolean){
 
     this.second = JSON.stringify(this.yeartwo.getRawValue());
     this.second = JSON.parse(this.second);
@@ -270,7 +293,7 @@ export class HomeComponent implements OnInit{
     //Condition 1 : GPA Level Should Be Greater Than 1.5
     let c1 = true;
     var haveminimumgpa = "";
-    if(year2gpa >= 1.50){
+    if(year2gpa >= 2.00){
       c1 = true;
       haveminimumgpa = "Yes";
     }else{
@@ -297,7 +320,7 @@ export class HomeComponent implements OnInit{
     }
 
     if(this.asd>=2){
-      creditcount += 3;
+      creditcount += 4;
     }
     if(this.ead>=2){
       creditcount += 4;
@@ -356,21 +379,25 @@ export class HomeComponent implements OnInit{
 
     let year = 1;
 
-    const datum = {"gpa":year2gpa,"condition1":haveminimumgpa,
+    this.datum = {"heading": "Year 2 GPA Status","gpa":year2gpa,"condition1":haveminimumgpa,
       "condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear,"yearc":year};
 
-    const stsmsg = this.dg.open(MessageComponent, {
-      width: '500px',
-      data: {heading: "Year 2 GPA Status", message: datum}
-    });
+    if(condition){
+      this.MessageDialog();
+    }
 
-    //console.log(yr1gpaRound);
 
-    console.log(year2gpa);
+    this.year2values = {"y2gpa": year2gpa,"y2credit" :creditcount,"dsa": this.dsa , "dms": this.dms,"ooad": this.ooad,"web2": this.web2,"ead":this.ead,"cn": this.cn,"asd":this.asd,"pm": this.pm,"uxd": this.uxd};
 
   }
 
-  calculatey3gpa(){
+  sendY2Data(){
+    this.sendY1Data();
+    this.calculatey2gpa(false);
+    this.dt.setY2Data(this.year2values);
+  }
+
+  calculatey3gpa(condition:boolean){
 
     this.third = JSON.stringify(this.yearthree.getRawValue());
     this.third = JSON.parse(this.third);
@@ -395,7 +422,7 @@ export class HomeComponent implements OnInit{
     //Condition 1 : GPA Level Should Be Greater Than 1.5
     let c1 = true;
     var haveminimumgpa = "";
-    if(year3gpa >= 1.50){
+    if(year3gpa >= 2.00){
       c1 = true;
       haveminimumgpa = "Yes";
     }else{
@@ -475,15 +502,22 @@ export class HomeComponent implements OnInit{
       proceedtonextyear = "Sorry You Have To try Again";
     }
 
-    const datum = {"gpa":year3gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
+    this.datum = {"heading": "Year 3 GPA Status","gpa":year3gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
 
-    const stsmsg = this.dg.open(MessageComponent, {
-      width: '500px',
-      data: {heading: "Year 3 GPA Status", message: datum}
-    });
+    this.year3values = {"y3gpa": year3gpa,"y3credit" :creditcount,"pp": this.pp , "sdp": this.sdp,"pis": this.pis,"sana": this.sana,"mad":this.mad,"nsa": this.nsa,"bt":this.bt,"qa": this.qa };
 
-    console.log(year3gpa);
+    if(condition){
+      this.MessageDialog();
+    }
 
+    // console.log(year3gpa);
+
+  }
+
+  sendY3Data(){
+    this.sendY2Data();
+    this.calculatey3gpa(false);
+    this.dt.setY3Data(this.year3values);
   }
 
   overollgpacalculate(){
@@ -633,7 +667,7 @@ export class HomeComponent implements OnInit{
       creditcount += 3;
     }
 
-    console.log("Credit Count :- "+creditcount);
+    //console.log("Credit Count :- "+creditcount);
     let c2 = true;
     if(creditcount == 90){
       minimumcreditcount = "Yes";
@@ -682,8 +716,8 @@ export class HomeComponent implements OnInit{
 
 
 
-    console.log(c2 + " - " + creditcount);
-    console.log(overallgpa);
+    //console.log(c2 + " - " + creditcount);
+    //console.log(overallgpa);
   }
 
 }
