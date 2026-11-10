@@ -1,6 +1,6 @@
-@font-face {
-  font-family: 'poppins';
-  src: url("src/assets/Font/Poppins-Thin.ttf")format('truetype');
+.logo-link {
+  display: block;
+  line-height: 0;
 }
 
 .blogo {
@@ -13,15 +13,14 @@
   padding-left: 15px;
 }
 
-.title{
-  font-family: poppins,sans-serif;
-  font-size: 30px;
-  font-weight: bold;
-
-  /*position: absolute;*/
-  /*right: 0;*/
-  /*margin: 0 auto;*/
-
+.title {
+  margin: 0;
+  font-family: poppins-medium, poppins, sans-serif;
+  font-size: 26px;
+  font-weight: normal;
+  letter-spacing: .02em;
+  color: #14213d;
+  text-transform: uppercase;
 }
 
 .spacer {
@@ -37,91 +36,109 @@
 
 .navlist {
   list-style-type: none;
-  flex: 10;
   display: flex;
   gap: 20px;
-  font-family: poppins, sans-serif;
-  font-size: 20px;
-  font-weight: bold;
+  font-family: poppins-medium, poppins, sans-serif;
+  font-size: 18px;
 }
 
-a:hover {
-  color: red;
+.navlist a:hover,
+.navlist a:focus-visible {
+  color: #1b4780;
+  text-decoration: underline;
   cursor: pointer;
 }
 
-.navbar{
-  background: rgb(2, 0, 36);
-  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(136, 235, 255, 1) 100%);
+.navbar {
+  background: linear-gradient(90deg, #ffffff 0%, #88ebff 100%);
   width: 100%;
-}
-.navbar{
   position: fixed;
-  z-index: 1;
+  z-index: 3;
 }
 
-a{
-  color: black;
+a {
+  color: #14213d;
   text-decoration: none;
 }
 
-.menu{
+.menu {
   display: none;
 }
 
 .sidenav {
-  height: 50rem;
-  width: 0;
+  height: 100vh;
+  width: 250px;
+  max-width: 85vw;
   position: fixed;
   z-index: 100000;
   top: 0;
   right: 0;
   background-color: #111;
   overflow-x: hidden;
-  transition: 0.5s;
+  transform: translateX(100%);
+  visibility: hidden;
+  transition: transform .3s, visibility .3s;
   padding-top: 60px;
+  box-sizing: border-box;
+}
+
+.sidenav.open {
+  transform: none;
+  visibility: visible;
 }
 
 .sidenav a {
-  padding: 8px 8px 8px 20px;
-  font-family: poppins, sans-serif;
+  padding: 10px 8px 10px 24px;
+  font-family: poppins-medium, poppins, sans-serif;
   text-decoration: none;
-  font-size: 22px;
+  font-size: 20px;
   color: #fff;
   display: block;
-  transition: 0.3s;
 }
 
-.sidenav a:hover {
-  color: red;
+.sidenav a:hover,
+.sidenav a:focus-visible {
+  color: #88ebff;
 }
 
 .sidenav .closebtn {
   position: absolute;
-  top: 0;
-  right: 25px;
+  top: 8px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  margin: 0 !important;
+  padding: 0 !important;
   font-size: 36px;
-  margin-left: 50px;
+  line-height: 1;
+  color: #fff;
+  background: none;
+  border: 0;
+  cursor: pointer;
 }
+
 @media screen and (max-width: 870px) {
-
-
-  .menu{
+  .menu {
     display: block;
-    margin-left: -55vw;
-    margin-top: 0;
   }
 
-  .menuicon{
-    transform: scale(2);
+  .menubtn {
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  .nav{
+  .nav {
     display: none;
   }
 
-  .title{
-    display: none;
+  /* Hidden on phones, but still the page heading for screen readers. */
+  .title {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
-
 }

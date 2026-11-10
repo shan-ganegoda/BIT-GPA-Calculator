@@ -44,3 +44,4 @@ Thumbs.db
 *.pack
 *.pack
 .idea/workspace.xml
+.angular

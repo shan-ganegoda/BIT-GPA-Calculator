@@ -1,723 +1,355 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, signal} from '@angular/core';
+import {DecimalPipe, NgClass} from "@angular/common";
+import {ReactiveFormsModule} from "@angular/forms";
+import {RouterLink} from "@angular/router";
+import {MatButtonModule} from "@angular/material/button";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
+import {MatSelectModule} from "@angular/material/select";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {MatDialog} from "@angular/material/dialog";
+import {Subscription} from "rxjs";
 import {MessageComponent} from "../../util/dialog/message/message.component";
 import {FinalmessageComponent} from "../../util/dialog/finalmessage/finalmessage.component";
-import {DatatransferService} from "../../Services/datatransfer.service";
+import {DatatransferService, GRADES_STORAGE_KEY} from "../../Services/datatransfer.service";
+import {
+  allKeysForLevel, Course, DEFAULT_INTAKE, EN_GRADES, GRADES, Intake, intakeDef, IntakeDef, INTAKES, LevelDef,
+} from "../../gpa/handbook";
+import {DegreeResult, evaluateDegree, evaluateLevel, gradePoint, Grades, LevelResult} from "../../gpa/gpa-engine";
+
+type LevelNo = number;
+
+const STORAGE_KEY = GRADES_STORAGE_KEY;
+const ROMAN = ['I', 'II', 'III'];
 
 @Component({
   selector: 'app-home',
+  imports: [
+    ReactiveFormsModule, RouterLink, DecimalPipe, NgClass,
+    MatButtonModule, MatButtonToggleModule, MatCardModule, MatIconModule, MatSelectModule,
+  ],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrl: './home.component.css'
 })
+export class HomeComponent implements OnInit, OnDestroy {
 
-export class HomeComponent implements OnInit{
+  readonly intakes = INTAKES;
+  readonly roman = ROMAN;
+  readonly thisYear = new Date().getFullYear();
+  /** Wider than a phone: the "How this works" notes start open. */
+  readonly wide = typeof window === 'undefined' || !window.matchMedia || window.matchMedia('(min-width: 769px)').matches;
+  grades: string[] = GRADES;
+  ens: string[] = EN_GRADES;
 
-  is !: any; ip !: any; pc !: any; cs !: any;
-  mc !: any; ds !: any; se !: any; web1 !: any;
-
-  dsa !: any; dms !: any; web2 !: any; ooad !: any;
-  asd !: any; uxd !: any; ead !: any; cn !: any; pm!: any;
-
-  fme !: any; pp !: any; sdp !: any; pis !: any; sana!: any;
-  etit !: any; mad !: any; nsa !: any; bt !: any; qa!:any;
-
-  selected = 'notselected';
-
-  datas:any;
-  year2values:any;
-  year3values:any;
-
-
-  datum:any;
-
-  grades: string[] = ['A+', 'A', "A-",'B+', 'B', "B-",'C+', 'C', "C-",'D+', 'D', "E"];
-  ens: string[] = ['Pass', 'Fail'];
-
-  logo: string = 'assets/logo.jpg';
+  intakeControl = new FormControl<Intake>(DEFAULT_INTAKE, {nonNullable: true});
+  readonly intake = signal<Intake>(DEFAULT_INTAKE);
 
   yearone !: FormGroup;
   yeartwo !: FormGroup;
   yearthree !: FormGroup;
 
-  first !:any;
-  second !:any;
-  third !:any;
+  /** Latest results, for the dialogs, the progression page and the tests. */
+  datas: any;
+  year2values: any;
+  year3values: any;
+  datum: any;
 
-  breakpoint : number = 3;
+  /** Live results shown on the page as grades are picked. */
+  readonly live = signal<LevelResult[]>([]);
+  readonly liveDegree = signal<DegreeResult>(evaluateDegree(DEFAULT_INTAKE, [{}, {}, {}]));
 
-  constructor(private fb:FormBuilder,
-              private dg:MatDialog,
-              private dt:DatatransferService
-              ){
+  private subs: Subscription[] = [];
 
-    this.yearone = this.fb.group({
-       "ip" : new FormControl("null"),
-       "is" : new FormControl("null"),
-       "im" : new FormControl("null"),
-       "cs" : new FormControl("null"),
-       "pc" : new FormControl("null"),
-
-       "ds" : new FormControl("null"),
-       "web1" : new FormControl("null"),
-       "csk1" : new FormControl("null"),
-       "se" : new FormControl("null"),
-       "mc" : new FormControl("null")
-     });
-
-    this.yeartwo = this.fb.group({
-      "dsa" : new FormControl("null"),
-      "web2" : new FormControl("null"),
-      "csk2" : new FormControl("null"),
-      "dms" : new FormControl("null"),
-      "ooad" : new FormControl("null"),
-
-      "asd" : new FormControl("null"),
-      "ead" : new FormControl("null"),
-      "cn" : new FormControl("null"),
-      "uxd" : new FormControl("null"),
-      "pm" : new FormControl("null")
-    });
-
-    this.yearthree = this.fb.group({
-      "fme" : new FormControl("null"),
-      "pp" : new FormControl("null"),
-      "pis" : new FormControl("null"),
-      "sana" : new FormControl("null"),
-      "mc2" : new FormControl("null"),
-
-      "etit" : new FormControl("null"),
-      "sdp" : new FormControl("null"),
-      "mad" : new FormControl("null"),
-      "nsa" : new FormControl("null"),
-      "bt" : new FormControl("null"),
-      "qa" : new FormControl("null")
-    });
+  constructor(private fb: FormBuilder,
+              private dg: MatDialog,
+              private dt: DatatransferService) {
+    this.yearone = this.buildGroup(1);
+    this.yeartwo = this.buildGroup(2);
+    this.yearthree = this.buildGroup(3);
+    this.refreshLive();
   }
 
   ngOnInit() {
-    this.breakpoint = (window.innerWidth <= 768) ? 1 : 3;
+    this.restore();
+    this.subs.push(
+      this.intakeControl.valueChanges.subscribe(i => this.setIntake(i)),
+      this.yearone.valueChanges.subscribe(() => this.onGradesChanged()),
+      this.yeartwo.valueChanges.subscribe(() => this.onGradesChanged()),
+      this.yearthree.valueChanges.subscribe(() => this.onGradesChanged()),
+    );
   }
 
-  onResize(event:any) {
-    this.breakpoint = (event.target.innerWidth <= 768) ? 1 : 3;
+  ngOnDestroy() {
+    this.subs.forEach(s => s.unsubscribe());
   }
 
+  /* ---------------- Intake and course data ---------------- */
+
+  get def(): IntakeDef {
+    return intakeDef(this.intake());
+  }
+
+  level(levelNo: LevelNo): LevelDef {
+    return this.def.levels[levelNo - 1];
+  }
+
+  coursesIn(levelNo: LevelNo, semester: number): Course[] {
+    return this.level(levelNo).courses.filter(c => c.semester === semester);
+  }
+
+  group(levelNo: LevelNo): FormGroup {
+    return [this.yearone, this.yeartwo, this.yearthree][levelNo - 1];
+  }
+
+  setIntake(intake: Intake) {
+    this.intake.set(intake);
+    this.dt.setIntake(intake);
+    this.onGradesChanged();
+  }
+
+  creditsLabel(c: Course): string {
+    if (c.kind === 'en') {
+      return 'Non-GPA · Pass/Fail';
+    }
+    if (c.split) {
+      return `${c.credits} credits (${Object.values(c.split).join(' + ')} over two semesters)`;
+    }
+    return `${c.credits} credit${c.credits === 1 ? '' : 's'}${c.kind === 'optional' ? ' · optional' : ''}`;
+  }
+
+  /** Colour hint for a picked grade. */
+  gradeClass(levelNo: LevelNo, key: string): string {
+    const v = this.group(levelNo).get(key)?.value;
+    if (v === 'Pass') { return 'g-good'; }
+    if (v === 'Fail') { return 'g-bad'; }
+    const p = gradePoint(v);
+    if (p === null || p === undefined) { return ''; }
+    return p >= 2 ? 'g-good' : p >= 1 ? 'g-warn' : 'g-bad';
+  }
+
+  gradedCount(levelNo: LevelNo): number {
+    const g = this.group(levelNo).getRawValue();
+    return this.level(levelNo).courses.filter(c => g[c.key] !== null && g[c.key] !== 'null' && g[c.key] !== undefined).length;
+  }
+
+  clearLevel(levelNo: LevelNo) {
+    this.group(levelNo).reset();
+  }
+
+  clearAll() {
+    [1, 2, 3].forEach(l => this.clearLevel(l as LevelNo));
+  }
+
+  /* ---------------- Grade points ---------------- */
+
+  /** Grade point of a grade ('null' / not selected = 0, unknown = undefined). */
   // @ts-ignore
-  getValue(value:string){
-    //first : this.yearone.getRawValue();
-
-    switch (value){
-      case "null" : return 0.00; break;
-      case 'A+' : return 4.00; break;
-      case 'A' : return 4.00; break;
-      case 'A-' : return 3.70; break;
-      case 'B+' : return 3.30; break;
-      case 'B' : return 3.00; break;
-      case 'B-' : return 2.70; break;
-      case 'C+' : return 2.30; break;
-      case 'C' : return 2.00; break;
-      case 'C-' : return 1.70; break;
-      case 'D+' : return 1.30; break;
-      case 'D' : return 1.00; break;
-      case 'E' : return 0.00; break;
-
-    }
+  getValue(value: string) {
+    const p = gradePoint(value);
+    return p === null ? 0 : p;
   }
 
-  calculatey1gpa(condition:boolean){
+  /* ---------------- Level results ---------------- */
 
-    this.first = JSON.stringify(this.yearone.getRawValue());
-    this.first = JSON.parse(this.first);
-
-    // console.log(this.first)
-    // console.log(this.first.is);
-
-    this.is = this.getValue(this.first.is);
-    this.ip = this.getValue(this.first.ip);
-    this.cs = this.getValue(this.first.cs);
-    this.pc = this.getValue(this.first.pc);
-
-    this.web1 = this.getValue(this.first.web1);
-    this.se = this.getValue(this.first.se);
-    this.ds = this.getValue(this.first.ds);
-    this.mc = this.getValue(this.first.mc);
-
-    console.log(this.ip,this.is,this.cs,this.pc,this.web1, this.se,this.ds,this.mc)
-
-
-
-//Calcutate GPA
-    var yr1gpa=(this.is*4 + this.ip*4 + this.cs*4 + this.pc*3 + this.ds*4 + this.web1*4 + this.mc*3 + this.se*4)/30
-    var year1gpa = Math.round(yr1gpa * 100) / 100;
-
-    //Condition 1 : GPA Level Should Be Greater Than 2
-    var c1 = true;
-    var haveminimumgpa = "";
-    if(year1gpa >= 2.00){
-      haveminimumgpa = "Yes";
-      c1 = true;
-    }else{
-      haveminimumgpa = "No";
-      c1 = false;
-    }
-
-    //console.log("Minimum GPA level-" +haveminimumgpa + "(" + year1gpa + ")");
-
-    //Condition 2: Minimum of 20 Credits Of C Grade of GPA Courses
-
-    var creditcount = 0;
-    var minimumcreditcount = "";
-
-    if(this.is>=2){
-      creditcount += 4;
-    }
-    if(this.pc>=2){
-      creditcount += 3;
-    }
-    if(this.cs>=2){
-      creditcount += 4;
-    }
-    if(this.ip>=2){
-      creditcount += 4;
-    }
-
-    if(this.mc>=2){
-      creditcount += 3;
-    }
-    if(this.se>=2){
-      creditcount += 4;
-    }
-    if(this.web1>=2){
-      creditcount += 4;
-    }
-    if(this.ds>=2){
-      creditcount += 4;
-    }
-
-
-   var c2 = true;
-    if(creditcount >= 20){
-      minimumcreditcount = "Yes";
-      c2=true;
-    }else{
-      minimumcreditcount = "No";
-      c2=false;
-    }
-
-    //console.log("Credit Count - " + creditcount);
-
-    //Condition 3 - All En Subjects Should be passed
-
-    var allenspassed = "";
-
-    var c3 = true;
-    if(this.first.im === 'Pass' && this.first.csk1 === 'Pass' ){
-      allenspassed = "Yes";
-      c3 = true;
-    }else{
-      allenspassed = "NO";
-      c3 = false;
-    }
-
-    //Condition 4 - No Grades Below D
-    let conditionstatement = "";
-
-    //console.log(this.is);
-
-    if(this.is == 0 || this.mc == 0 || this.cs == 0 || this.ip == 0 ||
-      this.pc == 0 || this.web1 == 0 || this.ds == 0 || this.se == 0){
-
-      conditionstatement = "Yes";
-    }else{
-      conditionstatement = "No";
-    }
-
-    // console.log("Below D - " + c4);
-
-
-    var proceedtonextyear = "";
-    var clr = "";
-    if(c1 && c2 && c3 && conditionstatement === "No"){
-      proceedtonextyear = "Congratulations! You Can Proceed To Next Year";
-      clr = "RED";
-    }else{
-      proceedtonextyear = "Sorry You Can't Proceed To Next Year";
-      clr = "GREEN";
-    }
-
-    this.datas = {"y1gpa": year1gpa,"y1credit" :creditcount,"is": this.is , "ip": this.ip,"pc": this.pc,"cs": this.cs,"se":this.se,"ds": this.ds,"mc":this.mc,"web1": this.web1};
-
-
-    this.datum = {"heading": "Year 1 GPA Status","gpa":year1gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
-
-    if(condition){
+  calculatey1gpa(condition: boolean) {
+    const r = this.evaluate(1);
+    this.datas = {y1gpa: r.gpa, y1credit: r.cCredits, ...this.pointsOf(1)};
+    this.datum = this.levelMessage(r);
+    if (condition) {
       this.MessageDialog();
     }
-
   }
 
-  MessageDialog(){
-    const stsmsg = this.dg.open(MessageComponent, {
-      width: '500px',
+  calculatey2gpa(condition: boolean) {
+    const r = this.evaluate(2);
+    this.year2values = {y2gpa: r.gpa, y2credit: r.cCredits, ...this.pointsOf(2)};
+    this.datum = this.levelMessage(r);
+    if (condition) {
+      this.MessageDialog();
+    }
+  }
+
+  calculatey3gpa(condition: boolean) {
+    const r = this.evaluate(3);
+    this.year3values = {y3gpa: r.gpa, y3credit: r.cCredits, ...this.pointsOf(3)};
+    this.datum = this.levelMessage(r);
+    if (condition) {
+      this.MessageDialog();
+    }
+  }
+
+  calculate(levelNo: LevelNo) {
+    [() => this.calculatey1gpa(true), () => this.calculatey2gpa(true), () => this.calculatey3gpa(true)][levelNo - 1]();
+  }
+
+  sendData(levelNo: LevelNo) {
+    [() => this.sendY1Data(), () => this.sendY2Data(), () => this.sendY3Data()][levelNo - 1]();
+  }
+
+  MessageDialog() {
+    this.dg.open(MessageComponent, {
+      width: '520px',
+      maxWidth: '95vw',
       data: {message: this.datum}
     });
   }
 
-  sendY1Data(){
+  sendY1Data() {
+    this.dt.setIntake(this.intake());
     this.calculatey1gpa(false);
     this.dt.setY1Data(this.datas);
   }
 
-  calculatey2gpa(condition:boolean){
-
-    this.second = JSON.stringify(this.yeartwo.getRawValue());
-    this.second = JSON.parse(this.second);
-
-    this.dms = this.getValue(this.second.dms);
-    this.dsa = this.getValue(this.second.dsa);
-    this.ooad = this.getValue(this.second.ooad);
-    this.web2 = this.getValue(this.second.web2);
-
-    this.uxd = this.getValue(this.second.uxd);
-    this.ead = this.getValue(this.second.ead);
-    this.asd = this.getValue(this.second.asd);
-    this.cn = this.getValue(this.second.cn);
-    this.pm = this.getValue(this.second.pm);
-
-
-
-    var yr2gpa=(this.ooad*3 + this.dsa*3 + this.dms*3 + this.web2*4 + this.uxd*3 + this.ead*4 + this.pm*3 + this.asd*4 + this.cn*3)/30
-    var year2gpa = Math.round(yr2gpa * 100) / 100;
-
-    //Condition 1 : GPA Level Should Be Greater Than 1.5
-    let c1 = true;
-    var haveminimumgpa = "";
-    if(year2gpa >= 2.00){
-      c1 = true;
-      haveminimumgpa = "Yes";
-    }else{
-      c1=false;
-      haveminimumgpa = "No";
-    }
-
-    //Condition 2: Minimum of 20 Credits Of C Grade of GPA Courses
-
-    var creditcount = 0;
-    var minimumcreditcount = "";
-
-    if(this.dsa>=2){
-      creditcount += 3;
-    }
-    if(this.dms>=2){
-      creditcount += 3;
-    }
-    if(this.web2>=2){
-      creditcount += 4;
-    }
-    if(this.ooad>=2){
-      creditcount += 3;
-    }
-
-    if(this.asd>=2){
-      creditcount += 4;
-    }
-    if(this.ead>=2){
-      creditcount += 4;
-    }
-    if(this.cn>=2){
-      creditcount += 3;
-    }
-    if(this.pm>=2){
-      creditcount += 3;
-    }
-    if(this.uxd>=2){
-      creditcount += 3;
-    }
-
-    let c2 = true;
-    if(creditcount >= 20){
-      minimumcreditcount = "Yes";
-      c2 = true;
-    }else{
-      minimumcreditcount = "No";
-      c2=false;
-    }
-
-    //Condition 3 - All En Subjects Should be passed
-
-    var allenspassed = "";
-    let c3 = true;
-
-    if(this.second.csk2 === 'Pass'){
-      allenspassed = "Yes";
-      c3 = true;
-    }else{
-      allenspassed = "NO";
-      c3 = false;
-    }
-
-    //Condition 4 - No Grades Below D
-
-    var conditionstatement = "";
-
-    if(this.dsa == 0 || this.dms == 0 || this.ooad == 0 || this.web2 == 0 || this.asd == 0 ||
-      this.cn == 0 || this.ead == 0 || this.pm == 0 || this.uxd == 0){
-
-      conditionstatement = "Yes";
-    }else{
-      conditionstatement = "No";
-    }
-
-    var proceedtonextyear = "";
-    var clr = "";
-    if(c1 && c2 && c3 && conditionstatement === "No"){
-      proceedtonextyear = "Congradulations! You Can Proceed To Next Year";
-    }else{
-      proceedtonextyear = "Sorry You Can't Proceed To Next Year";
-    }
-
-    let year = 1;
-
-    this.datum = {"heading": "Year 2 GPA Status","gpa":year2gpa,"condition1":haveminimumgpa,
-      "condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear,"yearc":year};
-
-    if(condition){
-      this.MessageDialog();
-    }
-
-
-    this.year2values = {"y2gpa": year2gpa,"y2credit" :creditcount,"dsa": this.dsa , "dms": this.dms,"ooad": this.ooad,"web2": this.web2,"ead":this.ead,"cn": this.cn,"asd":this.asd,"pm": this.pm,"uxd": this.uxd};
-
-  }
-
-  sendY2Data(){
+  sendY2Data() {
     this.sendY1Data();
     this.calculatey2gpa(false);
     this.dt.setY2Data(this.year2values);
   }
 
-  calculatey3gpa(condition:boolean){
-
-    this.third = JSON.stringify(this.yearthree.getRawValue());
-    this.third = JSON.parse(this.third);
-
-    this.fme = this.getValue(this.third.fme);
-    this.pp = this.getValue(this.third.pp);
-    this.sdp = this.getValue(this.third.sdp);
-    this.pis = this.getValue(this.third.pis);
-    this.sana = this.getValue(this.third.sana);
-
-    this.etit = this.getValue(this.third.etit);
-    this.mad = this.getValue(this.third.mad);
-    this.nsa = this.getValue(this.third.nsa);
-    this.bt = this.getValue(this.third.bt);
-    this.qa = this.getValue(this.third.qa);
-
-
-
-    var yr3gpa=(this.sdp*8 + this.pp*3 + this.pis*3 + this.sana*3 + this.qa*3 + this.mad*4 + this.nsa*3 + this.bt*3)/30
-    var year3gpa = Math.round(yr3gpa * 100) / 100;
-
-    //Condition 1 : GPA Level Should Be Greater Than 1.5
-    let c1 = true;
-    var haveminimumgpa = "";
-    if(year3gpa >= 2.00){
-      c1 = true;
-      haveminimumgpa = "Yes";
-    }else{
-      c1=false;
-      haveminimumgpa = "No";
-    }
-
-    //Condition 2: Minimum of 20 Credits Of C Grade of GPA Courses
-
-    var creditcount = 0;
-    var minimumcreditcount = "";
-
-    if(this.pp>=2){
-      creditcount += 3;
-    }
-    if(this.sdp>=2){
-      creditcount += 8;
-    }
-    if(this.pis>=2){
-      creditcount += 3;
-    }
-    if(this.sana>=2){
-      creditcount += 3;
-    }
-
-    if(this.mad>=2){
-      creditcount += 4;
-    }
-    if(this.nsa>=2){
-      creditcount += 3;
-    }
-    if(this.bt>=2){
-      creditcount += 3;
-    }
-    if(this.qa>=2){
-      creditcount += 3;
-    }
-
-    let c2 = true;
-    if(creditcount >= 20){
-      minimumcreditcount = "Yes";
-      c2 = true;
-    }else{
-      minimumcreditcount = "No";
-      c2=false;
-    }
-
-    //Condition 3 - All En Subjects Should be passed
-
-    var allenspassed = "";
-    let c3 = true;
-
-    if(this.third.fme === 'Pass' && this.third.etit === 'Pass'){
-      allenspassed = "Yes";
-      c3 = true;
-    }else{
-      allenspassed = "NO";
-      c3 = false;
-    }
-
-    //Condition 4 - No Grades Below D
-
-    var conditionstatement = "";
-
-    if(this.sdp == 0 || this.pp == 0 || this.pis == 0 || this.sana == 0 || this.mad == 0 ||
-      this.nsa == 0 || this.bt == 0 || this.qa == 0){
-      conditionstatement = "Yes";
-    }else{
-      conditionstatement = "No";
-    }
-
-    var proceedtonextyear = "";
-    var clr = "";
-    if(c1 && c2 && c3 && conditionstatement === "No"){
-      proceedtonextyear = "Congradulations! You Have Completed The Year 3";
-    }else{
-      proceedtonextyear = "Sorry You Have To try Again";
-    }
-
-    this.datum = {"heading": "Year 3 GPA Status","gpa":year3gpa,"condition1":haveminimumgpa,"condition2":minimumcreditcount,"condition3":allenspassed,"condition4":conditionstatement,"prmsg":proceedtonextyear};
-
-    this.year3values = {"y3gpa": year3gpa,"y3credit" :creditcount,"pp": this.pp , "sdp": this.sdp,"pis": this.pis,"sana": this.sana,"mad":this.mad,"nsa": this.nsa,"bt":this.bt,"qa": this.qa };
-
-    if(condition){
-      this.MessageDialog();
-    }
-
-    // console.log(year3gpa);
-
-  }
-
-  sendY3Data(){
+  sendY3Data() {
     this.sendY2Data();
     this.calculatey3gpa(false);
     this.dt.setY3Data(this.year3values);
   }
 
-  overollgpacalculate(){
+  /* ---------------- Degree ---------------- */
 
-    this.first = JSON.stringify(this.yearone.getRawValue());
-    this.first = JSON.parse(this.first);
+  overollgpacalculate() {
+    const d = this.evaluateAll();
+    const yesNo = (b: boolean) => b ? 'Yes' : 'No';
+    const datum = {
+      gpa: d.gpa,
+      condition1: yesNo(d.meetsGpa),
+      condition2: yesNo(d.meetsCredits),
+      condition3: yesNo(d.enPassed),
+      condition4: yesNo(!d.noBelowD),
+      checks: d.checks,
+      missing: d.levels.reduce((n, l) => n + l.missing.length, 0),
+      intake: this.def.label,
+      graduated: d.graduated,
+      prmsg: d.graduated
+        ? 'Congratulations! You meet the requirements for the BIT degree.'
+        : "Not yet. You don't meet all the degree requirements.",
+    };
 
-    this.second = JSON.stringify(this.yeartwo.getRawValue());
-    this.second = JSON.parse(this.second);
-
-    this.third = JSON.stringify(this.yearthree.getRawValue());
-    this.third = JSON.parse(this.third);
-
-    this.is = this.getValue(this.first.is);
-    this.ip = this.getValue(this.first.ip);
-    this.cs = this.getValue(this.first.cs);
-    this.pc = this.getValue(this.first.pc);
-
-    this.web1 = this.getValue(this.first.web1);
-    this.se = this.getValue(this.first.se);
-    this.ds = this.getValue(this.first.ds);
-    this.mc = this.getValue(this.first.mc);
-
-    this.dms = this.getValue(this.second.dms);
-    this.dsa = this.getValue(this.second.dsa);
-    this.ooad = this.getValue(this.second.ooad);
-    this.web2 = this.getValue(this.second.web2);
-
-    this.uxd = this.getValue(this.second.uxd);
-    this.ead = this.getValue(this.second.ead);
-    this.asd = this.getValue(this.second.asd);
-    this.cn = this.getValue(this.second.cn);
-    this.pm = this.getValue(this.second.pm);
-
-    this.fme = this.getValue(this.third.fme);
-    this.pp = this.getValue(this.third.pp);
-    this.sdp = this.getValue(this.third.sdp);
-    this.pis = this.getValue(this.third.pis);
-    this.sana = this.getValue(this.third.sana);
-
-    this.etit = this.getValue(this.third.etit);
-    this.mad = this.getValue(this.third.mad);
-    this.nsa = this.getValue(this.third.nsa);
-    this.bt = this.getValue(this.third.bt);
-    this.qa = this.getValue(this.third.qa);
-
-    let allsub = (this.ooad*3 + this.dsa*3 + this.dms*3 + this.web2*4 + this.uxd*3 + this.ead*4 + this.pm*3 + this.asd*4 + this.cn*3 + this.ooad*3 + this.dsa*3 + this.dms*3 + this.web2*4 + this.uxd*3 + this.ead*4 + this.pm*3 + this.asd*4 + this.cn*3 +
-                          this.sdp*8 + this.pp*3 + this.pis*3 + this.sana*3 + this.qa*3 + this.mad*4 + this.nsa*3 + this.bt*3)/90;
-
-    let overallgpa = Math.round(allsub*100)/100;
-
-    //Condition1 - Cumulative Gpa should be over 2.00
-    let c1 = true;
-    let condition1 = "yes";
-    if(overallgpa >= 2.00){
-      c1=true;
-      condition1 = "yes";
-    }else{
-      c1=false;
-      condition1 = "No";
-    }
-
-    //Condition 2- minimum 90 credits
-
-
-    let creditcount = 0;
-    let minimumcreditcount = "";
-
-    if(this.is>=2){
-      creditcount += 4;
-    }
-    if(this.pc>=2){
-      creditcount += 3;
-    }
-    if(this.cs>=2){
-      creditcount += 4;
-    }
-    if(this.ip>=2){
-      creditcount += 4;
-    }
-
-    if(this.mc>=2){
-      creditcount += 3;
-    }
-    if(this.se>=2){
-      creditcount += 4;
-    }
-    if(this.web1>=2){
-      creditcount += 4;
-    }
-    if(this.ds>=2){
-      creditcount += 4;
-    }
-
-    if(this.dsa>=2){
-      creditcount += 3;
-    }
-    if(this.dms>=2){
-      creditcount += 3;
-    }
-    if(this.web2>=2){
-      creditcount += 4;
-    }
-    if(this.ooad>=2){
-      creditcount += 3;
-    }
-
-    if(this.asd>=2){
-      creditcount += 4;
-    }
-    if(this.ead>=2){
-      creditcount += 4;
-    }
-    if(this.cn>=2){
-      creditcount += 3;
-    }
-    if(this.pm>=2){
-      creditcount += 3;
-    }
-    if(this.uxd>=2){
-      creditcount += 3;
-    }
-
-    if(this.pp>=2){
-      creditcount += 3;
-    }
-    if(this.sdp>=2){
-      creditcount += 8;
-    }
-    if(this.pis>=2){
-      creditcount += 3;
-    }
-    if(this.sana>=2){
-      creditcount += 3;
-    }
-
-    if(this.mad>=2){
-      creditcount += 4;
-    }
-    if(this.nsa>=2){
-      creditcount += 3;
-    }
-    if(this.bt>=2){
-      creditcount += 3;
-    }
-    if(this.qa>=2){
-      creditcount += 3;
-    }
-
-    //console.log("Credit Count :- "+creditcount);
-    let c2 = true;
-    if(creditcount == 90){
-      minimumcreditcount = "Yes";
-      c2 = true;
-    }else{
-      minimumcreditcount = "No";
-      c2=false;
-    }
-
-
-    //Condition 3 - All En Subjects Should be passed
-
-    var allenspassed = "";
-    let c3 = true;
-
-    if(this.third.fme === 'Pass' && this.third.etit === 'Pass' && this.second.csk2 === 'Pass' && this.first.im === 'Pass' && this.first.csk1 === 'Pass'){
-      allenspassed = "Yes";
-      c3 = true;
-    }else{
-      allenspassed = "No";
-      c3 = false;
-    }
-
-    let condition4 = "Yes";
-    if(creditcount != 90){
-      condition4 = "Yes";
-    }else{
-      condition4 = "No";
-    }
-
-    let prmsg = ""
-    if(c1 && c2 && c3){
-      prmsg = "Congradulation You Are Graduated!"
-    }else{
-      prmsg = "Better Luck Next Time!"
-    }
-
-
-    const datum = {"gpa":overallgpa,"condition1":condition1,
-      "condition2":minimumcreditcount,"condition3":allenspassed,"condition4":condition4,"prmsg":prmsg };
-
-    const stsmsg = this.dg.open(FinalmessageComponent, {
-      width: '500px',
-      data: {heading: "Degree Status", message: datum}
+    this.dg.open(FinalmessageComponent, {
+      width: '560px',
+      maxWidth: '95vw',
+      data: {heading: 'Degree Status', message: datum}
     });
-
-
-
-    //console.log(c2 + " - " + creditcount);
-    //console.log(overallgpa);
   }
 
+  /* ---------------- Helpers ---------------- */
+
+  private buildGroup(levelNo: LevelNo): FormGroup {
+    const controls: { [k: string]: FormControl } = {};
+    allKeysForLevel(levelNo as 1 | 2 | 3).forEach(k => controls[k] = new FormControl(null));
+    return this.fb.group(controls);
+  }
+
+  private gradesOf(levelNo: LevelNo): Grades {
+    return this.group(levelNo).getRawValue();
+  }
+
+  private pointsOf(levelNo: LevelNo): { [k: string]: number | null } {
+    const g = this.gradesOf(levelNo);
+    const out: { [k: string]: number | null } = {};
+    this.level(levelNo).courses.filter(c => c.kind !== 'en').forEach(c => {
+      const p = gradePoint(g[c.key]);
+      out[c.key] = typeof p === 'number' ? p : null;
+    });
+    return out;
+  }
+
+  private evaluate(levelNo: LevelNo): LevelResult {
+    return evaluateLevel(this.intake(), levelNo as 1 | 2 | 3, this.gradesOf(levelNo));
+  }
+
+  private evaluateAll(): DegreeResult {
+    return evaluateDegree(this.intake(), [this.gradesOf(1), this.gradesOf(2), this.gradesOf(3)]);
+  }
+
+  private levelMessage(r: LevelResult) {
+    const next = r.level < 3 ? `Level ${ROMAN[r.level]}` : '';
+    const nextYear = `Year ${r.level + 1} (${next})`;
+    const toEnter = r.missing.length === 1 ? 'the 1 missing course' : `the ${r.missing.length} missing courses`;
+    let prmsg: string;
+    if (r.level < 3) {
+      prmsg = r.canProgress
+        ? `Congratulations! You can move on to ${nextYear}.`
+        : r.complete ? `You can't move on to ${nextYear} yet. Check the conditions marked with a cross.`
+          : `You can't move on to ${nextYear} yet. Enter grades for ${toEnter} first.`;
+    } else {
+      prmsg = r.canProgress
+        ? 'Congratulations! You have completed Year 3 (Level III).'
+        : r.complete ? 'Not yet. You need to retake the courses marked below.'
+          : `Not yet. Enter grades for ${toEnter} first.`;
+    }
+    // Name the courses, not only their codes, and show the grade that caused the problem.
+    const g = this.gradesOf(r.level as LevelNo);
+    const named = (cs: Course[]) => cs.map(c => `${c.name} (${g[c.key] ?? 'no grade'})`).join(', ');
+    const checks = r.checks.map(c => {
+      if (c.label === 'No grade below D' && r.belowD.length) {
+        return {...c, detail: named(r.belowD)};
+      }
+      if (c.label.startsWith('PASS in every enhancement') && r.enNotPassed.length) {
+        return {...c, detail: named(r.enNotPassed)};
+      }
+      return c;
+    });
+    return {
+      heading: `Year ${r.level} (Level ${ROMAN[r.level - 1]}) GPA Status`,
+      gpa: r.gpa,
+      condition1: r.meetsGpa ? 'Yes' : 'No',
+      condition2: r.meetsCCredits ? 'Yes' : 'No',
+      condition3: r.enPassed ? 'Yes' : 'NO',
+      condition4: r.belowD.length ? 'Yes' : 'No',
+      checks,
+      missing: r.missing,
+      ok: r.canProgress,
+      intake: this.def.label,
+      prmsg,
+    };
+  }
+
+  private onGradesChanged() {
+    this.refreshLive();
+    this.save();
+  }
+
+  private refreshLive() {
+    this.live.set([1, 2, 3].map(l => this.evaluate(l as LevelNo)));
+    this.liveDegree.set(this.evaluateAll());
+  }
+
+  private save() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        intake: this.intake(),
+        levels: [this.gradesOf(1), this.gradesOf(2), this.gradesOf(3)],
+      }));
+    } catch (e) {
+      // Storage can be blocked (private mode); the calculator still works without it.
+    }
+  }
+
+  private restore() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        return;
+      }
+      const saved = JSON.parse(raw);
+      if (INTAKES.some(i => i.intake === saved.intake)) {
+        this.intake.set(saved.intake);
+        this.intakeControl.setValue(saved.intake, {emitEvent: false});
+        this.dt.setIntake(saved.intake);
+      }
+      (saved.levels ?? []).forEach((g: Grades, i: number) => this.group((i + 1) as LevelNo).patchValue(g ?? {}, {emitEvent: false}));
+      this.refreshLive();
+    } catch (e) {
+      // Ignore unreadable saved data.
+    }
+  }
 }

@@ -1,258 +1,144 @@
 import {Injectable} from '@angular/core';
+import {DEFAULT_INTAKE, Intake, intakeDef} from '../gpa/handbook';
+import {cumulativeGpa, evaluateLevel, Grades, Points, round2, semesterGpa, toPoints} from '../gpa/gpa-engine';
 
+/** Where the calculator saves the grades on this device. */
+export const GRADES_STORAGE_KEY = 'bit-gpa-calculator.v2';
+
+/**
+ * Hands the calculator results to the progression page.
+ * setY1Data / setY2Data / setY3Data take the level's GPA, its credit count (credits at C or above)
+ * and the grade point of every course (null = no grade).
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class DatatransferService {
 
-  is !: any;
-  ip !: any;
-  pc !: any;
-  cs !: any;
-  mc !: any;
-  ds !: any;
-  se !: any;
-  web1 !: any;
+  intake: Intake = DEFAULT_INTAKE;
 
-  dsa !: any;
-  dms !: any;
-  web2 !: any;
-  ooad !: any;
-  asd !: any;
-  uxd !: any;
-  ead !: any;
-  cn !: any;
-  pm!: any;
-
-  fme !: any;
-  pp !: any;
-  sdp !: any;
-  pis !: any;
-  sana!: any;
-  etit !: any;
-  mad !: any;
-  nsa !: any;
-  bt !: any;
-  qa!: any;
-
-
-
-  Year1data: any;
-  Year2data: any;
-  Year3data: any;
+  /** Grade points per level (index 0 = Level I). */
+  levelPoints: Points[] = [{}, {}, {}];
+  /** Which levels have been sent. */
+  levelSet: boolean[] = [false, false, false];
+  levelGpa: number[] = [0, 0, 0];
+  levelCredits: number[] = [0, 0, 0];
 
   /*============= Overall Data ==============*/
 
-  overallgpa: string = "";
-  semester: string = "";
-  creditcount: string = "";
-  year: string = "";
+  overallgpa: string = '';
+  semester: string = '';
+  creditcount: string = '';
+  year: string = '';
 
+  /*============= Semester GPAs ==============*/
 
-  /*============= Year 1 Data ==============*/
+  year1gpa: string = '';
+  sem1gpa = 0;
+  sem2gpa = 0;
 
-  year1gpa: string = "";
-  sem1gpa: number = 0;
-  sem2gpa: number = 0;
+  year2gpa: string = '';
+  sem3gpa = 0;
+  sem4gpa = 0;
 
-  /*============= Year 2 Data ==============*/
+  year3gpa: string = '';
+  sem5gpa = 0;
+  sem6gpa = 0;
 
-  year2gpa: string = "";
-  sem3gpa: number = 0;
-  sem4gpa: number = 0;
+  setIntake(intake: Intake) {
+    if (intake !== this.intake) {
+      this.intake = intake;
+      this.reset();
+    }
+  }
 
-  /*============= Year 2 Data ==============*/
-
-  year3gpa: string = "";
-  sem5gpa: number = 0;
-  sem6gpa: number = 0;
-
-  y1data: string = "";
-
-  constructor() {
+  reset() {
+    this.levelPoints = [{}, {}, {}];
+    this.levelSet = [false, false, false];
+    this.levelGpa = [0, 0, 0];
+    this.levelCredits = [0, 0, 0];
+    this.overallgpa = this.semester = this.creditcount = this.year = '';
+    this.year1gpa = this.year2gpa = this.year3gpa = '';
+    this.sem1gpa = this.sem2gpa = this.sem3gpa = this.sem4gpa = this.sem5gpa = this.sem6gpa = 0;
   }
 
   setY1Data(datas: any) {
-
-    this.year = "1";
-    this.creditcount = datas.y1credit;
-    this.overallgpa = datas.y1gpa;
-    this.year1gpa = datas.y1gpa;
-
-    this.is = datas.is;
-    this.ip = datas.ip;
-    this.cs = datas.cs;
-    this.pc = datas.pc;
-
-    this.se = datas.se;
-    this.ds = datas.ds;
-    this.mc = datas.mc;
-    this.web1 = datas.web1;
-
-    var sem1 = (this.is * 4 + this.ip * 4 + this.cs * 4 + this.pc * 3) / 30;
-    this.sem1gpa = Math.round(sem1 * 100) / 100;
-
-    var sem2 = (this.ds * 4 + this.web1 * 4 + this.mc * 3 + this.se * 4) / 30;
-    this.sem2gpa = Math.round(sem2 * 100) / 100;
-
-    if (datas.se == 0 && datas.ds == 0 && datas.mc == 0 && datas.web1 == 0) {
-      this.semester = "1";
-    } else {
-      this.semester = "2";
-    }
-
-
-  }
-
-  getY1Data() {
-    this.Year1data = {
-      "year": this.year,
-      "creditcount": this.creditcount,
-      "currentgpa": this.overallgpa,
-      "semester": this.semester,
-      "year1gpa": this.year1gpa,
-      "sem1gpa": this.sem1gpa,
-      "sem2gpa": this.sem2gpa,
-      "is": this.is,
-      "ip": this.ip,
-      "cs": this.cs,
-      "pc": this.pc,
-      "se": this.se,
-      "ds": this.ds,
-      "web1": this.web1,
-      "mc": this.mc
-    };
-
-    let values = JSON.stringify(this.Year1data);
-
-    return values;
+    this.reset();
+    this.store(1, datas, datas.y1gpa, datas.y1credit);
+    this.year1gpa = String(datas.y1gpa);
+    this.sem1gpa = semesterGpa(this.intake, 1, this.levelPoints[0]);
+    this.sem2gpa = semesterGpa(this.intake, 2, this.levelPoints[0]);
   }
 
   setY2Data(datas: any) {
-
-
-    this.year = "2";
-    this.creditcount = datas.y2credit + Number(this.creditcount);
-    this.year2gpa = datas.y2gpa;
-    let gpa = ((datas.y2gpa + Number(this.year1gpa)) / 2);
-    this.overallgpa = ((Math.round(gpa*100))/100).toString();
-
-
-    this.dsa = datas.dsa;
-    this.dms = datas.dms;
-    this.ooad = datas.ooad;
-    this.web2 = datas.web2;
-
-    this.ead = datas.ead;
-    this.asd = datas.asd;
-    this.pm = datas.pm;
-    this.uxd = datas.uxd;
-    this.cn = datas.cn;
-
-    var sem3 = (this.dsa * 3 + this.dms * 3 + this.web2 * 4 + this.ooad * 3) / 30;
-    this.sem3gpa = Math.round(sem3 * 100) / 100;
-
-    var sem4 = (this.pm * 3 + this.cn * 3 + this.asd * 4 + this.uxd * 3 + this.ead * 4) / 30;
-    this.sem4gpa = Math.round(sem4 * 100) / 100;
-
-    if (datas.asd == 0 && datas.ead == 0 && datas.cn == 0 && datas.uxd == 0 && datas.pm == 0) {
-      this.semester = "3";
-    } else {
-      this.semester = "4";
-    }
-
-  }
-
-  getY2Data() {
-    this.Year2data = {
-      "year": this.year,
-      "creditcount": this.creditcount,
-      "currentgpa": this.overallgpa,
-      "semester": this.semester,
-      "year2gpa": this.year2gpa,
-      "sem3gpa": this.sem3gpa,
-      "sem4gpa": this.sem4gpa,
-      "dsa": this.dsa,
-      "dms": this.dms,
-      "ooad": this.ooad,
-      "web2": this.web2,
-      "ead": this.ead,
-      "asd": this.asd,
-      "pm": this.pm,
-      "uxd": this.uxd,
-      "cn": this.cn
-    };
-
-    let values = JSON.stringify(this.Year2data);
-
-    return values;
+    this.store(2, datas, datas.y2gpa, datas.y2credit);
+    this.year2gpa = String(datas.y2gpa);
+    this.sem3gpa = semesterGpa(this.intake, 3, this.levelPoints[1]);
+    this.sem4gpa = semesterGpa(this.intake, 4, this.levelPoints[1]);
   }
 
   setY3Data(datas: any) {
-
-
-    this.year = "3";
-    this.creditcount = datas.y3credit + Number(this.creditcount);
-    this.year3gpa = datas.y3gpa;
-    let gpa = ((Number(this.year1gpa) + Number(this.year2gpa) + datas.y3gpa) / 3);
-    this.overallgpa = ((Math.round(gpa*100))/100).toString();
-
-    this.pp = datas.pp;
-    this.sdp = datas.sdp;
-    this.pis = datas.pis;
-    this.sana = datas.sana;
-
-    this.mad = datas.mad;
-    this.nsa = datas.nsa;
-    this.bt = datas.bt;
-    this.qa = datas.qa;
-
-
-    var sem5 = (this.pp * 3 + this.sdp * 8 + this.pis * 3 + this.sana * 3) / 30;
-    this.sem5gpa = Math.round(sem5 * 100) / 100;
-
-    var sem6 = (this.mad * 4 + this.nsa * 3 + this.bt * 3 + this.qa * 3) / 30;
-    this.sem6gpa = Math.round(sem6 * 100) / 100;
-
-    if (datas.mad == 0 && datas.nsa == 0 && datas.bt == 0 && datas.qa == 0 && datas.mc2 == 0) {
-      this.semester = "5";
-    } else {
-      this.semester = "6";
-    }
-
+    this.store(3, datas, datas.y3gpa, datas.y3credit);
+    this.year3gpa = String(datas.y3gpa);
+    this.sem5gpa = semesterGpa(this.intake, 5, this.levelPoints[2]);
+    this.sem6gpa = semesterGpa(this.intake, 6, this.levelPoints[2]);
   }
 
-  getY3Data() {
-    this.Year3data = {
-      "year": this.year,
-      "creditcount": this.creditcount,
-      "currentgpa": this.overallgpa,
-      "semester": this.semester,
-      "year3gpa": this.year3gpa,
-      "sem5gpa": this.sem5gpa,
-      "sem6gpa": this.sem6gpa,
-      "pp": this.pp,
-      "sdp": this.sdp,
-      "pis": this.pis,
-      "sana": this.sana,
-      "mad": this.mad,
-      "nsa": this.nsa,
-      "bt": this.bt,
-      "qa": this.qa
-    };
+  /**
+   * Rebuilds the results from the grades saved on this device, so the progress report also works
+   * after a reload or when opened directly. Sends every year up to the last one with a grade.
+   * Returns false when nothing is saved.
+   */
+  loadSaved(): boolean {
+    let saved: { intake?: string; levels?: Grades[] } | null = null;
+    try {
+      saved = JSON.parse(localStorage.getItem(GRADES_STORAGE_KEY) ?? 'null');
+    } catch (e) {
+      return false;
+    }
+    if (!saved) {
+      return false;
+    }
+    this.intake = intakeDef(saved.intake ?? DEFAULT_INTAKE).intake;
+    this.reset();
+    const levels = (saved.levels ?? []).slice(0, 3);
+    const entered = (g?: Grades) => !!g && Object.values(g).some(v => v !== null && v !== undefined && v !== 'null');
+    let last = -1;
+    levels.forEach((g, i) => { if (entered(g)) { last = i; } });
+    const setters = [(d: any) => this.setY1Data(d), (d: any) => this.setY2Data(d), (d: any) => this.setY3Data(d)];
+    for (let i = 0; i <= last; i++) {
+      const g = levels[i] ?? {};
+      const r = evaluateLevel(this.intake, (i + 1) as 1 | 2 | 3, g);
+      setters[i]({...toPoints(g), [`y${i + 1}gpa`]: r.gpa, [`y${i + 1}credit`]: r.cCredits});
+    }
+    return last >= 0;
+  }
 
-    let values = JSON.stringify(this.Year3data);
+  /** Semester GPAs 1..6 (0 when that level has not been sent). */
+  semesterGpas(): number[] {
+    return [this.sem1gpa, this.sem2gpa, this.sem3gpa, this.sem4gpa, this.sem5gpa, this.sem6gpa];
+  }
 
-    return values;
+  private store(levelNo: 1 | 2 | 3, datas: any, gpa: number, credits: number) {
+    const level = intakeDef(this.intake).levels[levelNo - 1];
+    const p: Points = {};
+    level.courses.filter(c => c.kind !== 'en').forEach(c => {
+      const v = datas[c.key];
+      p[c.key] = typeof v === 'number' ? v : null;
+    });
+    const i = levelNo - 1;
+    this.levelPoints[i] = p;
+    this.levelSet[i] = true;
+    this.levelGpa[i] = round2(Number(gpa) || 0);
+    this.levelCredits[i] = Number(credits) || 0;
+
+    this.year = String(levelNo);
+    this.creditcount = String(this.levelCredits.slice(0, levelNo).reduce((s, c) => s + c, 0));
+    this.overallgpa = String(cumulativeGpa(this.intake, this.levelPoints.slice(0, levelNo)).gpa);
+
+    // Current semester: the second semester of the level once any course taught only there has a grade.
+    const [first, second] = level.semesters;
+    const secondStarted = level.courses.some(c => c.kind !== 'en' && !c.split && c.semester === second && Number(p[c.key]) > 0);
+    this.semester = String(secondStarted ? second : first);
   }
 }
-
-
-
-
-
-
-
-
-
-

@@ -1,367 +1,133 @@
-<article class="back">
-
-    <mat-grid-list [cols]="breakpoint" rowHeight="100rem" class="background" (window:resize)="onResize($event)">
-      <mat-grid-tile-header>
-
-      </mat-grid-tile-header>
-      <mat-grid-tile>
-
-        <mat-card class="year1">
-          <mat-card-header>
-            <mat-card-title>Year 1</mat-card-title>
-          </mat-card-header>
-
-          <mat-card-content>
-            <form  class="forms" [formGroup]="yearone" >
-              <h3>Semester 1</h3>
-
-              <mat-label>Information Systems</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="is" [(value)]="selected">
-                  <mat-option value="null">Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Personal Computing With FOSS</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="pc">
-                  <mat-option value="null">Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Computer Systems</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="cs">
-                  <mat-option value="null">Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Introduction to Programming</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="ip">
-                  <mat-option value="null">Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Introduction to Mathematics</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="im">
-                  <mat-option value="null">Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of ens" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <h3>Semester 2</h3>
-
-              <mat-label>Web Development I</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="web1">
-                  <mat-option value="null">Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Fundementals of Software Engineering</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="se">
-                  <mat-option value="null">Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Database Systems</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="ds">
-                  <mat-option value="null">Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Mathematics For Computing</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="mc">
-                  <mat-option value="null">Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Communication Skills I</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="csk1">
-                  <mat-option value="null">Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of ens" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <button class="btns" (click)="calculatey1gpa(true)" mat-fab extended color="primary">
-                <mat-icon>table_view</mat-icon>Calculate</button>
-
-              <button class="progbtn" (click)="sendY1Data()"  routerLink="../progression" mat-fab extended color="primary">
-                <mat-icon>leaderboard</mat-icon>Progress Report<span class="btnbadge">Beta</span></button>
-
-            </form>
-
-          </mat-card-content>
-        </mat-card>
-
-
-      </mat-grid-tile>
-      <span class="spacer"></span>
-      <mat-grid-tile >
-
-        <mat-card class="year2">
-          <mat-card-header>
-            <mat-card-title>Year 2</mat-card-title>
-          </mat-card-header>
-
-          <mat-card-content>
-
-            <form  class="forms" [formGroup]="yeartwo" >
-              <h3>Semester 3</h3>
-
-              <mat-label>Data Strctures and Algorithems</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="dsa">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>WEB Development II</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="web2">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Data Management System</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="dms">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Object Oriented Analysis And Design</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="ooad">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Communication Skills II</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="csk2">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of ens" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <h3>Semester 4</h3>
-
-              <mat-label>Enterprise Application Development</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="ead">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>User Experience Development</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="uxd">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Computer Networks</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="cn">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Agile System Development</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="asd">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Project Management</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="pm">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <button class="btns" mat-fab extended color="primary" (click)="calculatey2gpa(true)">
-                <mat-icon>table_view</mat-icon>Calculate</button>
-
-              <button class="progbtn" (click)="sendY2Data()" routerLink="../progression" mat-fab extended color="primary">
-                <mat-icon>leaderboard</mat-icon>Progress Report<span class="btnbadge">Beta</span></button>
-
-            </form>
-
-          </mat-card-content>
-        </mat-card>
-
-      </mat-grid-tile>
-      <span class="spacer"></span>
-      <mat-grid-tile>
-
-        <mat-card class="year3">
-          <mat-card-header>
-            <mat-card-title>Year 3</mat-card-title>
-          </mat-card-header>
-
-          <mat-card-content>
-
-            <form  class="forms" [formGroup]="yearthree">
-              <h3>Semester 5</h3>
-
-              <mat-label>Fundamentals of Management & Entrepreneurship</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="fme">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of ens" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Professional Practice</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="pp">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Principles of Information Security</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="pis">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Systems & Network Administration</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="sana">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-<!--              <mat-label>Mathematics for Computing II</mat-label>-->
-<!--              <mat-form-field class="inputs" appearance="outline">-->
-<!--                <mat-select formControlName="mc2">-->
-<!--                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>-->
-<!--                </mat-select>-->
-<!--              </mat-form-field><br>-->
-
-              <h3>Semester 6</h3>
-
-              <mat-label>Emerging Topics in Information Technology</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="etit">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of ens" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Software Development Project</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="sdp">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Software Quality Assurance</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="qa">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Mobile Application Development</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="mad">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Network Security and Audit</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="nsa">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <mat-label>Mathematics for Computing II or e-Business Technologies</mat-label>
-              <mat-form-field class="inputs" appearance="outline">
-                <mat-select formControlName="bt">
-                  <mat-option value=null>Not Selected</mat-option>
-                  <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>
-                </mat-select>
-              </mat-form-field><br>
-
-              <button class="btns" mat-fab extended color="primary" (click)="calculatey3gpa(true)">
-                <mat-icon>table_view</mat-icon>Calculate</button>
-
-              <button class="progbtn" (click)="sendY3Data()" routerLink="../progression" mat-fab extended color="primary">
-                <mat-icon>leaderboard</mat-icon>Progress Report<span class="btnbadge">Beta</span></button>
-
-            </form>
-
-          </mat-card-content>
-
-        </mat-card>
-
-      </mat-grid-tile>
-
-    </mat-grid-list>
-<span class="btnall">
-  <button class="btnoverall" mat-fab extended color="primary" (click)="overollgpacalculate()">
-    <mat-icon>table_view</mat-icon>Calculate Overall GPA</button>
-</span>
-
-<!--  <div class="notice">-->
-<!--    <span>-->
-<!--      Please note that this GPA Calculation is based on the BIT Handbook.And this GPA Calculator And Progessive Review-->
-<!--      is provided as a value added support for BIT students.The UCSC decision will be the final decision on your GPA level-->
-<!--      and you should stick to their results.-->
-<!--    </span>-->
-<!--  </div>-->
-
+<article class="calc">
+
+  <!-- Intake year and live summary -->
+  <section class="toolbar-card">
+    <div class="intake">
+      <div class="intake-head">
+        <h2>Your intake year</h2>
+        <p>Credits and progression rules follow the BIT handbook for the year you enrolled.</p>
+      </div>
+      <mat-button-toggle-group class="intake-toggle" [formControl]="intakeControl" [hideSingleSelectionIndicator]="true" aria-label="Intake year">
+        @for (i of intakes; track i.intake) {
+          <mat-button-toggle [value]="i.intake">{{ i.label.replace(' intake', '') }}</mat-button-toggle>
+        }
+      </mat-button-toggle-group>
+      <details class="howto" [open]="wide">
+        <summary>How this works</summary>
+        <ul class="notes">
+          <li>Pick a grade for each course you have finished. Leave the rest blank: blank courses are not counted in
+            your GPA, so you can check your GPA part way through a level.</li>
+          <li>Your grades are saved on this device.</li>
+          @for (n of def.notes; track n) {
+            <li>{{ n }}</li>
+          }
+        </ul>
+      </details>
+    </div>
+
+    <div class="summary" aria-live="polite">
+      <div class="stat">
+        <span class="stat-label">Cumulative GPA</span>
+        <span class="stat-value">{{ liveDegree().gpa | number:'1.2-2' }}</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Credits entered</span>
+        <span class="stat-value">{{ liveDegree().totalCredits }}</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Degree</span>
+        <span class="pill" [class.pill-ok]="liveDegree().graduated" [class.pill-wait]="!liveDegree().graduated">
+          {{ liveDegree().graduated ? 'Requirements met' : 'Not yet' }}
+        </span>
+      </div>
+      <div class="summary-actions">
+        <button mat-flat-button color="primary" class="act" (click)="overollgpacalculate()">
+          <mat-icon aria-hidden="true">school</mat-icon> Check degree
+        </button>
+        <button mat-stroked-button class="act" (click)="clearAll()">
+          <mat-icon aria-hidden="true">restart_alt</mat-icon> Clear all
+        </button>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- One card per level -->
+  <section class="levels">
+    @for (lv of [1, 2, 3]; track lv) {
+    @let r = live()[lv - 1];
+    <mat-card class="level">
+      <header class="level-head">
+        <div>
+          <h2>Year {{ lv }}</h2>
+          <span class="level-sub">Level {{ roman[lv - 1] }} · {{ r.requiredCredits }} GPA credits</span>
+        </div>
+        <div class="level-gpa">
+          <span class="level-gpa-value">{{ r.gpa | number:'1.2-2' }}</span>
+          <span class="level-gpa-label">GPA</span>
+        </div>
+      </header>
+
+      <div class="level-status" [class.ok]="r.canProgress">
+        <mat-icon aria-hidden="true">{{ r.canProgress ? 'check_circle' : 'pending' }}</mat-icon>
+        @if (r.canProgress) {
+          <span>{{ lv < 3 ? 'Meets the rules to move to Level ' + roman[lv] : 'Level III requirements met' }}</span>
+        } @else {
+          <span>
+            {{ gradedCount(lv) }} of {{ level(lv).courses.length }} courses entered
+            · {{ r.cCredits }} credits at C or above
+          </span>
+        }
+      </div>
+
+      <form class="forms" [formGroup]="group(lv)">
+        @for (sem of level(lv).semesters; track sem) {
+          <h3 class="sem">Semester {{ sem }}</h3>
+
+          @for (c of coursesIn(lv, sem); track c.key) {
+          <div class="course">
+            <div class="course-info">
+              <span class="course-name">{{ c.name }}</span>
+              <span class="course-meta">{{ c.code }} · {{ creditsLabel(c) }}</span>
+            </div>
+            <mat-form-field class="grade" appearance="outline" subscriptSizing="dynamic">
+              <mat-select [formControlName]="c.key" placeholder="Grade" panelClass="grade-panel"
+                          [aria-label]="c.name + ' grade'" [ngClass]="gradeClass(lv, c.key)">
+                @for (g of (c.kind === 'en' ? ens : grades); track g) {
+                  <mat-option [value]="g">{{ g }}</mat-option>
+                }
+                <mat-option [value]="null" class="clear-option">Clear grade</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          }
+        }
+      </form>
+
+      <div class="level-actions">
+        <button mat-flat-button color="primary" class="act" (click)="calculate(lv)">
+          <mat-icon aria-hidden="true">fact_check</mat-icon> Check Year {{ lv }}
+        </button>
+        <button mat-stroked-button class="act" (click)="sendData(lv)" routerLink="../progression">
+          <mat-icon aria-hidden="true">leaderboard</mat-icon> Progress report
+        </button>
+        <button mat-button class="act act-small" (click)="clearLevel(lv)">Clear</button>
+      </div>
+    </mat-card>
+    }
+  </section>
+
+  <p class="disclaimer">
+    Based on the BIT student handbooks 2022 to 2026. This calculator is a study aid: UCSC's official results are final.
+  </p>
 </article>
-<footer>
-  <h4>© 2023 CODEHELIO, Sri Lanka. All rights reserved.</h4>
-</footer>
 
-<!--        <div  class="sem1">-->
-<!--         <div class="s"  *ngFor="let subject of subjects1">-->
-<!--           <div class="l"><mat-label>{{subject}}</mat-label></div>-->
-<!--         <div>-->
-<!--           <mat-form-field appearance="outline">-->
-<!--             <mat-label>{{subject}}</mat-label>-->
-<!--             <mat-select>-->
-<!--               <mat-option *ngFor="let grade of grades" [value]=grade>{{grade}}</mat-option>-->
-<!--             </mat-select>-->
-<!--           </mat-form-field>-->
-<!--         </div>-->
-<!--         </div>-->
-<!--        </div>-->
+<!-- Phones: keep the running GPA in view while picking grades. -->
+<div class="sticky-gpa" aria-hidden="true">
+  <span>Cumulative GPA <strong>{{ liveDegree().gpa | number:'1.2-2' }}</strong></span>
+  <span>{{ liveDegree().totalCredits }} credits entered</span>
+</div>
+
+<footer>
+  <p>© {{ thisYear }} CODEHELIO, Sri Lanka. All rights reserved.</p>
+</footer>

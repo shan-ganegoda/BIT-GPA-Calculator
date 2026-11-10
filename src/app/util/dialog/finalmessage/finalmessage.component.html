@@ -1,22 +1,33 @@
-<mat-card>
+<mat-card class="dlg">
   <mat-card-title>{{data.heading}}</mat-card-title>
   <mat-card-content>
-    <ng-container>
-      <span>Your Cumulative GPA : </span><span class="result">{{data.message.gpa}}</span>
-      <br>
-      <h3>Progression Condition</h3>
-      <br>
-      <span>A Minimum Cumulative GPA of 2.00 ?: </span> <span class="result">{{data.message.condition1}}</span><br/>
-      <span>A minimum of 90 credits of C grade for GPA courses?: </span> <span class="result">{{data.message.condition2}}</span><br/>
-      <span>A “PASS” grade for all EN courses? : </span> <span class="result">{{data.message.condition3}}</span><br/>
-      <span>Has obtained a grade below D grade?: </span> <span class="result">{{data.message.condition4}}</span><br/>
-      <br>
-      <span>Degree Progression : </span> <span class="result">{{data.message.prmsg}}</span><br/>
+    <div class="gpa-row">
+      <span>Cumulative GPA</span>
+      <span class="gpa">{{data.message.gpa | number:'1.2-2'}}</span>
+    </div>
+    <p class="intake">Rules for the {{data.message.intake}}</p>
 
-    </ng-container>
-    <!--    <span>{{data.message}}</span>-->
+    <h3>Degree requirements</h3>
+    <ul class="checks">
+      @for (c of data.message.checks; track c.label) {
+        <li [class.ok]="c.ok">
+          <mat-icon aria-hidden="true">{{ c.ok ? 'check_circle' : 'cancel' }}</mat-icon>
+          <span class="visually-hidden">{{ c.ok ? 'Met:' : 'Not met:' }}</span>
+          <span class="label">{{c.label}}</span>
+          <span class="detail">{{c.detail}}</span>
+        </li>
+      }
+    </ul>
+
+    @if (data.message.missing > 0) {
+      <p class="missing">
+        {{data.message.missing}} course{{data.message.missing === 1 ? ' still has' : 's still have'}} no grade.
+      </p>
+    }
+
+    <p class="verdict" [class.ok]="data.message.graduated">{{data.message.prmsg}}</p>
   </mat-card-content>
-  <mat-dialog-actions>
-    <button mat-raised-button [mat-dialog-close]="true"> OK</button>
+  <mat-dialog-actions align="end">
+    <button mat-flat-button color="primary" [mat-dialog-close]="true">OK</button>
   </mat-dialog-actions>
 </mat-card>

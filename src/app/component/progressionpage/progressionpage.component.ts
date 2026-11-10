@@ -1,594 +1,272 @@
-import {Component, OnInit} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {DecimalPipe} from '@angular/common';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import Chart from 'chart.js/auto';
-import {scales} from "chart.js";
+import type {Plugin} from 'chart.js';
 import {DatatransferService} from "../../Services/datatransfer.service";
+import {Course, GRADE_POINTS, intakeDef} from "../../gpa/handbook";
+import {countedCourses, Points} from "../../gpa/gpa-engine";
+
+/** One bar on a chart. value null = no grade yet (the bar is left out, not drawn as a fail). */
+export interface Bar {
+  label: string;
+  value: number;
+  /** Text drawn above the bar: a grade letter or a GPA. */
+  tag: string;
+  /** Year or semester still has courses without a grade. */
+  partial?: boolean;
+  note?: string;
+}
+
+export interface LevelChart {
+  level: number;
+  title: string;
+  bars: Bar[];
+  notEntered: string[];
+}
+
+const ROMAN = ['I', 'II', 'III'];
+/** Colour-blind-safe status colours on a white card (checked with the dataviz palette validator). */
+export const GOOD = '#2563c9';
+export const WARN = '#b87400';
+export const BAD = '#b3261e';
+const INK = '#14213d';
+const MUTED = '#5b6b82';
+const GRID = '#e6ecf4';
+
+/** Grade letter for a grade point (A and A+ are both 4.0, shown as A). */
+export function letterFor(points: number): string {
+  if (points >= 4) {
+    return 'A';
+  }
+  return Object.keys(GRADE_POINTS).find(g => GRADE_POINTS[g] === points) ?? points.toFixed(1);
+}
+
+export function colourFor(points: number): string {
+  return points >= 2 ? GOOD : points >= 1 ? WARN : BAD;
+}
+
+/** Draws a dashed "needed to progress" line (explained in the chart caption) and the value tags above each bar. */
+const decorations: Plugin<'bar'> = {
+  id: 'gpaDecorations',
+  afterDatasetsDraw(chart, _args, opts: any) {
+    const {ctx, chartArea, scales} = chart;
+    const meta = chart.getDatasetMeta(0);
+    const tags: string[] = opts?.tags ?? [];
+    ctx.save();
+    ctx.font = '600 12px Roboto, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = INK;
+    meta.data.forEach((bar: any, i: number) => {
+      if (tags[i]) {
+        ctx.fillText(tags[i], bar.x, bar.y - 6);
+      }
+    });
+    if (typeof opts?.passLine === 'number') {
+      const y = scales['y'].getPixelForValue(opts.passLine);
+      ctx.strokeStyle = INK;
+      ctx.setLineDash([6, 4]);
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      ctx.moveTo(chartArea.left, y);
+      ctx.lineTo(chartArea.right, y);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    ctx.restore();
+  },
+};
 
 @Component({
+  imports: [RouterLink, MatButtonModule, MatIconModule, DecimalPipe],
   selector: 'app-progressionpage',
   templateUrl: './progressionpage.component.html',
-  styleUrls: ['./progressionpage.component.css']
+  styleUrl: './progressionpage.component.css'
 })
-export class ProgressionpageComponent implements OnInit {
+export class ProgressionpageComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  logo: string = './assets/logo.jpg'
-  breakpoint: number = 0;
-  breakpoint2: number = 0;
-  breakpoint3: number = 0;
+  @ViewChild('yearCanvas') yearCanvas?: ElementRef<HTMLCanvasElement>;
+  @ViewChild('semCanvas') semCanvas?: ElementRef<HTMLCanvasElement>;
+  @ViewChild('level1Canvas') level1Canvas?: ElementRef<HTMLCanvasElement>;
+  @ViewChild('level2Canvas') level2Canvas?: ElementRef<HTMLCanvasElement>;
+  @ViewChild('level3Canvas') level3Canvas?: ElementRef<HTMLCanvasElement>;
 
+  readonly thisYear = new Date().getFullYear();
+  readonly good = GOOD;
+  readonly warn = WARN;
+  readonly bad = BAD;
 
-  is = 0;  ip = 0;  cs = 0;  pc = 0;
-  se = 0;  ds = 0;  web1 = 0;  mc = 0;
+  hasData = false;
+  intakeLabel = '';
+  passGpa = 2;
+  year = '0';
+  semester = '0';
+  credit = '0';
+  gpalevel = '0';
+  /** Some year shown still has courses without a grade. */
+  partial = false;
 
-  dsa = 0;  dms = 0;  ooad = 0;  web2 = 0;
-  ead = 0;  asd = 0;  pm = 0;  uxd = 0;  cn = 0;
+  yearBars: Bar[] = [];
+  semBars: Bar[] = [];
+  levelCharts: LevelChart[] = [];
 
-  pp =0;  sdp =0;  pis =0;  sana=0;
-  mad =0;  nsa =0;  bt =0;  qa=0;
-
-  public yearchart: any;
-  public semchart: any;
-  public sem1creditchart: any;
-
-  year1sub = ["IS", "IP", "CS", "PC", "SE", "DS", "WEB-1", "MC"];
-  year2sub = ["DSA", "DMS", "OOAD", "WEB-2", "EAD", "ASD", "UXD", "PM", "CN"];
-  year3sub = ["PP", "SDP", "PIS", "SANA", "MAD", "NSA", "BT or MC2","QA"];
-
-
-  /*======== Global Values  ==========*/
-
-  year: string = '0';
-  semester: string = '0';
-  credit: string = '0';
-  gpalevel: number = 0;
-  postyeartext:string ="";
-
-  /*======== Overall Charts ==========*/
-
-  overallsemdata: number[] = [];
-  overallyeardata: string[] = [];
-
-  /*======== Data Collection ==========*/
-
-  year1Data: any;
-  year2Data: any;
-  year3Data: any;
-
-  //Year 1 Data
-
-  year1gpa: string = "null";
-  sem1gpa = 0;
-  sem2gpa = 0;
-  year1results: number[] = [];
-
-//Year 2 Data
-  year2gpa: string = "null";
-  sem3gpa = 0;
-  sem4gpa = 0
-  year2results: number[] = [];
-
-
-//Year 3 Data
-  year3results: number[] = [];
-  year3gpa: string = "null";
-  sem5gpa = 0;
-  sem6gpa = 0
-
+  private charts: Chart[] = [];
 
   constructor(private dt: DatatransferService) {
   }
 
   ngOnInit() {
-    this.breakpoint = (window.innerWidth <= 768) ? 1 : 4;
-    this.breakpoint2 = (window.innerWidth <= 768) ? 6 : 12;
-    this.breakpoint3 = (window.innerWidth <= 768) ? 4 : 12;
+    this.load();
+  }
 
-    this.createYearChart();
-    this.createSemChart();
-    this.createYear1Chart();
-    this.createYear2Chart();
-    this.createYear3Chart();
+  ngAfterViewInit() {
+    if (!this.hasData) {
+      return;
+    }
+    this.barChart(this.yearCanvas, this.yearBars, this.passGpa, 'GPA');
+    this.barChart(this.semCanvas, this.semBars, this.passGpa, 'GPA');
+    const canvases = [this.level1Canvas, this.level2Canvas, this.level3Canvas];
+    this.levelCharts.forEach(lc => this.barChart(canvases[lc.level - 1], lc.bars, undefined, 'Grade points'));
+  }
 
+  ngOnDestroy() {
+    this.charts.forEach(c => c.destroy());
+    this.charts = [];
+  }
 
-    if (JSON.parse(this.dt.getY1Data()).creditcount > 0) {
-      this.year1Data = JSON.parse(this.dt.getY1Data());
-      this.setYear1Values();
+  /** Text alternative for a chart canvas. */
+  describe(title: string, bars: Bar[]): string {
+    if (!bars.length) {
+      return `${title}: no grades yet.`;
+    }
+    return `${title}: ` + bars.map(b => `${b.label} ${b.tag}${b.partial ? ' (so far)' : ''}`).join(', ') + '.';
+  }
 
-    } else {
-      //console.log("Year 1 Data Cannot Fetched");
+  /**
+   * Builds every array from scratch, so coming back to the page never duplicates data.
+   * When the page is opened directly (reload, bookmark), the saved grades are used.
+   */
+  load() {
+    const dt = this.dt;
+    if (!dt.levelSet.some(Boolean)) {
+      dt.loadSaved();
+    }
+    const def = intakeDef(dt.intake);
+    const levelsSent = dt.levelSet.filter(Boolean).length;
+    this.hasData = levelsSent > 0;
+    this.intakeLabel = def.label;
+    this.passGpa = def.minLevelGpa;
+    if (!this.hasData) {
+      return;
     }
 
-    if (JSON.parse(this.dt.getY2Data()).creditcount > 30) {
-      this.year2Data = JSON.parse(this.dt.getY2Data());
-      this.setYear2Values();
+    this.year = dt.year;
+    this.semester = dt.semester;
+    this.credit = dt.creditcount;
+    this.gpalevel = Number(dt.overallgpa).toFixed(2);
 
-    } else {
-      //console.log("Year 2 Data Cannot Fetched");
+    this.yearBars = [];
+    this.semBars = [];
+    this.levelCharts = [];
+    this.partial = false;
+    const sems = dt.semesterGpas();
+
+    for (let i = 0; i < levelsSent; i++) {
+      const level = def.levels[i];
+      const points: Points = dt.levelPoints[i];
+      const {courses, optionalMissing} = countedCourses(level, points);
+      const graded = (c: Course) => typeof points[c.key] === 'number';
+      const gradedCount = courses.filter(graded).length;
+      const total = courses.length + optionalMissing;
+      const partial = gradedCount < total;
+      this.partial = this.partial || partial;
+
+      if (gradedCount > 0) {
+        this.yearBars.push({
+          label: `Year ${i + 1}`, value: dt.levelGpa[i], tag: dt.levelGpa[i].toFixed(2), partial,
+          note: partial ? `${gradedCount} of ${total} courses` : undefined,
+        });
+      }
+
+      level.semesters.forEach((sem, j) => {
+        const inSem = courses.filter(c => c.split ? c.split[sem] : c.semester === sem);
+        const done = inSem.filter(graded).length;
+        if (done === 0) {
+          return; // no grades in this semester yet: leave it out instead of drawing a 0
+        }
+        const gpa = sems[2 * i + j];
+        this.semBars.push({
+          label: `Sem ${sem}`, value: gpa, tag: gpa.toFixed(2), partial: done < inSem.length,
+          note: done < inSem.length ? `${done} of ${inSem.length} courses` : undefined,
+        });
+      });
+
+      this.levelCharts.push({
+        level: i + 1,
+        title: `Year ${i + 1} (Level ${ROMAN[i]}) grades`,
+        bars: courses.filter(graded).map(c => {
+          const v = points[c.key] as number;
+          return {label: c.short, value: v, tag: letterFor(v), note: c.name};
+        }),
+        notEntered: courses.filter(c => !graded(c)).map(c => c.short),
+      });
     }
+  }
 
-    if (JSON.parse(this.dt.getY3Data()).creditcount > 60) {
-      this.year3Data = JSON.parse(this.dt.getY3Data());
-      //console.log(this.year3Data);
-      this.setYear3Values();
-
-    } else {
-      //console.log("Year 3 Data Cannot Fetched");
+  private barChart(ref: ElementRef<HTMLCanvasElement> | undefined, bars: Bar[], passLine: number | undefined,
+                   yTitle: string) {
+    if (!ref || !bars.length) {
+      return;
     }
-
-    if(JSON.parse(this.dt.getY3Data()).creditcount > 60){
-      this.year3Data = JSON.parse(this.dt.getY3Data());
-      this.setYear3Values();
-    }
-
-    switch (this.year){
-      case "1" : this.postyeartext = "st"; break;
-      case "2" : this.postyeartext = "nd"; break;
-      case "3" : this.postyeartext = "rd"; break;
-      default : this.postyeartext = "th"; break;
-    }
-
-  }
-
-  onResize(event: any) {
-    this.breakpoint = (event.target.innerWidth <= 768) ? 1 : 4;
-    this.breakpoint2 = (event.target.innerWidth <= 768) ? 6 : 12;
-    this.breakpoint3 = (event.target.innerWidth <= 768) ? 4 : 12;
-  }
-
-  setYear1Values() {
-
-    this.year1gpa = this.year1Data.year1gpa;
-    this.sem1gpa = this.year1Data.sem1gpa;
-    this.sem2gpa = this.year1Data.sem2gpa;
-
-    this.year = this.year1Data.year;
-    this.credit = this.year1Data.creditcount;
-    this.gpalevel = this.year1Data.currentgpa;
-    this.semester = this.year1Data.semester;
-
-    this.is = Number(this.year1Data.is);
-    this.ip = Number(this.year1Data.ip);
-    this.cs = Number(this.year1Data.cs);
-    this.pc = Number(this.year1Data.pc);
-
-    this.se = Number(this.year1Data.se);
-    this.ds = Number(this.year1Data.ds);
-    this.web1 = Number(this.year1Data.web1);
-    this.mc = Number(this.year1Data.mc);
-
-    this.overallsemdata.pop();
-    this.overallsemdata.pop();
-    this.overallyeardata.pop();
-
-    this.year1results.push(this.is, this.ip, this.cs, this.pc, this.se, this.ds, this.web1, this.mc);
-    this.overallsemdata.push(this.sem1gpa, this.sem2gpa);
-    this.overallyeardata.push(this.year1gpa);
-  }
-
-  setYear2Values() {
-    this.overallsemdata.pop();
-    this.overallsemdata.pop();
-    this.overallyeardata.pop();
-    this.setYear1Values();
-
-    this.year2gpa = this.year2Data.year2gpa;
-    this.sem3gpa = this.year2Data.sem3gpa;
-    this.sem4gpa = this.year2Data.sem4gpa;
-
-    this.year = this.year2Data.year;
-    this.credit = this.year2Data.creditcount;
-    this.gpalevel = this.year2Data.currentgpa;
-    this.semester = this.year2Data.semester;
-
-    this.dsa = Number(this.year2Data.dsa);
-    this.dms = Number(this.year2Data.dms);
-    this.ooad = Number(this.year2Data.ooad);
-    this.web2 = Number(this.year2Data.web2);
-
-    this.ead = Number(this.year2Data.ead);
-    this.asd = Number(this.year2Data.asd);
-    this.uxd = Number(this.year2Data.uxd);
-    this.pm = Number(this.year2Data.pm);
-    this.cn = Number(this.year2Data.cn);
-
-    this.year2results.push(this.dsa, this.dms, this.ooad, this.web2, this.ead, this.asd, this.uxd, this.pm, this.cn);
-
-    // this.overallsemdata = [];
-    this.overallsemdata.push(this.sem3gpa, this.sem4gpa);
-
-    // this.overallyeardata=[];
-    this.overallyeardata.push(this.year2gpa);
-
-    // console.log(this.year1gpa, this.year2gpa);
-    // console.log(this.overallyeardata);
-  }
-
-  setYear3Values() {
-    this.overallsemdata.pop();
-    this.overallsemdata.pop();
-    this.overallyeardata.pop();
-    this.setYear2Values();
-
-    this.year3gpa = this.year3Data.year3gpa;
-    this.sem5gpa = this.year3Data.sem5gpa;
-    this.sem6gpa = this.year3Data.sem6gpa;
-
-    this.year = this.year3Data.year;
-    this.credit = this.year3Data.creditcount;
-    this.gpalevel = this.year3Data.currentgpa;
-    this.semester = this.year3Data.semester;
-
-    this.pp = Number(this.year3Data.pp);
-    this.sdp = Number(this.year3Data.sdp);
-    this.pis = Number(this.year3Data.pis);
-    this.sana = Number(this.year3Data.sana);
-
-    this.mad = Number(this.year3Data.mad);
-    this.nsa = Number(this.year3Data.nsa);
-    this.bt = Number(this.year3Data.bt);
-    this.qa = Number(this.year3Data.qa);
-
-    this.year3results.push(this.pp, this.sdp, this.pis, this.sana, this.mad, this.nsa, this.bt, this.qa);
-
-    this.overallsemdata.push(this.sem5gpa, this.sem6gpa);
-
-    this.overallyeardata.push(this.year3gpa);
-
-    //console.log(this.year1gpa, this.year2gpa,this.year3gpa);
-    //console.log(this.overallyeardata);
-    //console.log(this.overallsemdata);
-  }
-
-  createYearChart() {
-
-    this.yearchart = new Chart("MyChart", {
-      type: 'line', //this denotes tha type of chart
-
+    const colours = bars.map(b => colourFor(b.value));
+    this.charts.push(new Chart(ref.nativeElement, {
+      type: 'bar',
       data: {
-        // values on X-Axis
-        labels: ['Year-1', 'Year-2', 'Year-3'],
-        datasets: [
-          {
-            data: this.overallyeardata,
-            backgroundColor: 'lightblue',
-            borderColor: 'red',
-            tension: 0.5,
-            borderWidth: 3,
-            fill: true,
-
-          },
-        ],
-
+        labels: bars.map(b => b.label),
+        datasets: [{
+          data: bars.map(b => b.value),
+          backgroundColor: bars.map((b, i) => b.partial ? colours[i] + '66' : colours[i]),
+          borderColor: colours,
+          borderWidth: bars.map(b => b.partial ? 2 : 0),
+          borderRadius: 4,
+          borderSkipped: 'bottom',
+          minBarLength: 4,
+          maxBarThickness: 56,
+        }],
       },
-
+      plugins: [decorations],
       options: {
-        plugins: {
-          legend: {
-            display: false
-          },
-          title: {
-            display: true,
-            text: 'Overall Year GPA Progression',
-            position: 'top',
-            font: {
-              weight: 'bold',
-              size: 30
-            }
-          }
-        },
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Year',
-              color: 'red'
-            }
-          },
-          y: {
-            min: 0,
-            title: {
-              display: true,
-              text: 'GPA Level',
-              color: 'red'
-
-            }
-          }
-        },
         maintainAspectRatio: false,
         responsive: true,
-        aspectRatio: 1,
-      }
-
-    });
-  }
-
-  createSemChart() {
-
-    this.semchart = new Chart("SemChart", {
-      type: 'bar', //this denotes tha type of chart
-
-      data: {
-        // values on X-Axis
-        labels: ['Sem-1', 'Sem-2', 'Sem-3', 'Sem-4', 'Sem-5', 'Sem-6'],
-        datasets: [
-          {
-            data: this.overallsemdata,
-            backgroundColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-            ], borderColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-            ],
-            borderWidth: 1,
-            borderRadius: 10,
-          },
-        ]
-      },
-      options: {
+        layout: {padding: {top: 18}},
         plugins: {
-          legend: {
-            display: false
+          legend: {display: false},
+          title: {display: false},
+          tooltip: {
+            callbacks: {
+              title: items => {
+                const b = bars[items[0].dataIndex];
+                return b.note && !b.partial ? `${b.label} · ${b.note}` : b.label;
+              },
+              label: item => {
+                const b = bars[item.dataIndex];
+                return b.partial ? `${b.tag} so far (${b.note})` : `${b.tag} (${b.value.toFixed(2)} points)`;
+              },
+            },
           },
-          title: {
-            display: true,
-            text: 'Overall Semester GPA Progression',
-            position: 'top',
-            font: {
-              weight: 'bold',
-              size: 30
-            }
-          }
+          // @ts-ignore custom plugin options
+          gpaDecorations: {tags: bars.map(b => b.tag), passLine},
         },
         scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Semester',
-              color: 'red'
-            }
-          },
+          x: {ticks: {color: INK, autoSkip: false, maxRotation: 45}, grid: {display: false}},
           y: {
-            title: {
-              display: true,
-              text: 'GPA Level',
-              color: 'red'
-            }
-          }
-        },
-        maintainAspectRatio: false,
-        responsive: true,
-        aspectRatio: 1,
-      }
-
-    });
-  }
-
-  createYear1Chart() {
-
-    this.semchart = new Chart("Year1Chart", {
-      type: 'bar', //this denotes tha type of chart
-
-      data: {
-        // values on X-Axis
-        labels: this.year1sub,
-        datasets: [
-          {
-            data: this.year1results,
-            backgroundColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(255, 205, 86)',
-              'rgb(255, 99, 132)',
-            ], borderColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(255, 205, 86)',
-              'rgb(255, 99, 132)',
-            ],
-            borderWidth: 1,
-            borderRadius: 10,
+            min: 0, max: 4, ticks: {color: MUTED, stepSize: 1}, grid: {color: GRID},
+            title: {display: true, text: yTitle, color: MUTED},
           },
-        ]
+        },
       },
-      options: {
-        plugins: {
-          legend: {
-            display: false
-          },
-          title: {
-            display: true,
-            text: 'Year 1 Subject Evaluate',
-            color: 'white',
-            position: 'top',
-            font: {
-              weight: 'bold',
-              size: 30
-            }
-          }
-        },
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Subjects',
-              color: 'red'
-            }
-          },
-          y: {
-            title: {
-              display: true,
-              text: 'Grade',
-              color: 'red'
-            }
-          }
-        },
-        maintainAspectRatio: false,
-        responsive: true,
-        aspectRatio: 1,
-      }
-
-    });
-
+    }));
   }
-
-  createYear2Chart() {
-
-    this.semchart = new Chart("Year2Chart", {
-      type: 'bar', //this denotes tha type of chart
-
-      data: {
-        // values on X-Axis
-        labels: this.year2sub,
-        datasets: [
-          {
-            data: this.year2results,
-            backgroundColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-            ], borderColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-            ],
-            borderWidth: 1,
-            borderRadius: 10,
-          },
-        ]
-      },
-      options: {
-        plugins: {
-          legend: {
-            display: false
-          },
-          title: {
-            display: true,
-            text: 'Year 2 Subject Evaluate',
-            color: 'white',
-            position: 'top',
-            font: {
-              weight: 'bold',
-              size: 30
-            }
-          }
-        },
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Subjects',
-              color: 'red'
-            }
-          },
-          y: {
-            title: {
-              display: true,
-              text: 'Grade',
-              color: 'red'
-            }
-          }
-        },
-        maintainAspectRatio: false,
-        responsive: true,
-        aspectRatio: 1,
-      }
-
-    });
-  }
-
-  createYear3Chart() {
-
-    this.semchart = new Chart("Year3Chart", {
-      type: 'bar', //this denotes tha type of chart
-
-      data: {
-        // values on X-Axis
-        labels: this.year3sub,
-        datasets: [
-          {
-            data: this.year3results,
-            backgroundColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-            ], borderColor: [
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-              'rgb(255, 99, 132)',
-              'rgb(255, 159, 64)',
-              'rgb(255, 205, 86)',
-            ],
-            borderWidth: 1,
-            borderRadius: 10,
-          },
-        ]
-      },
-      options: {
-        plugins: {
-          legend: {
-            display: false
-          },
-          title: {
-            display: true,
-            text: 'Year 3 Subject Evaluate',
-            color: 'white',
-            position: 'top',
-            font: {
-              weight: 'bold',
-              size: 30
-            }
-          }
-        },
-        scales: {
-          x: {
-            title: {
-              display: true,
-              text: 'Subjects',
-              color: 'red'
-            }
-          },
-          y: {
-            title: {
-              display: true,
-              text: 'Grade',
-              color: 'red'
-            }
-          }
-        },
-        maintainAspectRatio: false,
-        responsive: true,
-        aspectRatio: 1,
-      }
-
-    });
-  }
-
-
-
 }
